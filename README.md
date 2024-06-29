@@ -1,6 +1,7 @@
 <p align="center">
   <img src="assets/logo.png" />
 </p>
+
 # APAM
 A APAM é uma associação cujo objetivo é proteger os animais contra o abandono e os maus-tratos. Com sede em Cuiabá, a ONG abriga cerca de 60 animais que são tratados e encaminhados para adoção responsável.
 
@@ -12,16 +13,25 @@ A APAM é uma associação cujo objetivo é proteger os animais contra o abandon
 - [Time de Desenvolvedores](#time-de-desenvolvedores)
 
 <div id='funcionalidades'/> 
+
 # Funcionaluidades
+
 ## Mapa Conceitual
+
 ## Informações do Animal
+
 ## Informações do Resgate
+
 ## Histórico de Informações de Saúde
+
 ## Informações de Adoção
+
 ## Sistema de Notificações
+
 ## Consultas de Informação
 
 <div id='requisitos-e-tecnologias-usadas'/> 
+
 # Requisitos e Tecnologias Usadas
 > Versão do Python: 3.10.12
 
@@ -31,6 +41,7 @@ A APAM é uma associação cujo objetivo é proteger os animais contra o abandon
 - [SQLite](https://www.sqlite.org/)
 
 <div id='licença'/> 
+
 # Licença
 ```
   MIT License
@@ -57,6 +68,7 @@ A APAM é uma associação cujo objetivo é proteger os animais contra o abandon
 ```
 
 <div id='contribuições'/> 
+
 # Contribuições
 
 Contribuições são sempre bem-vindas! Para contribuir com o projeto, siga os passos abaixo:
@@ -139,6 +151,7 @@ Ficaremos felizes em receber suas contribuições! Lembre-se de seguir os padrõ
 ---
 
 <div id='time-de-desenvolvedores'/> 
+
 # Time de  Desenvolvedores
 
 | <center>Cargo</center>     | <center>Nome</center>     |
