@@ -156,22 +156,25 @@ Ficaremos felizes em receber suas contribuições! Lembre-se de seguir os padrõ
 
 # Time de  Desenvolvedores
 
-<table style="margin-left:auto; margin-right:auto;">
-  <tr>
-    <th style="text-align: center;">Cargo</th>
-    <th style="text-align: center;">Nome</th>
-  </tr>
-  <tr>
-    <td>PM e Desenvolvedor</td>
-    <td><a href="https://www.linkedin.com/in/veras-d/">Veras</a></td>
-  </tr>
-  <tr>
-    <td>Desenvolvedor</td>
-    <td><a href="https://www.linkedin.com/in/willianrsantos/">Willian Ribeiro</a></td>
-  </tr>
-  <tr>
-    <td>Desenvolvedor</td>
-    <td><a href="https://www.linkedin.com/in/dayvisson-tenorio/">Dayvisson Tenório Cardoso</a></td>
-  </tr>
-</table>
+<div style="text-align: center;">
+  <table style="margin-left: auto; margin-right: auto;">
+    <tr>
+      <th style="text-align: center;">Cargo</th>
+      <th style="text-align: center;">Nome</th>
+    </tr>
+    <tr>
+      <td>PM e Desenvolvedor</td>
+      <td><a href="https://www.linkedin.com/in/veras-d/">Veras</a></td>
+    </tr>
+    <tr>
+      <td>Desenvolvedor</td>
+      <td><a href="https://www.linkedin.com/in/willianrsantos/">Willian Ribeiro</a></td>
+    </tr>
+    <tr>
+      <td>Desenvolvedor</td>
+      <td><a href="https://www.linkedin.com/in/dayvisson-tenorio/">Dayvisson Tenório Cardoso</a></td>
+    </tr>
+  </table>
+</div>
+
 
