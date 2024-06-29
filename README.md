@@ -73,7 +73,9 @@ A APAM é uma associação cujo objetivo é proteger os animais contra o abandon
 
 Contribuições são sempre bem-vindas! Para contribuir com o projeto, siga os passos abaixo:
 
-1. **Crie uma Issue**: Descreva a funcionalidade a ser implementada ou o bug a ser corrigido. Verifique se já não há outro desenvolvedor trabalhando na mesma tarefa.
+1. **Crie uma Issue**: Descreva a funcionalidade a ser implementada ou o bug a ser corrigido.
+2. **Aguarde uma Resposta**: Verifique se já não há outro desenvolvedor trabalhando na mesma tarefa.
+3. **Mãos à Obra**: Caso a etapa 2 seja verdadeira e não haja ninguém encarregado do bug ou feature que você reportou, você mesmo pode desenvolvê-lo/corrigi-lo.
 
 ## Etapas para Contribuir
 
@@ -154,9 +156,22 @@ Ficaremos felizes em receber suas contribuições! Lembre-se de seguir os padrõ
 
 # Time de  Desenvolvedores
 
-| <center>Cargo</center>     | <center>Nome</center>     |
-|:-----|:-----|
-| PM e Desenvolvedor    | [Veras](https://www.linkedin.com/in/veras-d/)     |
-| Desenvolvedor     | [Willian Ribeiro](https://www.linkedin.com/in/willianrsantos/)     |
-| Desenvolvedor     | [Dayvisson Tenório Cardoso](https://www.linkedin.com/in/dayvisson-tenorio/)     |
+<table style="margin-left:auto; margin-right:auto;">
+  <tr>
+    <th style="text-align: center;">Cargo</th>
+    <th style="text-align: center;">Nome</th>
+  </tr>
+  <tr>
+    <td>PM e Desenvolvedor</td>
+    <td><a href="https://www.linkedin.com/in/veras-d/">Veras</a></td>
+  </tr>
+  <tr>
+    <td>Desenvolvedor</td>
+    <td><a href="https://www.linkedin.com/in/willianrsantos/">Willian Ribeiro</a></td>
+  </tr>
+  <tr>
+    <td>Desenvolvedor</td>
+    <td><a href="https://www.linkedin.com/in/dayvisson-tenorio/">Dayvisson Tenório Cardoso</a></td>
+  </tr>
+</table>
 
