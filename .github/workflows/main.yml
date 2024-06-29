@@ -1,2 +1,86 @@
+name: Create Release
 
+on:
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
+
+jobs:
+  build:
+    name: Build app
+    runs-on: ${{ matrix.config.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - os: windows-2019
+          - os: ubuntu-22.04
+    steps:
+      - name: Install pywin32
+        if: matrix.config.os == 'windows-2019'
+        run: pip install pywin32
+
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10.8'
+
+      - name: Install dependencies for ${{ matrix.config.os }}
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pillow
+
+      - name: Build with flet for ${{ matrix.config.os }}
+        run: |
+          flet pack src/app.py --icon assets/logo.png --add-data "assets:assets" --product-name "Gerenciador de Animais - APAM" --product-version "${GITHUB_REF#refs/tags/}" --file-description "Open Source Software Developed by team of volunteer developers" --copyright "copyright © 2024 APAM Ong. All rights reserved."
+          cp -r assets/ dist/main/
+
+      - name: Rename builded app
+        run: mv ./dist ./dist-${{ matrix.config.os }}
+
+      - name: Upload result job ${{ matrix.config.os }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: APAM-flet-artifact-${{ matrix.config.os }}
+          path: ./dist*
+
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: APAM-flet-artifact-ubuntu-22.04
+          path: dist-ubuntu-22.04
+
+      - name: Download artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: APAM-flet-artifact-windows-2019
+          path: dist-windows-2019
+
+      - name: Zip file windows
+        run: zip -r APAM_windows.zip dist-windows-2019
+
+      - name: Zip file ubuntu
+        run: zip -r APAM_ubuntu.zip dist-ubuntu-22.04
+
+      - name: Create Release
+        id: create_release
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          draft: false
+          prerelease: false
+          files: |
+            APAM_windows.zip
+            APAM_ubuntu.zip
 
