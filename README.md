@@ -18,20 +18,10 @@ A APAM é uma associação cujo objetivo é proteger os animais contra o abandon
 
 ## Banco de Dados
 
-<div style="text-align: center;">
-  <table style="margin-left: auto; margin-right: auto;">
-    <tr>
-      <th style="text-align: center;">Modelo Conceitual</th>
-      <th style="text-align: center;">Modelo Lógico</th>
-      <th style="text-align: center;">Banco Normalizado</th>
-    </tr>
-    <tr>
-      <td>![banco_APAM_modelo_conceitual](https://github.com/Veras-D/Gerenciador_Animais_APAM/assets/110254550/0d05cf1d-6f67-43fc-a6cd-37ad396d2876)</td>
-      <td></td>
-      <td></td>
-    </tr>
-  </table>
-</div>
+| Modelo Conceitual | Modelo Lógico | Banco Normalizado |
+|-------------------|---------------|-------------------|
+| <img src="https://github.com/Veras-D/Gerenciador_Animais_APAM/assets/110254550/3173dda0-e2d1-45d4-a5dd-e45ed0a982a6" alt="banco_APAM_modelo_conceitual" width="400"/> | <img src="https://github.com/Veras-D/Gerenciador_Animais_APAM/assets/110254550/727b0ef6-284e-46ab-bddd-a5ada1fb148e" alt="banco_APAM_modelo_logico" width="400"/> | <img src="https://github.com/Veras-D/Gerenciador_Animais_APAM/assets/110254550/6c6877ec-4805-4050-8ef6-020523b6e4bd" alt="banco_APAM_modelo_normalizado" width="400"/> |
+
 
 ## Informações do Animal
 
