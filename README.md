@@ -26,9 +26,9 @@ A APAM é uma associação cujo objetivo é proteger os animais contra o abandon
       <th style="text-align: center;">Banco Normalizado</th>
     </tr>
     <tr>
-      <td>![](assets/banco_APAM_modelo_conceitual.png)</td>
-      <td>![](assets/)</td>
-      <td>![](assets/)</td>
+      <td>![banco_APAM_modelo_conceitual](https://github.com/Veras-D/Gerenciador_Animais_APAM/assets/110254550/0d05cf1d-6f67-43fc-a6cd-37ad396d2876)</td>
+      <td></td>
+      <td></td>
     </tr>
   </table>
 </div>
