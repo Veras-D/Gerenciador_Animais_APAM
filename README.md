@@ -172,7 +172,7 @@ Ficaremos felizes em receber suas contribuições! Lembre-se de seguir os padrõ
 
 # Time de  Desenvolvedores
 
-<div style="text-align: center;">
+<div align="center">
   <table style="margin-left: auto; margin-right: auto;">
     <tr>
       <th style="text-align: center;">Cargo</th>
