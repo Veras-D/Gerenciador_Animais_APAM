@@ -169,15 +169,15 @@ Ficaremos felizes em receber suas contribuições! Lembre-se de seguir os padrõ
       <th style="text-align: center;">Nome</th>
     </tr>
     <tr>
-      <td>PM e Desenvolvedor</td>
+      <td>PM, Designer e Developer</td>
       <td><a href="https://www.linkedin.com/in/veras-d/">Veras</a></td>
     </tr>
     <tr>
-      <td>Desenvolvedor</td>
+      <td>DBA e Developer</td>
       <td><a href="https://www.linkedin.com/in/willianrsantos/">Willian Ribeiro</a></td>
     </tr>
     <tr>
-      <td>Desenvolvedor</td>
+      <td>Developer</td>
       <td><a href="https://www.linkedin.com/in/dayvisson-tenorio/">Dayvisson Tenório Cardoso</a></td>
     </tr>
   </table>
