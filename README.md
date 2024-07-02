@@ -16,7 +16,22 @@ A APAM é uma associação cujo objetivo é proteger os animais contra o abandon
 
 # Funcionaluidades
 
-## Mapa Conceitual
+## Banco de Dados
+
+<div style="text-align: center;">
+  <table style="margin-left: auto; margin-right: auto;">
+    <tr>
+      <th style="text-align: center;">Modelo Conceitual</th>
+      <th style="text-align: center;">Modelo Lógico</th>
+      <th style="text-align: center;">Banco Normalizado</th>
+    </tr>
+    <tr>
+      <td>![](assets/banco_APAM_modelo_conceitual.png)</td>
+      <td>![](assets/)</td>
+      <td>![](assets/)</td>
+    </tr>
+  </table>
+</div>
 
 ## Informações do Animal
 
@@ -39,6 +54,7 @@ A APAM é uma associação cujo objetivo é proteger os animais contra o abandon
 - [Flet](https://flet.dev/)
 - [Pandas](https://pandas.pydata.org/)
 - [SQLite](https://www.sqlite.org/)
+- [DOTENV](https://pypi.org/project/python-dotenv/)
 
 <div id='licença'/> 
 
