@@ -1,26 +1,26 @@
 import sqlite3
 
 class DataBaseAPAM:
-    def __init__(self):
-    	self.create_tables()
-        self.results_animal = self.db_execute("SELECT * FROM animal")
-        self.results_resgate = self.db_execute("SELECT * FROM resgate")
-        self.results_observacoes = self.db_execute("SELECT * FROM observacoes")
-        self.results_vacinas = self.db_execute("SELECT * FROM vacinas")
-        self.results_adocao = self.db_execute("SELECT * FROM adocao")
+	def __init__(self):
+		self.create_tables()
+		self.results_animal = self.db_execute("SELECT * FROM animal")
+		self.results_resgate = self.db_execute("SELECT * FROM resgate")
+		self.results_observacoes = self.db_execute("SELECT * FROM observacoes")
+		self.results_vacinas = self.db_execute("SELECT * FROM vacinas")
+		self.results_adocao = self.db_execute("SELECT * FROM adocao")
 
 
-    def db_execute(self, query, param = []):
-        with sqlite3.connect('GA_APAM.db') as con:
-            cur = con.cursor()
-            cur.execute(query, param)
-            con.commit()
-            return cur.fetchall()
+	def db_execute(self, query, param = []):
+		with sqlite3.connect('GA_APAM.db') as con:
+			cur = con.cursor()
+			cur.execute(query, param)
+			con.commit()
+			return cur.fetchall()
 
 
-    def create_tables(self):
-    	    def create_tables(self):
-		self.db_execute('''CREATE TABLE IF NOT EXISTS animal
+	def create_tables(self):
+		def create_tables(self):
+			self.db_execute('''CREATE TABLE IF NOT EXISTS animal
 			            (id_animal INTEGER PRIMARY KEY AUTOINCREMENT,
 			            name_animal TEXT NOT NULL,
 			            data_cadastro DATE NOT NULL,
@@ -32,7 +32,7 @@ class DataBaseAPAM:
 			            pelagem TEXT NOT NULL,
 			            raca TEXT NOT NULL)''')
 
-		self.db_execute('''CREATE TABLE IF NOT EXISTS resgate
+			self.db_execute('''CREATE TABLE IF NOT EXISTS resgate
 			            (id_resgate INTEGER PRIMARY KEY AUTOINCREMENT,
 			            id_animal INTEGER,
 			            local_resgate TEXT NOT NULL,
@@ -49,14 +49,14 @@ class DataBaseAPAM:
 			            status_atual TEXT NOT NULL,
 			            FOREIGN KEY (id_animal) REFERENCES animal(id_animal))''')
 
-		self.db_execute('''CREATE TABLE IF NOT EXISTS observacoes
+			self.db_execute('''CREATE TABLE IF NOT EXISTS observacoes
 			            (id_obs INTEGER PRIMARY KEY AUTOINCREMENT,
 			            id_animal INTEGER,
 			            data DATE NOT NULL,
 			            observacao TEXT NOT NULL,
 			            FOREIGN KEY (id_animal) REFERENCES animal(id_animal))''')
 
-		self.db_execute('''CREATE TABLE IF NOT EXISTS vacinas
+			self.db_execute('''CREATE TABLE IF NOT EXISTS vacinas
 			            (id_vacinas INTEGER PRIMARY KEY AUTOINCREMENT,
 			            id_animal INTEGER,
 			            data_vacina DATE NOT NULL,
@@ -66,7 +66,7 @@ class DataBaseAPAM:
 			            data_proxima_dose DATE NOT NULL,
 			            FOREIGN KEY (id_animal) REFERENCES animal(id_animal))''')
 
-		self.db_execute('''CREATE TABLE IF NOT EXISTS adocao
+			self.db_execute('''CREATE TABLE IF NOT EXISTS adocao
 			            (id_adocao INTEGER PRIMARY KEY AUTOINCREMENT,
 			            id_animal INTEGER,
 			            name_adotante TEXT NOT NULL,

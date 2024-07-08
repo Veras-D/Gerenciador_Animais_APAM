@@ -11,12 +11,12 @@ class GerenciadorDeAnimaisAPAM:
         self.page.title = "Gerenciador de Animais | ASSOCIAÇÃO MATO-GROSSENSE PROTETORA DOS ANIMAIS (APAM)"
         self.page.scroll = True
         self.page.vertical_alignment = ft.MainAxisAlignment.CENTER
-    	self.page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
+        self.page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
         self.main_page()
 
 
     def main_page(self):
-	    self.page.add(Text("Teste"))
+        self.page.add(Text("Teste"))
 
 
 ft.app(target=GerenciadorDeAnimaisAPAM)
