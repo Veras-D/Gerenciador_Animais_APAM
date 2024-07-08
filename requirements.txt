@@ -1,2 +1,3 @@
 flet
 pandas
+python-dotenv

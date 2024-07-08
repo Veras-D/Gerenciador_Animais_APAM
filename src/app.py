@@ -16,7 +16,7 @@ class GerenciadorDeAnimaisAPAM:
 
 
     def main_page(self):
-        self.page.add(Text("Teste"))
+        self.page.add(ft.Text("Teste"))
 
 
 ft.app(target=GerenciadorDeAnimaisAPAM)
