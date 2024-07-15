@@ -178,7 +178,11 @@ Ficaremos felizes em receber suas contribuições! Lembre-se de seguir os padrõ
     </tr>
     <tr>
       <td>Developer</td>
-      <td><a href="https://www.linkedin.com/in/dayvisson-tenorio/">Dayvisson Tenório Cardoso</a></td>
+      <td><a href="https://www.linkedin.com/in/dayvisson-tenorio/">Dayvisson Tenório</a></td>
+    </tr>
+    <tr>
+      <td>Developer</td>
+      <td><a href="https://www.linkedin.com/in/arantesgustavoo/">Gustavo Oliveira</a></td>
     </tr>
   </table>
 </div>
