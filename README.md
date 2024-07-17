@@ -189,7 +189,9 @@ Ficaremos felizes em receber suas contribuições! Lembre-se de seguir os padrõ
       <td>Tester Developer</td>
       <td><a href="https://www.linkedin.com/in/lucas-alexandre-47a6672a0/">Lucas Alexandre</a></td>
     </tr>
+    <tr>
+      <td>Tester Developer</td>
+      <td><a href="https://www.linkedin.com/in/luan-alencar/">Luan Carlos</a></td>
+    </tr>
   </table>
 </div>
-
-
