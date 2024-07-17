@@ -1,4 +1,6 @@
 import sqlite3
+from Models.Entities.animal import Animal
+
 
 class DataBaseAPAM:
 	def __init__(self):
@@ -86,3 +88,12 @@ class DataBaseAPAM:
 			            referencia_rua TEXT NOT NULL,
 			            data_adocao DATE NOT NULL,
 			            FOREIGN KEY (id_animal) REFERENCES animal(id_animal))''')
+			        
+			        
+	def add_animal(self, animal: Animal) -> None:
+	    pass	        
+
+
+	def get_animais(self, nome: str) -> Animal:
+	    pass
+        

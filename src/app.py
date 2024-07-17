@@ -1,7 +1,7 @@
 import flet as ft
 import config
-from util import Util
-from db.db import DataBaseAPAM
+from util import Validacao
+from Models.Repository.db import DataBaseAPAM
 
 
 class GerenciadorDeAnimaisAPAM:
