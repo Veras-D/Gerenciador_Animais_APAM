@@ -1,5 +1,8 @@
 import re
 import sqlite3
+from venv import validdocbr
+
+validator = validdocbr()
 
 
 class Validacao:
@@ -9,15 +12,15 @@ class Validacao:
 
     @staticmethod
     def tratar_dados(self, dado):
-        return re.sub(selgf.reg, "", dado)
+        return re.sub(self.reg, "", dado)
 
     @staticmethod
     def tratarCPF(cpf):
-        return Validacao.tratar_dados(cpf)
+        return validator.cpf_mask(cpf)
 
     @staticmethod
     def tratarRG(rg):
-        return Validacao.tratar_dados(rg)
+        return validator.rg_mask(rg)
 
     @staticmethod
     def tratarCEP(cep):
@@ -29,17 +32,13 @@ class Validacao:
 
     @staticmethod
     def validarCPF(cpf):
-        cpf = Validacao.tratarCPF(cpf)
-        if len(cpf) != 11 or not cpf.isdigit():
-            return False
-        return True
-
+        is_cpf_valid = validator.cpf(cpf)
+        return is_cpf_valid
+    
     @staticmethod
     def validarRG(rg):
-        rg = Validacao.tratarRG(rg)
-        if len(rg) < 7 or len(rg) > 14 or not rg.isdigit():
-            return False
-        return True
+        is_rg_valid = validator.rg(rg)
+        return is_rg_valid
 
     @staticmethod
     def validarCEP(cep):
