@@ -1,7 +1,5 @@
-class Animal:
-   def __init__(
-       self,
-       name: str,
-   ) -> None:
-       self.name = name
+from dataclasses import dataclass
 
+@dataclass
+class Animal:
+   nome: str

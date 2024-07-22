@@ -1,6 +1,7 @@
 import re
 import sqlite3
 
+
 class Validacao:
     def __init__(self):
         self.reg_field = r'[\s\-_,\"\'\*\.\!\?\;\:\(\)\[\]\{\}\<\>\|\\\/]'

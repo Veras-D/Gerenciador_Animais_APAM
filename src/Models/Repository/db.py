@@ -1,5 +1,5 @@
 import sqlite3
-from Models.Entities.animal import Animal
+from src.Models.Entities.animal import Animal
 
 
 class DataBaseAPAM:
@@ -96,4 +96,3 @@ class DataBaseAPAM:
 
 	def get_animais(self, nome: str) -> Animal:
 	    pass
-        
