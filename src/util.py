@@ -1,48 +1,39 @@
 import re
-import sqlite3
-from validdocbr import validdocbr
+from validate_docbr import CPF
 
-validator = validdocbr()
-
+cpf_int = CPF()
 
 class Validacao:
-    def __init__(self):
-        self.reg_field = r'[\s\-_,\"\'\*\.\!\?\;\:\(\)\[\]\{\}\<\>\|\\\/]'
-        self.reg_email = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+    reg_field = r'[\s\-_,\"\'\*\.\!\?\;\:\(\)\[\]\{\}\<\>\|\\\/]'
+    reg_email = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
 
     @staticmethod
-    def tratar_dados(self, dado):
-        return re.sub(self.reg, "", dado)
+    def tratar_dados(dado):
+        return re.sub(Validacao.reg_field, "", dado)
 
     @staticmethod
-    def tratarCPF(cpf):
-        return validator.cpf_mask(cpf)
+    def mascarar_cpf(cpf):
+        return cpf_int.mask(cpf)
 
-    @staticmethod
-    def tratarRG(rg):
-        return validator.rg_mask(rg)
-
-    @staticmethod
-    def tratarCEP(cep):
-        return Validacao.tratar_dados(cep)
+    # @staticmethod
+    # def mascarar_rg(rg):
+    #     return validator.rg_mask(rg)
 
     @staticmethod
     def tratarTelefone_e_Celular(telefone):
         return Validacao.tratar_dados(telefone)
 
     @staticmethod
-    def validarCPF(cpf):
-        is_cpf_valid = validator.cpf(cpf)
-        return is_cpf_valid
-    
-    @staticmethod
-    def validarRG(rg):
-        is_rg_valid = validator.rg(rg)
-        return is_rg_valid
+    def validar_cpf(cpf):
+        return cpf_int.validate(cpf)
+
+    # @staticmethod
+    # def validarRG(rg):
+    #     return validator.rg(rg)
 
     @staticmethod
     def validarCEP(cep):
-        cep = Validacao.tratarCEP(cep)
+        cep = Validacao.tratar_dados(cep)  # Corrigido para tratar_dados
         if len(cep) != 8 or not cep.isdigit():
             return False
         return True
@@ -54,8 +45,8 @@ class Validacao:
         return True
 
     @staticmethod
-    def validarEmail(self, email):
-        return re.match(self.reg_email, email) is not None
+    def validarEmail(email):
+        return re.match(Validacao.reg_email, email) is not None
 
     @staticmethod
     def validarTelefone_e_Celular(telefone):
@@ -71,4 +62,3 @@ class Validacao:
     @staticmethod
     def verificarCampo(campo):
         return campo.strip() != ""
-
