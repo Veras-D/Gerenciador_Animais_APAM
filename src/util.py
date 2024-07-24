@@ -1,6 +1,6 @@
 import re
 import sqlite3
-from venv import validdocbr
+from validdocbr import validdocbr
 
 validator = validdocbr()
 

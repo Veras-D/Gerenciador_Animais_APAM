@@ -1,5 +1,5 @@
 import sqlite3
-from src.Models.Entities.animal import Animal
+from Models.Entities.animal import Animal
 
 
 class DataBaseAPAM:
