@@ -1,18 +1,18 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 
 @dataclass
 class InfoAnimal:
-    foto: str = ''  # ver se é necessário mudar depois
     nome: str
-    castrado: str = 'Não'
     especie: str
+    foto: str = ''  # ver se é necessário mudar depois
+    castrado: str = 'Não'
     genero: str = 'Não Informado'
     temperamento: str = 'Não Informado'
     idade: int = 0
     tipo_idade: str = 'Anos'
     porte: str = 'Não Informado'
-    pelagem: list = []
+    pelagem: list[str] = field(default_factory=list)
     raca: str = 'SRD'
     microchip: str = 'Não'
     possue_sequela: str = 'Não'
@@ -23,6 +23,7 @@ class InfoAnimal:
 @dataclass
 class InfoResgate:
     id_info_animal: int
+    data_resgate: str
     atendimento: str = 'Não Informado'
     intervencao_cirugica: str = 'Não Informado'
     local_resgate: str = 'Não Informado'
@@ -30,7 +31,6 @@ class InfoResgate:
     anamnese: str = 'Não Informado'
     diag_estado_saude: str = 'Não Informado'
     trat_intervencao_medicacao: str = 'Não Informado'
-    data_resgate: str
     observacoes_resgate: str = ''
 
 

@@ -2,23 +2,22 @@ from dataclasses import dataclass
 
 
 @dataclass
-class Adortante:
+class Adotante:
     nome: str
     rg: str
     cpf: str
     rua: str
     numero: str
-    complemento: str: 'Não Informado'
     bairro: str
     cep: str
     cidade: str
     estado: str
-    profissao: str = 'Não Informado'
-    email: str 
-    telefone_fixo: str = 'Não Informado'
+    email: str
     telefone_celular: str
     referencia_rua: str
-
+    profissao: str = 'Não Informado'
+    complemento: str = 'Não Informado'
+    telefone_fixo: str = 'Não Informado'
 
 
 @dataclass
@@ -33,4 +32,3 @@ class AdocaoAdotante:
     id_info_animal: int
     id_dotante: int
     data_adocao: str
-    

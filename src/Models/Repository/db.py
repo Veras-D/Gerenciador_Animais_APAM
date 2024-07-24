@@ -1,5 +1,9 @@
 import sqlite3
-from Models.Entities.animal import Animal
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../Entities')))
+from animal import InfoAnimal
+from adotante import Adotante
 
 
 class DataBaseAPAM:
@@ -90,9 +94,9 @@ class DataBaseAPAM:
 			            FOREIGN KEY (id_animal) REFERENCES animal(id_animal))''')
 			        
 			        
-	def add_animal(self, animal: Animal) -> None:
+	def add_animal(self, animal: InfoAnimal) -> None:
 	    pass	        
 
 
-	def get_animais(self, nome: str) -> Animal:
+	def get_animais(self, nome: str) -> InfoAnimal:
 	    pass
