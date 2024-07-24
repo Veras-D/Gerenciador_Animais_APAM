@@ -1,6 +1,7 @@
 import re
 from validate_docbr import CPF
 
+
 cpf_int = CPF()
 
 class Validacao:

@@ -5,7 +5,7 @@ from dataclasses import dataclass, field
 class InfoAnimal:
     nome: str
     especie: str
-    foto: str = ''  # ver se é necessário mudar depois
+    foto: bytes = b''
     castrado: str = 'Não'
     genero: str = 'Não Informado'
     temperamento: str = 'Não Informado'
