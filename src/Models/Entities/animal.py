@@ -3,35 +3,35 @@ from dataclasses import dataclass
 
 @dataclass
 class InfoAnimal:
-    foto: str  # ver se é necessário mudar depois
+    foto: str = ''  # ver se é necessário mudar depois
     nome: str
-    castrado: str
+    castrado: str = 'Não'
     especie: str
-    genero: str
-    temperamento: str
-    idade: int
-    tipo_idade: str
-    porte: str
-    pelagem: list
-    raca: str
-    microchip: str
-    possue_sequela: str
-    status_atual: str
-    observacoes: str
+    genero: str = 'Não Informado'
+    temperamento: str = 'Não Informado'
+    idade: int = 0
+    tipo_idade: str = 'Anos'
+    porte: str = 'Não Informado'
+    pelagem: list = []
+    raca: str = 'SRD'
+    microchip: str = 'Não'
+    possue_sequela: str = 'Não'
+    status_atual: str = 'Vivo'
+    observacoes: str = ''
 
 
 @dataclass
 class InfoResgate:
     id_info_animal: int
-    atendimento: str
-    intervencao_cirugica: str
-    local_resgate: str
-    destinacao: str
-    anamnese: str
-    diag_estado_saude: str
-    trat_intervencao_medicacao: str
+    atendimento: str = 'Não Informado'
+    intervencao_cirugica: str = 'Não Informado'
+    local_resgate: str = 'Não Informado'
+    destinacao: str = 'Não Informado'
+    anamnese: str = 'Não Informado'
+    diag_estado_saude: str = 'Não Informado'
+    trat_intervencao_medicacao: str = 'Não Informado'
     data_resgate: str
-    observacoes_resgate: str
+    observacoes_resgate: str = ''
 
 
 @dataclass
@@ -51,10 +51,10 @@ class Exames:
     id_info_animal: int
     data_exame: str
     exames_realizados: str
-    medicacoes: str
-    tratamento: str
-    alimentacao_especial: str
-    observacoes: str
+    medicacoes: str = 'Não Informado'
+    tratamento: str = 'Não Informado'
+    alimentacao_especial: str = 'Não'
+    observacoes: str = ''
 
 
 @dataclass
