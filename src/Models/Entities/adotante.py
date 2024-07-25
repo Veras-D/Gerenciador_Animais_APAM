@@ -3,6 +3,7 @@ from dataclasses import dataclass
 
 @dataclass
 class Adotante:
+    id_adotante: int
     nome: str
     rg: str
     cpf: str
@@ -22,7 +23,9 @@ class Adotante:
 
 @dataclass
 class ObservacaoAdotante:
+    id_acomp_adocao: int
     id_adotante: int
+    nome_protetor: str
     observacao: str
     data_observacao: str
 
