@@ -159,7 +159,7 @@ No GitHub, vá para o seu repositório fork, encontre a sua branch e clique em "
 
 ---
 
-Ficaremos felizes em receber suas contribuições! Lembre-se de seguir os padrões do projeto ao enviar um pull request e de revisar o código antes de submetê-lo. Obrigado por colaborar!
+Ficaremos felizes em receber suas contribuições! Lembre-se de seguir os padrões do projeto ao enviar um pull request e de revisar o código antes de submetê-lo. Caso queira que seu nome seja inserido em `Time de Dsenvolvedores` basta enviar seu linkedin junto ao PR. Obrigado por colaborar!
 
 ---
 
