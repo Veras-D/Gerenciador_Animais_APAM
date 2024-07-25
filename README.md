@@ -182,6 +182,10 @@ Ficaremos felizes em receber suas contribuições! Lembre-se de seguir os padrõ
       <td><a href="https://www.linkedin.com/in/willianrsantos/">Willian Ribeiro</a></td>
     </tr>
     <tr>
+      <td>UI Developer</td>
+      <td><a href="https://www.linkedin.com/in/allan-andrade-0a3361229/">Allan Andrade</a></td>
+    </tr>
+    <tr>
       <td>Developer</td>
       <td><a href="https://www.linkedin.com/in/dayvisson-tenorio/">Dayvisson Tenório</a></td>
     </tr>
@@ -198,4 +202,4 @@ Ficaremos felizes em receber suas contribuições! Lembre-se de seguir os padrõ
       <td><a href="https://www.linkedin.com/in/lucas-alexandre-47a6672a0/">Lucas Alexandre</a></td>
     </tr>
   </table>
-</div>
+</div> 
