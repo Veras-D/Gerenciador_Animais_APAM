@@ -18,9 +18,9 @@ A APAM é uma associação cujo objetivo é proteger os animais contra o abandon
 
 ## Banco de Dados
 
-| Modelo Conceitual | Modelo Lógico | Banco Normalizado |
-|-------------------|---------------|-------------------|
-| <img src="https://github.com/user-attachments/assets/9b03d9cf-1a04-4d84-af0b-eb18b666b351" alt="banco_APAM_modelo_conceitual" width="400"/> | <img src="https://github.com/user-attachments/assets/9b03d9cf-1a04-4d84-af0b-eb18b666b351" alt="banco_APAM_modelo_logico" width="400"/> | <img src="https://github.com/user-attachments/assets/9b03d9cf-1a04-4d84-af0b-eb18b666b351" alt="banco_APAM_modelo_normalizado" width="400"/> |
+| Modelo Conceitual | Modelo Lógico |
+|-------------------|---------------|
+| <img src="https://github.com/user-attachments/assets/9b03d9cf-1a04-4d84-af0b-eb18b666b351" alt="banco_APAM_modelo_conceitual" width="400"/> | <img src="https://github.com/user-attachments/assets/3c7d3439-0e2c-4c1e-975d-577df1b070a2" alt="banco_APAM_modelo_logico" width="400"/> |
 
 ## Diagrama de Fluxo de Dados
 <p align="center">
