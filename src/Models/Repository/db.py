@@ -2,8 +2,23 @@ import sqlite3
 import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../Entities')))
-from animal import InfoAnimal
-from adotante import Adotante
+from animal import (
+    InfoAnimal,
+    InfoResgate,
+    Castracao,
+    Obto,
+    Exames,
+    Vacinas,
+    Vermifugos,
+    Pesos,
+    ProfilaxiaLaishmaniose,
+    LarTemporario
+)
+from adotante import (
+    Adotante,
+    ObservacaoAdotante,
+    AdocaoAdotante
+)
 
 
 class DataBaseAPAM:
