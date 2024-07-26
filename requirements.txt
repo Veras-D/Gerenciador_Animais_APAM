@@ -1,3 +1,4 @@
 flet
 pandas
 python-dotenv
+win10toast
