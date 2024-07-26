@@ -9,11 +9,11 @@ class Notifier:
         
     def exemplo(self):
         # exemplo
-        toaster.show_toast(
+        self.toaster.show_toast(
             'Titulo',
             'Texto',
             threaded=True,
-            icon_path=self.path_logo,
+            icon_path=self.logo,
             duration=3
         )
     
@@ -23,6 +23,5 @@ class Notifier:
 
 if __name__ == "__main__":
     path_logo = '../../assets/logo.png'
-    notifier = Notifier()
+    notifier = Notifier(path_logo)
     notifier.exemplo()
-
