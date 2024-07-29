@@ -426,3 +426,4 @@ class DataBaseAPAM:
 if __name__ == "__main__":
     db = DataBaseAPAM()
     print("Banco de dados e tabelas criados com sucesso.")
+    
