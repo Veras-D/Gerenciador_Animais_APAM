@@ -1,54 +1,51 @@
 from dataclasses import dataclass, field
-
+from typing import List
 
 @dataclass
 class InfoAnimal:
-    nome: str
+    nome_animal: str
     especie: str
     foto: bytes = b''
-    castrado: str = 'Não'
+    data_cadastro: str = 'Não'
     genero: str = 'Não Informado'
     temperamento: str = 'Não Informado'
-    idade: int = 0
-    tipo_idade: str = 'Anos'
+    idade_anos: int = 0
+    idade_meses: int = 0
     porte: str = 'Não Informado'
-    pelagem: list[str] = field(default_factory=list)
+    pelagem: List[str] = field(default_factory=list)
     raca: str = 'SRD'
     microchip: str = 'Não'
-    possue_sequela: str = 'Não'
     status_atual: str = 'Vivo'
+    possui_sequela: str = 'Não'
     observacoes: str = ''
-
 
 @dataclass
 class InfoResgate:
-    id_info_animal: int
-    data_resgate: str
-    atendimento: str = 'Não Informado'
-    intervencao_cirugica: str = 'Não Informado'
+    id_animal: int
     local_resgate: str = 'Não Informado'
-    destinacao: str = 'Não Informado'
-    anamnese: str = 'Não Informado'
-    diag_estado_saude: str = 'Não Informado'
-    trat_intervencao_medicacao: str = 'Não Informado'
-    observacoes_resgate: str = ''
-
+    atendimento: str = 'Não Informado'
+    necessario_intervencao_cirurgica: str = 'Não Informado'
+    destinacao_do_protegido: str = 'Não Informado'
+    historico_anamnese: str = 'Não Informado'
+    diagnostico_estado_saude: str = 'Não Informado'
+    tratamento_intervencao_e_medicacao: str = 'Não Informado'
+    data_resgate: str = ''
+    observacoes: str = ''
 
 @dataclass
 class Castracao:
-    id_info_animal: int
+    id_animal: int
     data_castracao: str
-
+    castrado: str = 'Não'
 
 @dataclass
-class Obto:
-    id_info_animal: int
+class Obito:
+    id_animal: int
     data_obito: str
-
 
 @dataclass
 class Exames:
-    id_info_animal: int
+    id_animal: int
     data_exame: str
     exames_realizados: str
     medicacoes: str = 'Não Informado'
@@ -56,41 +53,35 @@ class Exames:
     alimentacao_especial: str = 'Não'
     observacoes: str = ''
 
-
 @dataclass
 class Vacinas:
-    id_info_animal: int
+    id_animal: int
     vacina: str
-    data_aplicacao: str
-    proxima_aplicacao: str
-
+    data_vacina: str
+    data_proxima_dose: str
 
 @dataclass
 class Vermifugos:
-    id_info_animal: int
+    id_animal: int
     data_aplicacao: str
-    proxima_aplicacao: str
-
+    data_proxima_aplicacao: str
 
 @dataclass
 class Pesos:
-    id_info_animal: int
+    id_animal: int
     peso: float
-    data_aplicacao: str
-    proxima_aplicacao: str
-
-
+    data_peso: str
+    data_proximo_peso: str
 
 @dataclass
 class ProfilaxiaLaishmaniose:
-    id_info_animal: int
+    id_animal: int
     data_aplicacao: str
-    proxima_aplicacao: str
-
+    data_proxima_aplicacao: str
 
 @dataclass
 class LarTemporario:
-    id_info_animal: int
+    id_animal: int
     local: str
-    data_ida: str
-    data_retorno: str
+    data_entrada: str
+    data_saida: str
