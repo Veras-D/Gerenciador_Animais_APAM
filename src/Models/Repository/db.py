@@ -61,12 +61,11 @@ class DataBaseAPAM:
 		    (id_animal INTEGER PRIMARY KEY AUTOINCREMENT,
 		    foto BLOB,
            	nome_animal TEXT NOT NULL,
-		    data_cadastro DATE NOT NULL,
 		    especie TEXT NOT NULL,
 		    genero TEXT NOT NULL,
 			temperamento TEXT NOT NULL,
-		    idade_anos TEXT NOT NULL,
-		    idade_meses TEXT NOT NULL,	
+		    idade TEXT NOT NULL,
+		    medida_idade TEXT NOT NULL,	
 		    porte TEXT NOT NULL,
 		    pelagem TEXT NOT NULL,
 		    raca TEXT NOT NULL,
@@ -74,8 +73,6 @@ class DataBaseAPAM:
 			status_atual TEXT NOT NULL,
 			possui_sequela BOOLEAN,
 			observacoes TEXT)''')
-	
-
    
 		self.db_execute('''CREATE TABLE IF NOT EXISTS animal_adotante
 		    (id_animal_adotante INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -183,7 +180,6 @@ class DataBaseAPAM:
 			data_entrada DATE NOT NULL,
 			data_saida DATE NOT NULL,
 			FOREIGN KEY (id_animal) REFERENCES animal(id_animal) ON DELETE CASCADE)''')
-   
 	
 	# CRUD referente ao animal
 	# Resgate
@@ -199,22 +195,18 @@ class DataBaseAPAM:
 	def update_resgate(self, resgate: InfoResgate) -> None:
 		sql = '''UPDATE resgate
 				SET local_resgate = ?, atendimento = ?, necessario_intervencao_cirurgica = ?, destinacao_do_protegido = ?, historico_anamnese = ?, diagnostico_estado_saude = ?, tratamento_intervencao_e_medicacao = ?, data_resgate = ?, observacoes = ?
-				WHERE id_animal = ?'''
+				WHERE id_animal = ? ADN id_resgate = ?'''
 		self.db_execute(sql, (resgate.local_resgate, resgate.atendimento, resgate.necessario_intervencao_cirurgica, resgate.destinacao_do_protegido, resgate.historico_anamnese, resgate.diagnostico_estado_saude, resgate.tratamento_intervencao_e_medicacao, resgate.data_resgate, resgate.observacoes, resgate.id_animal))
   
 	def delete_resgate(self, id_animal: int) -> None:
-		sql = '''DELETE FROM resgate WHERE id_animal = ?'''
+		sql = '''DELETE FROM resgate WHERE id_animal = ? AND id_resgate = ?'''
 		self.db_execute(sql, [id_animal])
   
 	# Animal
 	def add_animal(self, animal: InfoAnimal) -> None:
-		sql = '''INSERT INTO animal (foto, nome_animal, data_cadastro, especie, genero, temperamento, idade_anos, idade_meses, porte, pelagem, raca, microchip, status_atual, possui_sequela, observacoes) 
-  				 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'''
-		self.db_execute(sql, (animal.foto, animal.nome_animal, animal.data_cadastro, animal.especie, animal.genero, animal.temperamento, animal.idade_anos, animal.idade_meses, animal.porte, animal.pelagem, animal.raca, animal.microchip, animal.status_atual, animal.possui_sequela, animal.observacoes))
-
-	def get_all_animals(self) -> list:
-		sql = '''SELECT * FROM animal'''
-		return self.db_execute(sql)
+		sql = '''INSERT INTO animal (foto, nome_animal, especie, genero, temperamento, idade, medida_idade, porte, pelagem, raca, microchip, status_atual, possui_sequela, observacoes) 
+  				 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'''
+		self.db_execute(sql, (animal.foto, animal.nome_animal, animal.especie, animal.genero, animal.temperamento, animal.idade, animal.medida_idade, animal.porte, animal.pelagem, animal.raca, animal.microchip, animal.status_atual, animal.possui_sequela, animal.observacoes))
 
 	def get_animais(self, nome: str) -> list:
 		sql = '''SELECT * FROM animal WHERE nome_animal = ?'''
@@ -222,9 +214,9 @@ class DataBaseAPAM:
 
 	def update_animal(self, id_animal: int, animal: InfoAnimal) -> None:
 		sql = '''UPDATE animal
-                SET foto = ?, nome_animal = ?, data_cadastro = ?, especie = ?, genero = ?, temperamento = ?, idade_anos = ?, idade_meses = ?, porte = ?, pelagem = ?, raca = ?, microchip = ?, status_atual = ?, possui_sequela = ?, observacoes = ?
+                SET foto = ?, nome_animal = ?, especie = ?, genero = ?, temperamento = ?, idade = ?, medida_idade = ?, porte = ?, pelagem = ?, raca = ?, microchip = ?, status_atual = ?, possui_sequela = ?, observacoes = ?
                 WHERE id_animal = ?'''
-		self.db_execute(sql, (animal.foto, animal.nome_animal, animal.data_cadastro, animal.especie, animal.genero, animal.temperamento, animal.idade_anos, animal.idade_meses, animal.porte, ','.join(animal.pelagem), animal.raca, animal.microchip, animal.status_atual, animal.possui_sequela, animal.observacoes, id_animal))
+		self.db_execute(sql, (animal.foto, animal.nome_animal, animal.especie, animal.genero, animal.temperamento, animal.idade, animal.medida_idade, animal.porte, ','.join(animal.pelagem), animal.raca, animal.microchip, animal.status_atual, animal.possui_sequela, animal.observacoes, id_animal))
         
 	def delete_animal(self, id_animal: int) -> None:
 		sql = '''DELETE FROM animal WHERE id_animal = ?'''
@@ -275,11 +267,11 @@ class DataBaseAPAM:
 		return self.db_execute(sql, [id_animal])
 
 	def update_exames(self, exames: Exames) -> None:
-		sql = '''UPDATE exames SET data_exame = ?, exames_realizados = ?, medicacoes = ?, tratamento = ?, alimentacao_especial = ?, observacoes = ? WHERE id_animal = ?'''
+		sql = '''UPDATE exames SET data_exame = ?, exames_realizados = ?, medicacoes = ?, tratamento = ?, alimentacao_especial = ?, observacoes = ? WHERE id_animal = ? AND id_exame = ?'''
 		self.db_execute(sql, (exames.data_exame, exames.exames_realizados, exames.medicacoes, exames.tratamento, exames.alimentacao_especial, exames.observacoes, exames.id_animal))
   
 	def delete_exames(self, id_animal: int) -> None:
-		sql = '''DELETE FROM exames WHERE id_animal = ?'''
+		sql = '''DELETE FROM exames WHERE id_animal = ? AND id_exame = ?'''
 		self.db_execute(sql, [id_animal])
   
 	# Vacinas
@@ -292,11 +284,11 @@ class DataBaseAPAM:
 		return self.db_execute(sql, [id_animal])
 
 	def update_vacinas(self, vacinas: Vacinas) -> None:
-		sql = '''UPDATE vacinas SET vacina = ?, data_vacina = ?, data_proxima_dose = ? WHERE id_animal = ?'''
+		sql = '''UPDATE vacinas SET vacina = ?, data_vacina = ?, data_proxima_dose = ? WHERE id_animal = ? AND id_vacinas = ?'''
 		self.db_execute(sql, (vacinas.vacina, vacinas.data_vacina, vacinas.data_proxima_dose, vacinas.id_animal))
 
 	def delete_vacinas(self, id_animal: int) -> None:
-		sql = '''DELETE FROM vacinas WHERE id_animal = ?'''
+		sql = '''DELETE FROM vacinas WHERE id_animal = ? AND id_vacinas = ?'''
 		self.db_execute(sql, [id_animal])
   
 	# Vermifugos
@@ -309,11 +301,11 @@ class DataBaseAPAM:
 		return self.db_execute(sql, [id_animal])
 
 	def update_vermifugos(self, vermifugos: Vermifugos) -> None:
-		sql = '''UPDATE vermifugos SET data_aplicacao = ?, data_proxima_aplicacao = ? WHERE id_animal = ?'''
+		sql = '''UPDATE vermifugos SET data_aplicacao = ?, data_proxima_aplicacao = ? WHERE id_animal = ? AND id_vermifugos = ?'''
 		self.db_execute(sql, (vermifugos.data_aplicacao, vermifugos.data_proxima_aplicacao, vermifugos.id_animal))
   
 	def delete_vermifugos(self, id_animal: int) -> None:
-		sql = '''DELETE FROM vermifugos WHERE id_animal = ?'''
+		sql = '''DELETE FROM vermifugos WHERE id_animal = ? AND id_vermifugos = ?'''
 		self.db_execute(sql, [id_animal])
   
 	# Pesos
@@ -326,11 +318,11 @@ class DataBaseAPAM:
 		return self.db_execute(sql, [id_animal])
 
 	def update_pesos(self, pesos: Pesos) -> None:
-		sql = '''UPDATE pesos SET peso = ?, data_peso = ?, data_proximo_peso = ? WHERE id_animal = ?'''
+		sql = '''UPDATE pesos SET peso = ?, data_peso = ?, data_proximo_peso = ? WHERE id_animal = ? AND id_pesos = ?'''
 		self.db_execute(sql, (pesos.peso, pesos.data_peso, pesos.data_proximo_peso, pesos.id_animal))
   
 	def delete_pesos(self, id_animal: int) -> None:
-		sql = '''DELETE FROM pesos WHERE id_animal = ?'''
+		sql = '''DELETE FROM pesos WHERE id_animal = ? AND id_pesos = ?'''
 		self.db_execute(sql, [id_animal])
   
 	# Profilaxia Laishmaniose
@@ -343,11 +335,11 @@ class DataBaseAPAM:
 		return self.db_execute(sql, [id_animal])
 
 	def update_profilaxia_laishmaniose(self, profilaxia: ProfilaxiaLaishmaniose) -> None:
-		sql = '''UPDATE profilaxia_laishmaniose SET data_aplicacao = ?, data_proxima_aplicacao = ? WHERE id_animal = ?'''
+		sql = '''UPDATE profilaxia_laishmaniose SET data_aplicacao = ?, data_proxima_aplicacao = ? WHERE id_animal = ? AND id_profilaxia = ?'''
 		self.db_execute(sql, (profilaxia.data_aplicacao, profilaxia.data_proxima_aplicacao, profilaxia.id_animal))
   
 	def delete_profilaxia_laishmaniose(self, id_animal: int) -> None:
-		sql = '''DELETE FROM profilaxia_laishmaniose WHERE id_animal = ?'''
+		sql = '''DELETE FROM profilaxia_laishmaniose WHERE id_animal = ? AND id_profilaxia = ?'''
 		self.db_execute(sql, [id_animal])
   
 	# Lar Temporario
@@ -360,11 +352,11 @@ class DataBaseAPAM:
 		return self.db_execute(sql, [id_animal])
 
 	def update_lar_temporario(self, lar: LarTemporario) -> None:
-		sql = '''UPDATE lar_temporario SET local = ?, data_entrada = ?, data_saida = ? WHERE id_animal = ?'''
+		sql = '''UPDATE lar_temporario SET local = ?, data_entrada = ?, data_saida = ? WHERE id_animal = ? AND id_lar_temporario = ?'''
 		self.db_execute(sql, (lar.local, lar.data_entrada, lar.data_saida, lar.id_animal))
   
 	def delete_lar_temporario(self, id_animal: int) -> None:
-		sql = '''DELETE FROM lar_temporario WHERE id_animal = ?'''
+		sql = '''DELETE FROM lar_temporario WHERE id_animal = ? AND id_lar_temporario = ?'''
 		self.db_execute(sql, [id_animal])
 
 	# CRUD referente aos atributos do adotante
@@ -398,11 +390,11 @@ class DataBaseAPAM:
 		return self.db_execute(sql, [id_adotante])
 
 	def update_acompanhamento_adocao(self, observacao: ObservacaoAdotante) -> None:
-		sql = '''UPDATE acompanhamento_adocao SET observacao = ?, data_observacao = ? WHERE id_adotante = ?'''
+		sql = '''UPDATE acompanhamento_adocao SET observacao = ?, data_observacao = ? WHERE id_adotante = ? AND id_acompanhamento_adocao = ?'''
 		self.db_execute(sql, (observacao.observacao, observacao.data_observacao, observacao.id_adotante))
   
 	def delete_acompanhamento_adocao(self, id_adotante: int) -> None:
-		sql = '''DELETE FROM acompanhamento_adocao WHERE id_adotante = ?'''
+		sql = '''DELETE FROM acompanhamento_adocao WHERE id_adotante = ? AND id_acompanhamento_adocao = ?'''
 		self.db_execute(sql, [id_adotante])
   
 	# Adocao Adotante
@@ -420,9 +412,10 @@ class DataBaseAPAM:
 		self.db_execute(sql, (adocao.id_adotante, adocao.data_adocao, adocao.id_animal))
   
 	def delete_adocao_adotante(self, id_animal: int) -> None:
-		sql = '''DELETE FROM animal_adotante WHERE id_animal = ?'''
+		sql = '''DELETE FROM animal_adotante WHERE id_animal = ? '''
 		self.db_execute(sql, [id_animal])
   
+
 if __name__ == "__main__":
     db = DataBaseAPAM()
     print("Banco de dados e tabelas criados com sucesso.")

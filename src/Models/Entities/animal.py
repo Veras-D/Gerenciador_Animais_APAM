@@ -6,11 +6,10 @@ class InfoAnimal:
     nome_animal: str
     especie: str
     foto: bytes = b''
-    data_cadastro: str = 'Não'
     genero: str = 'Não Informado'
     temperamento: str = 'Não Informado'
-    idade_anos: int = 0
-    idade_meses: int = 0
+    idade: int = 0
+    medida_idade: str = 'Não Informado'
     porte: str = 'Não Informado'
     pelagem: List[str] = field(default_factory=list)
     raca: str = 'SRD'
