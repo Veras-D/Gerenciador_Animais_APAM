@@ -9,7 +9,7 @@ class Validacao:
     reg_email = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
 
     @staticmethod
-    def tratar_dados(dado):
+    def _tratar_dados(dado):
         return re.sub(Validacao.reg_field, "", dado)
 
     @staticmethod
@@ -22,7 +22,7 @@ class Validacao:
 
     @staticmethod
     def tratarTelefone_e_Celular(telefone):
-        return Validacao.tratar_dados(telefone)
+        return Validacao._tratar_dados(telefone)
 
     @staticmethod
     def validar_cpf(cpf):
@@ -34,7 +34,7 @@ class Validacao:
 
     @staticmethod
     def validarCEP(cep):
-        cep = Validacao.tratar_dados(cep)  # Corrigido para tratar_dados
+        cep = Validacao._tratar_dados(cep)  # Corrigido para tratar_dados
         if len(cep) != 8 or not cep.isdigit():
             return False
         return True
