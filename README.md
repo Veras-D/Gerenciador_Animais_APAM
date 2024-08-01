@@ -18,9 +18,9 @@ A APAM é uma associação cujo objetivo é proteger os animais contra o abandon
 
 ## Banco de Dados
 
-| Modelo Conceitual | Modelo Lógico | Banco Normalizado |
-|-------------------|---------------|-------------------|
-| <img src="https://github.com/user-attachments/assets/9b03d9cf-1a04-4d84-af0b-eb18b666b351" alt="banco_APAM_modelo_conceitual" width="400"/> | <img src="https://github.com/user-attachments/assets/9b03d9cf-1a04-4d84-af0b-eb18b666b351" alt="banco_APAM_modelo_logico" width="400"/> | <img src="https://github.com/user-attachments/assets/9b03d9cf-1a04-4d84-af0b-eb18b666b351" alt="banco_APAM_modelo_normalizado" width="400"/> |
+| Modelo Conceitual | Modelo Lógico |
+|-------------------|---------------|
+| <img src="https://github.com/user-attachments/assets/9b03d9cf-1a04-4d84-af0b-eb18b666b351" alt="banco_APAM_modelo_conceitual" width="400"/> | <img src="https://github.com/user-attachments/assets/3c7d3439-0e2c-4c1e-975d-577df1b070a2" alt="banco_APAM_modelo_logico" width="400"/> |
 
 ## Diagrama de Fluxo de Dados
 <p align="center">
@@ -159,7 +159,7 @@ No GitHub, vá para o seu repositório fork, encontre a sua branch e clique em "
 
 ---
 
-Ficaremos felizes em receber suas contribuições! Lembre-se de seguir os padrões do projeto ao enviar um pull request e de revisar o código antes de submetê-lo. Obrigado por colaborar!
+Ficaremos felizes em receber suas contribuições! Lembre-se de seguir os padrões do projeto ao enviar um pull request e de revisar o código antes de submetê-lo. Caso queira que seu nome seja inserido em `Time de Desenvolvedores` basta enviar seu linkedin junto ao PR. Obrigado por colaborar!
 
 ---
 
@@ -182,6 +182,10 @@ Ficaremos felizes em receber suas contribuições! Lembre-se de seguir os padrõ
       <td><a href="https://www.linkedin.com/in/willianrsantos/">Willian Ribeiro</a></td>
     </tr>
     <tr>
+      <td>UI Developer</td>
+      <td><a href="https://www.linkedin.com/in/allan-andrade-0a3361229/">Allan Andrade</a></td>
+    </tr>
+    <tr>
       <td>Developer</td>
       <td><a href="https://www.linkedin.com/in/dayvisson-tenorio/">Dayvisson Tenório</a></td>
     </tr>
@@ -198,4 +202,4 @@ Ficaremos felizes em receber suas contribuições! Lembre-se de seguir os padrõ
       <td><a href="https://www.linkedin.com/in/lucas-alexandre-47a6672a0/">Lucas Alexandre</a></td>
     </tr>
   </table>
-</div>
+</div> 
