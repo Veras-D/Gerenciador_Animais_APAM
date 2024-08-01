@@ -9,7 +9,7 @@ from Controllers.LoginController import password_verification
 config = Config()
 
 
-def main(page, estado):
+def main(page, estado="Teste"):
 
     page.title = config.TITLE
     page.theme_mode = ft.ThemeMode.LIGHT
