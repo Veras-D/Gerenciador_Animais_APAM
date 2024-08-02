@@ -38,13 +38,17 @@ def main(page, estado="Teste"):
         )
     logo_path = os.path.join(os.path.dirname(__file__), '..', '..', 'assets', 'logo.png')
 
-    def testar(e):
+    def acessar(e):
         print(user.value, password.value)
         print(type(user.value), type(password.value))
         if password_verification(page, user.value, password.value):
             page.clean()
             estado.estado = "Tela Seleção"
             estado.main_page()
+        else:
+            user.error_text = "Usuário ou Senha Invalido"
+            password.error_text = "Usuário ou Senha Invalido"
+            page.update()
 
     page.add(
         ft.Image(src=logo_path, width=120, height=120),
@@ -53,7 +57,7 @@ def main(page, estado="Teste"):
             ft.Column(
                 [user,
                 password,
-                ft.ElevatedButton(text='Entrar', on_click=testar, width=300, height=40)],
+                ft.ElevatedButton(text='Entrar', on_click=acessar, width=300, height=40)],
             )
         ],
         alignment=ft.MainAxisAlignment.CENTER

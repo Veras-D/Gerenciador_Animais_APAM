@@ -17,8 +17,8 @@ class GerenciadorDeAnimaisAPAM:
         self.page.scroll = True
         self.page.vertical_alignment = ft.MainAxisAlignment.CENTER
         self.page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
-        self.page.window_height = config.WIDTH_LOGIN
-        self.page.window_width = config.HEIGHT_LOGIN
+        self.page.window_height = config.HEIGHT_LOGIN
+        self.page.window_width = config.WIDTH_LOGIN
         self.main_page()
 
 
@@ -28,8 +28,8 @@ class GerenciadorDeAnimaisAPAM:
             LoginView.main(self.page, self)
 
         if self.estado == "Tela Seleção":
-            self.page.window_height = config.WIDTH_BASE
-            self.page.window_width = config.HEIGHT_BASE
+            self.page.window_height = config.HEIGHT_BASE
+            self.page.window_width = config.WIDTH_BASE
             SelectionView.main(self.page)
 
 
