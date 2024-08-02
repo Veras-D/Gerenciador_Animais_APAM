@@ -195,7 +195,7 @@ class DataBaseAPAM:
 	def update_resgate(self, resgate: InfoResgate) -> None:
 		sql = '''UPDATE resgate
 				SET local_resgate = ?, atendimento = ?, necessario_intervencao_cirurgica = ?, destinacao_do_protegido = ?, historico_anamnese = ?, diagnostico_estado_saude = ?, tratamento_intervencao_e_medicacao = ?, data_resgate = ?, observacoes = ?
-				WHERE id_animal = ? ADN id_resgate = ?'''
+				WHERE id_animal = ? AND id_resgate = ?'''
 		self.db_execute(sql, (resgate.local_resgate, resgate.atendimento, resgate.necessario_intervencao_cirurgica, resgate.destinacao_do_protegido, resgate.historico_anamnese, resgate.diagnostico_estado_saude, resgate.tratamento_intervencao_e_medicacao, resgate.data_resgate, resgate.observacoes, resgate.id_animal))
   
 	def delete_resgate(self, id_animal: int) -> None:
