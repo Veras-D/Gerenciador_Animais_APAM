@@ -27,10 +27,25 @@ class GerenciadorDeAnimaisAPAM:
         if self.estado == "Login":
             LoginView.main(self.page, self)
 
-        if self.estado == "Tela Seleção":
+        elif self.estado == "Tela Seleção":
             self.page.window_height = config.HEIGHT_BASE
             self.page.window_width = config.WIDTH_BASE
             SelectionView.main(self.page)
+
+        elif self.estado == "Tela de Cadastro de Animal":
+            pass
+
+        elif self.estado == "Tela de Consulta de Animal":
+            pass
+
+        elif self.estado == "Tela de Cadastro de Adotante":
+            pass
+
+        elif self.estado == "Tela de Consulta de Adotante":
+            pass
+
+        else:
+            LoginView.main(self.page, self)
 
 
 ft.app(target=GerenciadorDeAnimaisAPAM)

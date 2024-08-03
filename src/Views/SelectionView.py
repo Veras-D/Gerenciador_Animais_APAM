@@ -34,7 +34,7 @@ def main(page):
 
     page.drawer = ft.NavigationDrawer(
         controls=[
-            ft.Image(src="assets/logo.png", width=150, height=150),
+            ft.Image(src="assets/logo.png", width=100, height=100),
             ft.Container(height=20),
             ft.Divider(thickness=2),
             ft.NavigationDrawerDestination(
