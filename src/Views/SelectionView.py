@@ -32,10 +32,40 @@ def main(page):
         width=250
     )
 
+    page.drawer = ft.NavigationDrawer(
+        controls=[
+            ft.Image(src="assets/logo.png", width=150, height=150),
+            ft.Container(height=20),
+            ft.Divider(thickness=2),
+            ft.NavigationDrawerDestination(
+                label="Home",
+                icon=ft.icons.HOME,
+                selected_icon_content=ft.Icon(ft.icons.HOME),
+            ),
+            ft.Divider(thickness=2),
+            ft.NavigationDrawerDestination(
+                icon_content=ft.Icon(ft.icons.INFO),
+                label="Logs",
+                selected_icon=ft.Icon(ft.icons.INFO),
+            ),
+            ft.Divider(thickness=2),
+            ft.NavigationDrawerDestination(
+                icon_content=ft.Icon(ft.icons.PEOPLE),
+                label="About Us",
+                selected_icon=ft.icons.PEOPLE,
+            ),
+            ft.Divider(thickness=2)
+        ],
+    )
+
+    def menu(e):
+        page.drawer.open = True
+        page.drawer.update()
+
     menu = ft.IconButton(
         icon=ft.icons.MENU,
         icon_color=ft.colors.BLACK,
-        on_click=lambda e: print("Menu clicado"),
+        on_click=menu,
     )
 
     page.add(
