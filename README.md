@@ -17,7 +17,6 @@ A APAM é uma associação cujo objetivo é proteger os animais contra o abandon
 # Funcionaluidades
 
 ## Banco de Dados
-
 | Modelo Conceitual | Modelo Lógico |
 |-------------------|---------------|
 | <img src="https://github.com/user-attachments/assets/9b03d9cf-1a04-4d84-af0b-eb18b666b351" alt="banco_APAM_modelo_conceitual" width="400"/> | <img src="https://github.com/user-attachments/assets/3c7d3439-0e2c-4c1e-975d-577df1b070a2" alt="banco_APAM_modelo_logico" width="400"/> |
@@ -27,17 +26,30 @@ A APAM é uma associação cujo objetivo é proteger os animais contra o abandon
   <img src="https://github.com/user-attachments/assets/c97f3235-b360-4926-814c-e5dd9b558c36" />
 </p>
 
+## Acessando o Sistema
+### Login
+| Normal Mode | Error Mode |
+|-------------|------------|
+| <img src="https://github.com/user-attachments/assets/8d30631f-7ae5-4128-a6b0-29e6f12be1e3" alt="normal_login" width="400"/> | <img src="https://github.com/user-attachments/assets/d672933b-1389-4a59-b702-de33c62a63ed" alt="error_login" width="400"/> |
+
+### Tela de Seleção
+| Normal Mode | Menu Mode |
+|-------------|------------|
+| <img src="https://github.com/user-attachments/assets/7e477fb7-4ca6-4dd6-b438-cfe1473d4ca3" alt="normal_selection" width="400"/> | <img src="https://github.com/user-attachments/assets/bfb9008b-ec9e-4184-a410-2113c3971078" alt="menu_slection" width="400"/> |
+
 ## Informações do Animal
+### Cadastrando um Animal
 
-## Informações do Resgate
+### Consultando um Animal
 
-## Histórico de Informações de Saúde
+## Informações do Adotante
+### Cadastrando um Adotante
 
-## Informações de Adoção
+### Consultando um Adotante
 
 ## Sistema de Notificações
 
-## Consultas de Informação
+## Sistema de Logs
 
 <div id='requisitos-e-tecnologias-usadas'/> 
 
