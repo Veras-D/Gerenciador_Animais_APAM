@@ -186,7 +186,7 @@ Ficaremos felizes em receber suas contribuições! Lembre-se de seguir os padrõ
       <th style="text-align: center;">Nome</th>
     </tr>
     <tr>
-      <td>PM, Designer e Developer</td>
+      <td>ADS, Designer e Developer</td>
       <td><a href="https://www.linkedin.com/in/veras-d/">Veras</a></td>
     </tr>
     <tr>
@@ -212,6 +212,10 @@ Ficaremos felizes em receber suas contribuições! Lembre-se de seguir os padrõ
     <tr>
       <td>Tester Developer</td>
       <td><a href="https://www.linkedin.com/in/lucas-alexandre-47a6672a0/">Lucas Alexandre</a></td>
+    </tr>
+    <tr>
+      <td>Technical Recruiter</td>
+      <td><a href="https://www.linkedin.com/in/gabriel-bandeira-macedo-a2107a139/">Gabriel Bandeira</a></td>
     </tr>
   </table>
 </div> 
