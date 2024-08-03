@@ -186,7 +186,7 @@ Ficaremos felizes em receber suas contribuições! Lembre-se de seguir os padrõ
       <th style="text-align: center;">Nome</th>
     </tr>
     <tr>
-      <td>PM, Designer e Developer</td>
+      <td>ADS, Designer e Developer</td>
       <td><a href="https://www.linkedin.com/in/veras-d/">Veras</a></td>
     </tr>
     <tr>
