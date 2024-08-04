@@ -8,9 +8,6 @@ from Views import (
     AdotanteRegisterView,
     AdotanteSearchView
 )
-from Controllers.LoginController import password_verification
-# from util import Validacao
-# from Models.Repository.db import DataBaseAPAM
 
 
 config = Config()
