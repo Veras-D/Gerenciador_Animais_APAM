@@ -1,7 +1,7 @@
 import flet as ft
 
 
-def main(page):
+def main(page, estado):
     page.title = "Tela de Seleção"
     page.bgcolor = "white"
 
@@ -14,10 +14,51 @@ def main(page):
         padding=10 
     )
 
-    btn_cadastrar_animal = ft.OutlinedButton("Cadastrar Animal", on_click='', style=button_style, width=250, height=50)
-    btn_consultar_animal = ft.OutlinedButton("Consultar Animal", on_click='', style=button_style,width=250, height=50)
-    btn_cadastrar_adotante = ft.OutlinedButton("Cadastrar Adotante", on_click='', style=button_style, width=250, height=50)
-    btn_consultar_adotante = ft.OutlinedButton("Consultar Adotante", on_click='', style=button_style, width=250, height=50)
+
+    def cadastrar_animal(e):
+        page.clean()
+        estado.estado = "Tela de Cadastro de Animal"
+        estado.main_page()
+
+
+    def consultar_animal(e):
+        page.clean()
+        estado.estado = "Tela de Consulta de Animal"
+        estado.main_page()
+
+
+    def cadastrar_adotante(e):
+        page.clean()
+        estado.estado = "Tela de Cadastro de Adotante"
+        estado.main_page()
+
+
+    def consultar_adotante(e):
+        page.clean()
+        estado.estado = "Tela de Consulta de Adotante"
+        estado.main_page()
+
+
+    btn_cadastrar_animal = ft.OutlinedButton(
+        "Cadastrar Animal", 
+        on_click=cadastrar_animal,
+        style=button_style, width=250, height=50
+        )
+    btn_consultar_animal = ft.OutlinedButton(
+        "Consultar Animal", 
+        on_click=consultar_animal,
+        style=button_style,width=250, height=50
+        )
+    btn_cadastrar_adotante = ft.OutlinedButton(
+        "Cadastrar Adotante", 
+        on_click=cadastrar_adotante, 
+        style=button_style, width=250, height=50
+        )
+    btn_consultar_adotante = ft.OutlinedButton(
+        "Consultar Adotante", 
+        on_click=consultar_adotante,
+        style=button_style, width=250, height=50
+        )
 
     content = ft.Column(
         [

@@ -1,6 +1,13 @@
 import flet as ft
 from config import Config
-from Views import LoginView, SelectionView
+from Views import (
+    LoginView, 
+    SelectionView,
+    AnimalRegisterView,
+    AnimalSearchView,
+    AdotanteRegisterView,
+    AdotanteSearchView
+)
 from Controllers.LoginController import password_verification
 # from util import Validacao
 # from Models.Repository.db import DataBaseAPAM
@@ -30,21 +37,23 @@ class GerenciadorDeAnimaisAPAM:
         elif self.estado == "Tela Seleção":
             self.page.window_height = config.HEIGHT_BASE
             self.page.window_width = config.WIDTH_BASE
-            SelectionView.main(self.page)
+            SelectionView.main(self.page, self)
 
         elif self.estado == "Tela de Cadastro de Animal":
-            pass
+            AnimalRegisterView.main(self.page)
 
         elif self.estado == "Tela de Consulta de Animal":
-            pass
+            AnimalSearchView.main(self.page)
 
         elif self.estado == "Tela de Cadastro de Adotante":
-            pass
+            AdotanteRegisterView.main(self.page)
 
         elif self.estado == "Tela de Consulta de Adotante":
-            pass
+            AdotanteSearchView.main(self.page)
 
         else:
+            self.page.window_height = config.HEIGHT_LOGIN
+            self.page.window_width = config.WIDTH_LOGIN
             LoginView.main(self.page, self)
 
 
