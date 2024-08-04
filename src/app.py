@@ -30,7 +30,7 @@ class GerenciadorDeAnimaisAPAM:
 
 
     def main_page(self):
-        self.page.add(ft.Text("Teste"))
+        self.page.add(ft.Text("Em Desenvolvimento"))
         if self.estado == "Login":
             LoginView.main(self.page, self)
 
