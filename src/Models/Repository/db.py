@@ -21,6 +21,9 @@ from adotante import (
     AdocaoAdotante
 )
 
+from logs import (
+	Logs
+    )
 
 class DataBaseAPAM:
 	def __init__(self):
@@ -38,7 +41,7 @@ class DataBaseAPAM:
 		self.results_pesos = self.db_execute("SELECT * FROM pesos")
 		self.results_profilaxia_laishmaniose = self.db_execute("SELECT * FROM profilaxia_laishmaniose")
 		self.results_lar_temporario = self.db_execute("SELECT * FROM lar_temporario")
-		
+		self.results_logs = self.db_execute("SELECT * FROM logs")
 
 
 	def db_execute(self, query, param = []):
@@ -181,6 +184,408 @@ class DataBaseAPAM:
 			data_saida DATE NOT NULL,
 			FOREIGN KEY (id_animal) REFERENCES animal(id_animal) ON DELETE CASCADE)''')
 	
+		self.db_execute('''CREATE TABLE IF NOT EXISTS logs
+			(id_logs INTEGER PRIMARY KEY AUTOINCREMENT,
+			tabela TEXT NOT NULL,
+			operacao TEXT NOT NULL,
+			nome_id_animal INTEGER NOT NULL,
+			timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP)''')
+
+		# Definições de Triggers
+		self.create_triggers()
+  
+	# Triggers para logs
+	def create_triggers(self):
+    # Trigger para INSERT na tabela 'animal'
+		self.db_execute('''
+    	    CREATE TRIGGER IF NOT EXISTS log_insert_animal
+    	    AFTER INSERT ON animal
+    	    FOR EACH ROW
+    	    BEGIN
+    	        INSERT INTO logs (tabela, operacao, nome_id_animal) VALUES ('animal', 'INSERT', NEW.nome_animal);
+    	    END;
+    	''')
+
+    	# Trigger para UPDATE na tabela 'animal'
+		self.db_execute('''
+    	    CREATE TRIGGER IF NOT EXISTS log_update_animal
+    	    AFTER UPDATE ON animal
+    	    FOR EACH ROW
+    	    BEGIN
+    	        INSERT INTO logs (tabela, operacao, nome_id_animal) VALUES ('animal', 'UPDATE', NEW.nome_animal);
+    	    END;
+    	''')
+
+    	# Trigger para DELETE na tabela 'animal'
+		self.db_execute('''
+    	    CREATE TRIGGER IF NOT EXISTS log_delete_animal
+    	    AFTER DELETE ON animal
+    	    FOR EACH ROW
+    	    BEGIN
+    	        INSERT INTO logs (tabela, operacao, nome_id_animal) VALUES ('animal', 'DELETE', OLD.nome_animal);
+    	    END;
+    	''')
+
+    	# # Trigger para INSERT na tabela 'animal_adotante'
+		# self.db_execute('''
+    	#     CREATE TRIGGER IF NOT EXISTS log_insert_animal_adotante
+    	#     AFTER INSERT ON animal_adotante
+    	#     FOR EACH ROW
+    	#     BEGIN
+    	#         INSERT INTO logs (tabela, operacao, nome_id_animal) VALUES ('animal_adotante', 'INSERT', NEW.id_animal_adotante);
+    	#     END;
+    	# ''')
+
+    	# # Trigger para UPDATE na tabela 'animal_adotante'
+		# self.db_execute('''
+    	#     CREATE TRIGGER IF NOT EXISTS log_update_animal_adotante
+    	#     AFTER UPDATE ON animal_adotante
+    	#     FOR EACH ROW
+    	#     BEGIN
+    	#         INSERT INTO logs (tabela, operacao, nome_id_animal) VALUES ('animal_adotante', 'UPDATE', NEW.id_animal_adotante);
+    	#     END;
+    	# ''')
+
+    	# # Trigger para DELETE na tabela 'animal_adotante'
+		# self.db_execute('''
+    	#     CREATE TRIGGER IF NOT EXISTS log_delete_animal_adotante
+    	#     AFTER DELETE ON animal_adotante
+    	#     FOR EACH ROW
+    	#     BEGIN
+    	#         INSERT INTO logs (tabela, operacao, nome_id_animal) VALUES ('animal_adotante', 'DELETE', OLD.id_animal_adotante);
+    	#     END;
+    	# ''')
+
+    	# Trigger para INSERT na tabela 'adotante'
+		self.db_execute('''
+    	    CREATE TRIGGER IF NOT EXISTS log_insert_adotante
+    	    AFTER INSERT ON adotante
+    	    FOR EACH ROW
+    	    BEGIN
+    	        INSERT INTO logs (tabela, operacao, nome_id_animal) VALUES ('adotante', 'INSERT', NEW.nome_adotante);
+    	    END;
+    	''')
+
+    	# Trigger para UPDATE na tabela 'adotante'
+		self.db_execute('''
+    	    CREATE TRIGGER IF NOT EXISTS log_update_adotante
+    	    AFTER UPDATE ON adotante
+    	    FOR EACH ROW
+    	    BEGIN
+    	        INSERT INTO logs (tabela, operacao, nome_id_animal) VALUES ('adotante', 'UPDATE', NEW.nome_adotante);
+    	    END;
+    	''')
+
+    	# Trigger para DELETE na tabela 'adotante'
+		self.db_execute('''
+    	    CREATE TRIGGER IF NOT EXISTS log_delete_adotante
+    	    AFTER DELETE ON adotante
+    	    FOR EACH ROW
+    	    BEGIN
+    	        INSERT INTO logs (tabela, operacao, nome_id_animal) VALUES ('adotante', 'DELETE', OLD.nome_adotante);
+    	    END;
+    	''')
+
+    	# Trigger para INSERT na tabela 'acompanhamento_adocao'
+		self.db_execute('''
+    	    CREATE TRIGGER IF NOT EXISTS log_insert_acompanhamento_adocao
+    	    AFTER INSERT ON acompanhamento_adocao
+    	    FOR EACH ROW
+    	    BEGIN
+    	        INSERT INTO logs (tabela, operacao, nome_id_animal) VALUES ('acompanhamento_adocao', 'INSERT', NEW.id_acompanhamento_adocao);
+    	    END;
+    	''')
+
+    	# Trigger para UPDATE na tabela 'acompanhamento_adocao'
+		self.db_execute('''
+    	    CREATE TRIGGER IF NOT EXISTS log_update_acompanhamento_adocao
+    	    AFTER UPDATE ON acompanhamento_adocao
+    	    FOR EACH ROW
+    	    BEGIN
+    	        INSERT INTO logs (tabela, operacao, nome_id_animal) VALUES ('acompanhamento_adocao', 'UPDATE', NEW.id_acompanhamento_adocao);
+    	    END;
+    	''')
+
+    	# Trigger para DELETE na tabela 'acompanhamento_adocao'
+		self.db_execute('''
+    	    CREATE TRIGGER IF NOT EXISTS log_delete_acompanhamento_adocao
+    	    AFTER DELETE ON acompanhamento_adocao
+    	    FOR EACH ROW
+    	    BEGIN
+    	        INSERT INTO logs (tabela, operacao, nome_id_animal) VALUES ('acompanhamento_adocao', 'DELETE', OLD.id_acompanhamento_adocao);
+    	    END;
+    	''')
+
+    	# Trigger para INSERT na tabela 'resgate'
+		self.db_execute('''
+    	    CREATE TRIGGER IF NOT EXISTS log_insert_resgate
+    	    AFTER INSERT ON resgate
+    	    FOR EACH ROW
+    	    BEGIN
+    	        INSERT INTO logs (tabela, operacao, nome_id_animal) VALUES ('resgate', 'INSERT', NEW.id_animal);
+    	    END;
+    	''')
+
+    	# Trigger para UPDATE na tabela 'resgate'
+		self.db_execute('''
+    	    CREATE TRIGGER IF NOT EXISTS log_update_resgate
+    	    AFTER UPDATE ON resgate
+    	    FOR EACH ROW
+    	    BEGIN
+    	        INSERT INTO logs (tabela, operacao, nome_id_animal) VALUES ('resgate', 'UPDATE', NEW.id_animal);
+    	    END;
+    	''')
+
+    	# Trigger para DELETE na tabela 'resgate'
+		self.db_execute('''
+    	    CREATE TRIGGER IF NOT EXISTS log_delete_resgate
+    	    AFTER DELETE ON resgate
+    	    FOR EACH ROW
+    	    BEGIN
+    	        INSERT INTO logs (tabela, operacao, nome_id_animal) VALUES ('resgate', 'DELETE', OLD.id_animal);
+    	    END;
+    	''')
+
+    	# Trigger para INSERT na tabela 'castracao'
+		self.db_execute('''
+    	    CREATE TRIGGER IF NOT EXISTS log_insert_castracao
+    	    AFTER INSERT ON castracao
+    	    FOR EACH ROW
+    	    BEGIN
+    	        INSERT INTO logs (tabela, operacao, nome_id_animal) VALUES ('castracao', 'INSERT', NEW.id_animal);
+    	    END;
+    	''')
+
+    	# Trigger para UPDATE na tabela 'castracao'
+		self.db_execute('''
+    	    CREATE TRIGGER IF NOT EXISTS log_update_castracao
+    	    AFTER UPDATE ON castracao
+    	    FOR EACH ROW
+    	    BEGIN
+    	        INSERT INTO logs (tabela, operacao, nome_id_animal) VALUES ('castracao', 'UPDATE', NEW.id_animal);
+    	    END;
+    	''')
+
+    	# Trigger para DELETE na tabela 'castracao'
+		self.db_execute('''
+    	    CREATE TRIGGER IF NOT EXISTS log_delete_castracao
+    	    AFTER DELETE ON castracao
+    	    FOR EACH ROW
+    	    BEGIN
+    	        INSERT INTO logs (tabela, operacao, nome_id_animal) VALUES ('castracao', 'DELETE', OLD.id_animal);
+    	    END;
+    	''')
+
+    	# Trigger para INSERT na tabela 'obito'
+		self.db_execute('''
+    	    CREATE TRIGGER IF NOT EXISTS log_insert_obito
+    	    AFTER INSERT ON obito
+    	    FOR EACH ROW
+    	    BEGIN
+    	        INSERT INTO logs (tabela, operacao, nome_id_animal) VALUES ('obito', 'INSERT', NEW.id_animal);
+    	    END;
+    	''')
+
+    	# Trigger para UPDATE na tabela 'obito'
+		self.db_execute('''
+    	    CREATE TRIGGER IF NOT EXISTS log_update_obito
+    	    AFTER UPDATE ON obito
+    	    FOR EACH ROW
+    	    BEGIN
+    	        INSERT INTO logs (tabela, operacao, nome_id_animal) VALUES ('obito', 'UPDATE', NEW.id_animal);
+    	    END;
+    	''')
+
+    	# Trigger para DELETE na tabela 'obito'
+		self.db_execute('''
+    	    CREATE TRIGGER IF NOT EXISTS log_delete_obito
+    	    AFTER DELETE ON obito
+    	    FOR EACH ROW
+    	    BEGIN
+    	        INSERT INTO logs (tabela, operacao, nome_id_animal) VALUES ('obito', 'DELETE', OLD.id_animal);
+    	    END;
+    	''')
+
+    	# Trigger para INSERT na tabela 'exames'
+		self.db_execute('''
+    	    CREATE TRIGGER IF NOT EXISTS log_insert_exames
+    	    AFTER INSERT ON exames
+    	    FOR EACH ROW
+    	    BEGIN
+    	        INSERT INTO logs (tabela, operacao, nome_id_animal) VALUES ('exames', 'INSERT', NEW.id_animal);
+    	    END;
+    	''')
+
+    	# Trigger para UPDATE na tabela 'exames'
+		self.db_execute('''
+    	    CREATE TRIGGER IF NOT EXISTS log_update_exames
+    	    AFTER UPDATE ON exames
+    	    FOR EACH ROW
+    	    BEGIN
+    	        INSERT INTO logs (tabela, operacao, nome_id_animal) VALUES ('exames', 'UPDATE', NEW.id_animal);
+    	    END;
+    	''')
+
+    	# Trigger para DELETE na tabela 'exames'
+		self.db_execute('''
+    	    CREATE TRIGGER IF NOT EXISTS log_delete_exames
+    	    AFTER DELETE ON exames
+    	    FOR EACH ROW
+    	    BEGIN
+    	        INSERT INTO logs (tabela, operacao, nome_id_animal) VALUES ('exames', 'DELETE', OLD.id_animal);
+    	    END;
+    	''')
+
+    	# Trigger para INSERT na tabela 'vacinas'
+		self.db_execute('''
+    	    CREATE TRIGGER IF NOT EXISTS log_insert_vacinas
+    	    AFTER INSERT ON vacinas
+    	    FOR EACH ROW
+    	    BEGIN
+    	        INSERT INTO logs (tabela, operacao, nome_id_animal) VALUES ('vacinas', 'INSERT', NEW.id_animal);
+    	    END;
+    	''')
+
+    	# Trigger para UPDATE na tabela 'vacinas'
+		self.db_execute('''
+    	    CREATE TRIGGER IF NOT EXISTS log_update_vacinas
+    	    AFTER UPDATE ON vacinas
+    	    FOR EACH ROW
+    	    BEGIN
+    	        INSERT INTO logs (tabela, operacao, nome_id_animal) VALUES ('vacinas', 'UPDATE', NEW.id_animal);
+    	    END;
+    	''')
+
+    	# Trigger para DELETE na tabela 'vacinas'
+		self.db_execute('''
+    	    CREATE TRIGGER IF NOT EXISTS log_delete_vacinas
+    	    AFTER DELETE ON vacinas
+    	    FOR EACH ROW
+    	    BEGIN
+    	        INSERT INTO logs (tabela, operacao, nome_id_animal) VALUES ('vacinas', 'DELETE', OLD.id_animal);
+    	    END;
+    	''')
+
+    	# Trigger para INSERT na tabela 'vermifugos'
+		self.db_execute('''
+    	    CREATE TRIGGER IF NOT EXISTS log_insert_vermifugos
+    	    AFTER INSERT ON vermifugos
+    	    FOR EACH ROW
+    	    BEGIN
+    	        INSERT INTO logs (tabela, operacao, nome_id_animal) VALUES ('vermifugos', 'INSERT', NEW.id_animal);
+    	    END;
+    	''')
+
+    	# Trigger para UPDATE na tabela 'vermifugos'
+		self.db_execute('''
+    	    CREATE TRIGGER IF NOT EXISTS log_update_vermifugos
+    	    AFTER UPDATE ON vermifugos
+    	    FOR EACH ROW
+    	    BEGIN
+    	        INSERT INTO logs (tabela, operacao, nome_id_animal) VALUES ('vermifugos', 'UPDATE', NEW.id_animal);
+    	    END;
+    	''')
+
+    	# Trigger para DELETE na tabela 'vermifugos'
+		self.db_execute('''
+    	    CREATE TRIGGER IF NOT EXISTS log_delete_vermifugos
+    	    AFTER DELETE ON vermifugos
+    	    FOR EACH ROW
+    	    BEGIN
+    	        INSERT INTO logs (tabela, operacao, nome_id_animal) VALUES ('vermifugos', 'DELETE', OLD.id_animal);
+    	    END;
+    	''')
+
+    	# Trigger para INSERT na tabela 'pesos'
+		self.db_execute('''
+    	    CREATE TRIGGER IF NOT EXISTS log_insert_pesos
+    	    AFTER INSERT ON pesos
+    	    FOR EACH ROW
+    	    BEGIN
+    	        INSERT INTO logs (tabela, operacao, nome_id_animal) VALUES ('pesos', 'INSERT', NEW.id_animal);
+    	    END;
+    	''')
+
+    	# Trigger para UPDATE na tabela 'pesos'
+		self.db_execute('''
+    	    CREATE TRIGGER IF NOT EXISTS log_update_pesos
+    	    AFTER UPDATE ON pesos
+    	    FOR EACH ROW
+    	    BEGIN
+    	        INSERT INTO logs (tabela, operacao, nome_id_animal) VALUES ('pesos', 'UPDATE', NEW.id_animal);
+    	    END;
+    	''')
+
+    	# Trigger para DELETE na tabela 'pesos'
+		self.db_execute('''
+    	    CREATE TRIGGER IF NOT EXISTS log_delete_pesos
+    	    AFTER DELETE ON pesos
+    	    FOR EACH ROW
+    	    BEGIN
+    	        INSERT INTO logs (tabela, operacao, nome_id_animal) VALUES ('pesos', 'DELETE', OLD.id_animal);
+    	    END;
+    	''')
+
+    	# Trigger para INSERT na tabela 'profilaxia_laishmaniose'
+		self.db_execute('''
+    	    CREATE TRIGGER IF NOT EXISTS log_insert_profilaxia_laishmaniose
+    	    AFTER INSERT ON profilaxia_laishmaniose
+    	    FOR EACH ROW
+    	    BEGIN
+    	        INSERT INTO logs (tabela, operacao, nome_id_animal) VALUES ('profilaxia_laishmaniose', 'INSERT', NEW.id_animal);
+    	    END;
+    	''')
+
+    	# Trigger para UPDATE na tabela 'profilaxia_laishmaniose'
+		self.db_execute('''
+    	    CREATE TRIGGER IF NOT EXISTS log_update_profilaxia_laishmaniose
+    	    AFTER UPDATE ON profilaxia_laishmaniose
+    	    FOR EACH ROW
+    	    BEGIN
+    	        INSERT INTO logs (tabela, operacao, nome_id_animal) VALUES ('profilaxia_laishmaniose', 'UPDATE', NEW.id_animal);
+    	    END;
+    	''')
+
+    	# Trigger para DELETE na tabela 'profilaxia_laishmaniose'
+		self.db_execute('''
+    	    CREATE TRIGGER IF NOT EXISTS log_delete_profilaxia_laishmaniose
+    	    AFTER DELETE ON profilaxia_laishmaniose
+    	    FOR EACH ROW
+    	    BEGIN
+    	        INSERT INTO logs (tabela, operacao, nome_id_animal) VALUES ('profilaxia_laishmaniose', 'DELETE', OLD.id_animal);
+    	    END;
+    	''')
+
+    	# Trigger para INSERT na tabela 'lar_temporario'
+		self.db_execute('''
+    	    CREATE TRIGGER IF NOT EXISTS log_insert_lar_temporario
+    	    AFTER INSERT ON lar_temporario
+    	    FOR EACH ROW
+    	    BEGIN
+    	        INSERT INTO logs (tabela, operacao, nome_id_animal) VALUES ('lar_temporario', 'INSERT', NEW.id_animal);
+    	    END;
+    	''')
+
+    	# Trigger para UPDATE na tabela 'lar_temporario'
+		self.db_execute('''
+    	    CREATE TRIGGER IF NOT EXISTS log_update_lar_temporario
+    	    AFTER UPDATE ON lar_temporario
+    	    FOR EACH ROW
+    	    BEGIN
+    	        INSERT INTO logs (tabela, operacao, nome_id_animal) VALUES ('lar_temporario', 'UPDATE', NEW.id_animal);
+    	    END;
+    	''')
+
+    	# Trigger para DELETE na tabela 'lar_temporario'
+		self.db_execute('''
+    	    CREATE TRIGGER IF NOT EXISTS log_delete_lar_temporario
+    	    AFTER DELETE ON lar_temporario
+    	    FOR EACH ROW
+    	    BEGIN
+    	        INSERT INTO logs (tabela, operacao, nome_id_animal) VALUES ('lar_temporario', 'DELETE', OLD.id_animal);
+    	    END;
+    	''')      
+	
 	# CRUD referente ao animal
 	# Resgate
 	def add_resgate(self, resgate: InfoResgate) -> None:
@@ -204,20 +609,21 @@ class DataBaseAPAM:
   
 	# Animal
 	def add_animal(self, animal: InfoAnimal) -> None:
-		sql = '''INSERT INTO animal (foto, nome_animal, especie, genero, temperamento, idade, medida_idade, porte, pelagem, raca, microchip, status_atual, possui_sequela, observacoes) 
+		sql = '''INSERT INTO animal (foto, nome_id_animal_animal, especie, genero, temperamento, idade, medida_idade, porte, pelagem, raca, microchip, status_atual, possui_sequela, observacoes) 
   				 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'''
 		self.db_execute(sql, (animal.foto, animal.nome_animal, animal.especie, animal.genero, animal.temperamento, animal.idade, animal.medida_idade, animal.porte, animal.pelagem, animal.raca, animal.microchip, animal.status_atual, animal.possui_sequela, animal.observacoes))
-
-	def get_animais(self, nome: str) -> list:
-		sql = '''SELECT * FROM animal WHERE nome_animal = ?'''
+		
+  
+	def get_animais(self, nome_id_animal: str) -> list:
+		sql = '''SELECT * FROM animal WHERE nome_id_animal_animal = ?'''
 		return self.db_execute(sql, [nome])
 
 	def update_animal(self, id_animal: int, animal: InfoAnimal) -> None:
 		sql = '''UPDATE animal
-                SET foto = ?, nome_animal = ?, especie = ?, genero = ?, temperamento = ?, idade = ?, medida_idade = ?, porte = ?, pelagem = ?, raca = ?, microchip = ?, status_atual = ?, possui_sequela = ?, observacoes = ?
+                SET foto = ?, nome_id_animal_animal = ?, especie = ?, genero = ?, temperamento = ?, idade = ?, medida_idade = ?, porte = ?, pelagem = ?, raca = ?, microchip = ?, status_atual = ?, possui_sequela = ?, observacoes = ?
                 WHERE id_animal = ?'''
 		self.db_execute(sql, (animal.foto, animal.nome_animal, animal.especie, animal.genero, animal.temperamento, animal.idade, animal.medida_idade, animal.porte, ','.join(animal.pelagem), animal.raca, animal.microchip, animal.status_atual, animal.possui_sequela, animal.observacoes, id_animal))
-        
+  
 	def delete_animal(self, id_animal: int) -> None:
 		sql = '''DELETE FROM animal WHERE id_animal = ?'''
 		self.db_execute(sql, [id_animal])
@@ -372,7 +778,7 @@ class DataBaseAPAM:
 
 	def update_adotante(self, id_adotante: int, adotante: Adotante) -> None:
 		sql = '''UPDATE adotante
-				SET nome_adotante = ?, rg = ?, cpf = ?, rua = ?, numero = ?, bairro = ?, cep = ?, cidade = ?, estado = ?, email = ?, profissao = ?, telefone_fixo = ?, telefone_celular = ?, referencia_rua = ?, complemento = ?
+				SET nome_id_animal_adotante = ?, rg = ?, cpf = ?, rua = ?, numero = ?, bairro = ?, cep = ?, cidade = ?, estado = ?, email = ?, profissao = ?, telefone_fixo = ?, telefone_celular = ?, referencia_rua = ?, complemento = ?
 				WHERE id_adotante = ?'''
 		self.db_execute(sql, (adotante.nome_adotante, adotante.rg, adotante.cpf, adotante.rua, adotante.numero, adotante.bairro, adotante.cep, adotante.cidade, adotante.estado, adotante.email, adotante.profissao, adotante.telefone_fixo, adotante.telefone_celular, adotante.referencia_rua, adotante.complemento, id_adotante))
 	
@@ -415,7 +821,18 @@ class DataBaseAPAM:
 		sql = '''DELETE FROM animal_adotante WHERE id_animal = ? '''
 		self.db_execute(sql, [id_animal])
   
-
+	# Logs
+	def add_logs(self, logs: Logs) -> None:
+		sql = '''INSERT INTO logs (Tabela, Operacao, nome_id_animal) VALUES (?, ?, ?)'''
+		self.db_execute(sql, (logs.tabela, logs.operacao, logs.nome))
+		
+		self.db_execute('''
+                DELETE FROM logs 
+   				WHERE id_logs NOT IN (
+           			SELECT id_logs FROM logs ORDER BY timestamp DESC LIMIT 100
+         	)
+        ''')
+  
 if __name__ == "__main__":
     db = DataBaseAPAM()
     print("Banco de dados e tabelas criados com sucesso.")
