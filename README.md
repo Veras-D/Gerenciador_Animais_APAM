@@ -47,6 +47,8 @@ A APAM é uma associação cujo objetivo é proteger os animais contra o abandon
 
 ### Consultando um Adotante
 
+## Tela Sobre 
+
 ## Sistema de Notificações
 
 ## Sistema de Logs
