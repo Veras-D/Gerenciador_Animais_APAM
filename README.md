@@ -198,12 +198,16 @@ Ficaremos felizes em receber suas contribuições! Lembre-se de seguir os padrõ
       <td><a href="https://www.linkedin.com/in/willianrsantos/">Willian Ribeiro</a></td>
     </tr>
     <tr>
-      <td>UI Developer</td>
-      <td><a href="https://www.linkedin.com/in/allan-andrade-0a3361229/">Allan Andrade</a></td>
+      <td>QA e Developer</td>
+      <td><a href="https://www.linkedin.com/in/dayvisson-tenorio/">Dayvisson Tenório</a></td>
     </tr>
     <tr>
-      <td>Developer</td>
-      <td><a href="https://www.linkedin.com/in/dayvisson-tenorio/">Dayvisson Tenório</a></td>
+      <td>QA e Technical Recruiter</td>
+      <td><a href="https://www.linkedin.com/in/gabriel-bandeira-macedo-a2107a139/">Gabriel Bandeira</a></td>
+    </tr>
+    <tr>
+      <td>UI Developer</td>
+      <td><a href="https://www.linkedin.com/in/allan-andrade-0a3361229/">Allan Andrade</a></td>
     </tr>
     <tr>
       <td>Developer</td>
@@ -217,9 +221,6 @@ Ficaremos felizes em receber suas contribuições! Lembre-se de seguir os padrõ
       <td>Tester Developer</td>
       <td><a href="https://www.linkedin.com/in/lucas-alexandre-47a6672a0/">Lucas Alexandre</a></td>
     </tr>
-    <tr>
-      <td>Technical Recruiter</td>
-      <td><a href="https://www.linkedin.com/in/gabriel-bandeira-macedo-a2107a139/">Gabriel Bandeira</a></td>
-    </tr>
   </table>
 </div> 
+![image](https://github.com/user-attachments/assets/baa28b55-92b6-4239-b1b2-7450c067479b)
