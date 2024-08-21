@@ -66,6 +66,7 @@ A APAM é uma associação cujo objetivo é proteger os animais contra o abandon
 - [SQLite](https://www.sqlite.org/)
 - [DOTENV](https://pypi.org/project/python-dotenv/)
 - [PyTest](https://docs.pytest.org/en/8.2.x/)
+- [multiprocessing](https://docs.python.org/3/library/multiprocessing.html)
 
 <div id='licença'/> 
 
@@ -223,4 +224,3 @@ Ficaremos felizes em receber suas contribuições! Lembre-se de seguir os padrõ
     </tr>
   </table>
 </div> 
-![image](https://github.com/user-attachments/assets/baa28b55-92b6-4239-b1b2-7450c067479b)
