@@ -37,6 +37,8 @@ class GerenciadorDeAnimaisAPAM:
             SelectionView.main(self.page, self)
 
         elif self.estado == "Tela de Cadastro de Animal":
+            self.page.window_height = config.HEIGHT_BASE * 1.5
+            self.page.window_width = config.WIDTH_BASE * 1.5
             AnimalRegisterView.main(self.page)
 
         elif self.estado == "Tela de Consulta de Animal":

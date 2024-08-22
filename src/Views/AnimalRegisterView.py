@@ -1,5 +1,69 @@
 import flet as ft
 import datetime
+import multiprocessing
+
+
+q = multiprocessing.Queue()
+
+class Page2(ft.Page):
+    def __init__(self):
+        super().__init__()
+
+
+def popup(page_: Page2):
+    page_.title = "CheckBox Pelagem"
+    # page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
+    # page.vertical_alignment = ft.MainAxisAlignment.CENTER
+    page_.window_width = 400
+    page_.window_height = 420
+    # page_.window_resizable = False
+    page_.theme_mode = ft.ThemeMode.LIGHT
+    page_.scroll = True
+    
+    
+
+    def button_clicked(e):
+        list_values = (
+            f"Checkboxes values are:  {c1.value}, {c2.value}, {c3.value}, {c4.value}, {c5.value}."
+        )
+        page_.window_destroy()
+    
+    t = ft.Text(value="Escolha a Palagem do Protegido", size=20)
+    c1 = ft.Checkbox(label="Preto", value=False)
+    c2 = ft.Checkbox(label="Cinza", value=False)
+    c3 = ft.Checkbox(label="Bege", value=False)
+    c4 = ft.Checkbox(label="Siamês", value=False)
+    c5 = ft.Checkbox(label="Branco", value=False)
+    c6 = ft.Checkbox(label="Marrom", value=False)
+    c7 = ft.Checkbox(label="Amarelo", value=False)
+    c8 = ft.Checkbox(label="Laranja", value=False)
+    c9 = ft.Checkbox(label="Tigrada", value=False)
+    c10 = ft.Checkbox(label="Tigrada Preto ou Cinza", value=False)
+    c11 = ft.Checkbox(label="Tigrada Amarelo ou Branco", value=False)
+    c12 = ft.Checkbox(label="Sem Pelagem", value=False)
+    c13 = ft.Checkbox(label="Escama", value=False)
+    c14 = ft.Checkbox(label="Outros", value=False)
+    b = ft.ElevatedButton(text="Salvar", on_click=button_clicked)
+
+    page_.add(
+        t,
+        ft.Container(height=2),
+        ft.Row([
+            ft.Column([c1, c2, c3, c4, c5, c6, c7]),
+            ft.Container(width=50),
+            ft.Column([c8, c9, c10, c11, c12, c13, c14])
+        ]),
+        ft.Row([
+            ft.Column(
+                [ft.Container(
+                    content=b,
+                    padding=10
+                )],
+            )
+        ],
+        alignment=ft.MainAxisAlignment.END
+        )
+    )
 
 
 def main(page: ft.Page):
@@ -205,7 +269,7 @@ def main(page: ft.Page):
             ft.dropdown.Option("Status Atual"),
             ft.dropdown.Option("Abrigado"),
             ft.dropdown.Option("Adotado"),
-            ft.dropdown.Option("Óbito") #Quando o status é mudado para óbito um campo data de óbito e observações de óbito devem aparecer para serem preenchidos
+            ft.dropdown.Option("Óbito")  # Quando o status é mudado para óbito um campo data de óbito e observações de óbito devem aparecer para serem preenchidos
         ],
         value="Status Atual",
         border_radius=8
@@ -257,6 +321,12 @@ def main(page: ft.Page):
     )
     
     def validate_fields(e):
+        def run_popup():
+            ft.app(target=popup)
+        p2 = multiprocessing.Process(target=run_popup)
+        p2.start()
+        p2.join()
+
         errors = []
         if not nome_protegido.value:
             errors.append("Nome do protegido é obrigatório.")
@@ -338,7 +408,7 @@ def main(page: ft.Page):
             infos_add,
             error_message
         ],
-        expand=True,
+        # expand=True,
         alignment=ft.MainAxisAlignment.CENTER,
         vertical_alignment=ft.MainAxisAlignment.CENTER
     )
@@ -355,6 +425,26 @@ def main(page: ft.Page):
     )
 
 
+def run_main():
+    ft.app(target=main)
+
+
+def run_popup():
+    ft.app(target=popup)
+
 
 if __name__ == "__main__":
-    ft.app(target=main)
+    # t2 = threading.Thread(target=ft.app(target=main), daemon=True)
+    # t2.start()
+    # t = threading.Thread(target=ft.app(target=LoginView.main), daemon=True)
+    # t.start()
+    # Adicione este suporte para evitar problemas no Windows com PyInstaller
+    multiprocessing.freeze_support()
+
+    # Crie e inicie os processos
+    p1 = multiprocessing.Process(target=run_main)
+
+    p1.start()
+
+    # Opcional: Esperar que os processos terminem antes de sair
+    p1.join()
