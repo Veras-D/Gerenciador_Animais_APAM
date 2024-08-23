@@ -114,12 +114,6 @@ def main(page: ft.Page, estado = None):
         )
     page.overlay.append(date_picker)
 
-
-    def perfil_picked(e):
-        if e.files:
-            img_perfil.content.src = e.files[0].path
-            img_perfil.update()
-
     def go_home(e):
         page.clean()
         estado.estado = "Tela Seleção"
@@ -135,15 +129,22 @@ def main(page: ft.Page, estado = None):
         alignment=ft.alignment.center_left,
         # on_click=go_home,
     )
+
     img_perfil = ft.Container(
-        ft.Image(
-            src="https://picsum.photos/800/800",
-            width=120,
-            height=120,
-            border_radius=200,
-        )
+        ft.CircleAvatar(
+            foreground_image_src="https://picsum.photos/800/800",
+            content=ft.Text("LOAD"),
+        ),
+        width=120,
+        height=120,
     )
     
+    def perfil_picked(e):
+        if e.files:
+            img_perfil.content.src = e.files[0].path
+            img_perfil.update()
+
+
     file_picker = ft.FilePicker(
         on_result=perfil_picked
     )
