@@ -23,12 +23,32 @@ def popup(page_: Page2):
     
 
     def button_clicked(e):
-        list_values = (
-            f"Checkboxes values are:  {c1.value}, {c2.value}, {c3.value}, {c4.value}, {c5.value}."
-        )
+        list_values = {
+            f"{c1.label}": c1.value,
+            f"{c2.label}": c2.value,
+            f"{c3.label}": c3.value,
+            f"{c4.label}": c4.value,
+            f"{c5.label}": c5.value,
+            f"{c6.label}": c6.value,
+            f"{c7.label}": c7.value,
+            f"{c8.label}": c8.value,
+            f"{c9.label}": c9.value,
+            f"{c10.label}": c10.value,
+            f"{c11.label}": c11.value,
+            f"{c12.label}": c12.value,
+            f"{c13.label}": c13.value,
+            f"{c14.label}": c14.value,
+        }
+
+        pelagens = [chave for chave, valor in list_values.items() if valor]
+        q.put(pelagens)
+
+        print(list_values)
+        print(pelagens)
+        # print(q.get())
         page_.window_destroy()
     
-    t = ft.Text(value="Escolha a Palagem do Protegido", size=20)
+    t = ft.Text(value="Escolha a Palagem do Protegido", size=20, weight=ft.FontWeight.BOLD)
     c1 = ft.Checkbox(label="Preto", value=False)
     c2 = ft.Checkbox(label="Cinza", value=False)
     c3 = ft.Checkbox(label="Bege", value=False)
@@ -46,7 +66,9 @@ def popup(page_: Page2):
     b = ft.ElevatedButton(text="Salvar", on_click=button_clicked)
 
     page_.add(
-        t,
+        ft.Row([t],
+        alignment=ft.MainAxisAlignment.CENTER
+        ),
         ft.Container(height=2),
         ft.Row([
             ft.Column([c1, c2, c3, c4, c5, c6, c7]),
