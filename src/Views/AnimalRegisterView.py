@@ -87,7 +87,7 @@ def popup(page_: Page2):
     )
 
 
-def main(page: ft.Page):
+def main(page: ft.Page, estado = None):
     data_field = ft.TextField(
         hint_text='Data',
         read_only=True,
@@ -120,10 +120,20 @@ def main(page: ft.Page):
             img_perfil.content.src = e.files[0].path
             img_perfil.update()
 
+    def go_home(e):
+        page.clean()
+        estado.estado = "Tela Seleção"
+        estado.main_page()
+
     icon_return = ft.Container(
-        content=ft.Icon(ft.icons.HOME_OUTLINED, size=24, color=ft.colors.BLACK),
+        content=ft.IconButton(
+            icon=ft.icons.HOME_OUTLINED,
+            height=50,
+            width=50,
+            icon_color=ft.colors.BLACK
+        ),
         alignment=ft.alignment.center_left,
-        url="#"
+        # on_click=go_home,
     )
     img_perfil = ft.Container(
         ft.Image(
