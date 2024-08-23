@@ -21,7 +21,6 @@ def popup(page_: Page2):
     page_.scroll = True
     
     
-
     def button_clicked(e):
         list_values = {
             f"{c1.label}": c1.value,
@@ -89,48 +88,32 @@ def popup(page_: Page2):
 
 
 def main(page: ft.Page):
-    def example(): #calendario
-        class Example(ft.Column):
-            def __init__(self):
-                super().__init__()
-                self.datepicker = ft.DatePicker(
-                    first_date=datetime.datetime(2023, 10, 1),
-                    last_date=datetime.datetime(2024, 10, 1),
-                    on_change=self.change_date,
-                )
+    data_field = ft.TextField(
+        hint_text='Data',
+        read_only=True,
+        focused_border_color=ft.colors.BLACK,
+        value='',
+        width=210,
+        text_align=ft.TextAlign.CENTER,
+        color=ft.colors.WHITE,
+        border_radius=10
+        )
+    def change_date(e):
+        data_field.value = date_picker.value.date()
+        page.update()
+    # Criar date_picker_nasc
+    date_picker = ft.DatePicker(
+        on_change=change_date
+    )
+    data_castracao = ft.IconButton(
+        icon=ft.icons.CALENDAR_MONTH,
+        icon_color=ft.colors.WHITE,
+        height=50,
+        width=50,
+        on_click=lambda _: date_picker.pick_date()  # Criar uma função
+        )
+    page.overlay.append(date_picker)
 
-                self.selected_date = ft.Text()
-
-                self.controls = [
-                    ft.ElevatedButton( 
-                        "Data castração",
-                        icon=ft.icons.CALENDAR_MONTH,
-                        on_click=self.open_date_picker,
-                        color=ft.colors.BLACK
-                    ),
-                    self.selected_date,
-                ]
-
-            async def open_date_picker(self, e):
-                await self.datepicker.pick_date_async()
-
-            async def change_date(self, e):
-                self.selected_date.value = f"Data selecionada: {self.datepicker.value}"
-                await e.control.page.update_async()
-
-            def did_mount(self):
-                self.page.overlay.append(self.datepicker)
-                self.page.update()
-
-            def will_unmount(self):
-                self.page.overlay.remove(self.datepicker)
-                self.page.update()
-
-        datepicker_example = Example()
-
-        return datepicker_example
-    
-    data_castracao = example()
 
     def perfil_picked(e):
         if e.files:
@@ -378,7 +361,10 @@ def main(page: ft.Page):
             img_perfil,
             upload_img,
             animal_castrado,
-            data_castracao,
+            ft.Row([
+                data_field,
+                data_castracao
+            ]),
             campo_obs_cad
         ]
     )
