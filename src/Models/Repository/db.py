@@ -632,7 +632,7 @@ class DataBaseAPAM:
 	# Castraçao
 	def add_castracao(self, castracao: Castracao) -> None:
 		sql = '''INSERT INTO castracao (id_animal, data_castracao, castrado) VALUES (?, ?, ?)'''
-		self.db_execute(sql, (castracao.id_animal, castracao.data_castracao, castracao.castrado))
+		self.db_execute(sql, (castracao.id_animal, castracao.data_castracao, castracao.castrado, castracao.observacoes))
   
 	def get_castracao(self, id_animal: int) -> list:
 		sql = '''SELECT * FROM castracao WHERE id_animal = ?'''

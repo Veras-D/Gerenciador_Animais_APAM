@@ -5,6 +5,7 @@ import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
 import Models.Repository.db as database
+import Models.Entities.animal as animal
 import util
 
 
@@ -145,9 +146,9 @@ def main(page: ft.Page, estado = None):
         width=120,
         height=120,
     )
-    
+    # foto=open("caminho/para/sua/foto.jpg", "rb").read()
     # isso está pegando o caminho, não o binario
-    def perfil_picked(e):
+    def perfil_picked(e: ft.FilePickerResultEvent):
         if e.files:
             img_perfil.content.src = e.files[0].path
             img_perfil.update()
@@ -266,7 +267,6 @@ def main(page: ft.Page, estado = None):
         style=button_style
     )
 
-
     raca =  ft.TextField(
         col=4,
         label="Raça",
@@ -343,6 +343,7 @@ def main(page: ft.Page, estado = None):
     )
 
     def save_func(e):
+        foto_animal = open(img_perfil.content.src, "rb").read()
         nome_animal = nome_protegido.value
         genero_animal = genero.value
         temperamento_animal = temperamento.value
@@ -352,7 +353,7 @@ def main(page: ft.Page, estado = None):
         porte_animal = porte.value
         status_animal = status_atual.value
         tem_microchip = mocrochip.value
-        possui_sequela = possui_seq.value
+        animal_possui_sequela = possui_seq.value
         idade_animal = idade.value
         idade_tipo_animal = idade_tipo.value
         e_castrado = animal_castrado.value
@@ -360,24 +361,49 @@ def main(page: ft.Page, estado = None):
         obs_animal = obs.value
         obs_cast_animal = obs_cast.value
 
+        animal_registado = animal.InfoAnimal(
+            nome_animal=nome_animal,
+            especie=especie_animal,
+            foto=foto_animal,
+            genero=genero_animal,
+            temperamento=temperamento_animal,
+            idade=idade_animal,
+            medida_idade=idade_tipo_animal,
+            porte=porte_animal,
+            pelagem=pelagem_aniamal,
+            raca=raca_animal,
+            microchip=tem_microchip,
+            status_atual=status_animal,
+            possui_sequela=animal_possui_sequela,
+            observacoes=obs_animal
+        )
 
-        errors = []
-        if not nome_protegido.value:
-            errors.append("Nome do protegido é obrigatório.")
-        if not idade.value.isdigit():
-            errors.append("Idade deve ser um número válido.")
-        if errors:
-            error_message.value = "\n".join(errors)
-            error_message.update()
-        else:
-            error_message.value = "Formulário válido!"
-            error_message.update()
+        castracao_animal_registrado = animal.Castracao(
+            data_castracao=data_castracao_animal,
+            castrado=e_castrado,
+            observacoes=obs_cast_animal
+        )
 
-        db.add_animal()
-        
+
+        # errors = []
+        # if not nome_protegido.value:
+        #     errors.append("Nome do protegido é obrigatório.")
+        # if not idade.value.isdigit():
+        #     errors.append("Idade deve ser um número válido.")
+        # if errors:
+        #     error_message.value = "\n".join(errors)
+        #     error_message.update()
+        # else:
+        #     error_message.value = "Formulário válido!"
+        #     error_message.update()
+
+
+        db.add_animal(animal_registado)
+        db.add_castracao()
+
 
     error_message = ft.Text(value="", color=ft.colors.RED)
-    
+
     submit_button = ft.ElevatedButton(
         text="Salvar",
         on_click=save_func,
@@ -400,7 +426,8 @@ def main(page: ft.Page, estado = None):
             campo_obs_cad
         ]
     )
-    
+
+
     info_insert = ft.Container(
         padding=80,
         col=12,
@@ -420,7 +447,7 @@ def main(page: ft.Page, estado = None):
             ]
         )
     )
-    
+
     obs = ft.TextField(
             hint_text="Observações",
             value="",

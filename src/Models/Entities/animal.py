@@ -36,6 +36,7 @@ class Castracao:
     id_animal: int
     data_castracao: str
     castrado: str = 'Não'
+    observacoes: str = ''
 
 @dataclass
 class Obito:
