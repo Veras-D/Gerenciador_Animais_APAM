@@ -169,7 +169,7 @@ def main(page: ft.Page, estado = None):
         content=ft.Row(
             controls=[
                 ft.ElevatedButton("Escolher Foto",
-                                  on_click=lambda _: file_picker.pick_files(allow_multiple=False),
+                                  on_click=lambda _: file_picker.pick_files(allow_multiple=False, file_type=ft.FilePickerFileType.IMAGE),
                                   bgcolor="#D9D9D9",
                                   icon=ft.icons.FOLDER_OPEN_OUTLINED,
                                   color=ft.colors.BLACK)
