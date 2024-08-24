@@ -139,6 +139,7 @@ def main(page: ft.Page, estado = None):
         height=120,
     )
     
+    # isso está pegando o caminho, não o binario
     def perfil_picked(e):
         if e.files:
             img_perfil.content.src = e.files[0].path
@@ -163,14 +164,15 @@ def main(page: ft.Page, estado = None):
         ),
         width=126
     )
-    
+    ######
+
     animal_castrado = ft.Dropdown(
         width=172,
         options=[
             ft.dropdown.Option("Castrado"),
             ft.dropdown.Option("Não castrado"),
         ],
-        value="Castrado",
+        hint_text="É castrado?",
         alignment=ft.alignment.center,
         border_radius=8
     )
@@ -179,7 +181,8 @@ def main(page: ft.Page, estado = None):
         ft.TextField(
             value="",
             hint_text="Observações castração",
-            width=172, height=143,
+            width=172, multiline=True,
+            min_lines=7, max_lines=7,
         ),
     )
 
@@ -194,22 +197,21 @@ def main(page: ft.Page, estado = None):
 
     genero = ft.Dropdown(
         col=4,
+        hint_text="Gênero",
         width=172,
         options=[
-            ft.dropdown.Option("Gênero"),
             ft.dropdown.Option("Masc."),
             ft.dropdown.Option("Fem."),
             ft.dropdown.Option("Desc.")
         ],
-        value="Gênero",
         border_radius=8
     )
 
     temperamento = ft.Dropdown(
         col=4,
         width=172,
+        hint_text="Temperamento",
         options=[
-            ft.dropdown.Option("Temperamento"),
             ft.dropdown.Option("Calmo"),
             ft.dropdown.Option("Raivoso"),
             ft.dropdown.Option("Sociável"),
@@ -218,47 +220,47 @@ def main(page: ft.Page, estado = None):
             ft.dropdown.Option("Sem Reação"),
             ft.dropdown.Option("Outro"),
         ],
-        value="Temperamento",
         alignment=ft.alignment.center,
         border_radius=8
     )
 
     especie = ft.TextField(
         col=4,
-        label="Especie", 
+        label="Especie",
         value="",
         width=172,
         height=56,
         border_radius=8,
     )
 
-    pelagem = ft.Dropdown(
-        col=4,  
-        width=172,
-        options=[
-            ft.dropdown.Option("Pelagem"),
-            ft.dropdown.Option("Preto"),
-            ft.dropdown.Option("Cinza"),
-            ft.dropdown.Option("Bege"),
-            ft.dropdown.Option("Siamês"),
-            ft.dropdown.Option("Branco"),
-            ft.dropdown.Option("Marrom"),
-            ft.dropdown.Option("Amarelo"),
-            ft.dropdown.Option("Laranja"),
-            ft.dropdown.Option("Tigrada Marrom ou Preto"),
-            ft.dropdown.Option("Tigrada Preto ou Cinza"),
-            ft.dropdown.Option("Tigrada Amarelo ou Branco"),
-            ft.dropdown.Option("Sem Pelagem"),
-            ft.dropdown.Option("Escama"),
-            ft.dropdown.Option("Outros"),
-        ],  
-        value="Pelagem",  
-        border_radius=8, 
+    button_style = ft.ButtonStyle(
+        bgcolor=ft.colors.WHITE,
+        color=ft.colors.BLACK,
+        shape=ft.RoundedRectangleBorder(radius=8),
+        side=ft.BorderSide(width=2, color=ft.colors.BLACK),
+        padding=10 
     )
+
+    def popup_pelagem(e):
+        def run_popup():
+            ft.app(target=popup)
+        p2 = multiprocessing.Process(target=run_popup)
+        p2.start()
+        p2.join()
+
+    pelagem = ft.OutlinedButton(
+        text="Selecionar Pelagem",
+        col=4,
+        width=172,
+        height=56,
+        on_click=popup_pelagem,
+        style=button_style
+    )
+
 
     raca =  ft.TextField(
         col=4,
-        label="Raça", 
+        label="Raça",
         value="",
         width=172,
         height=56,
@@ -268,81 +270,70 @@ def main(page: ft.Page, estado = None):
     porte = ft.Dropdown(
         col=4,
         width=172,
+        hint_text="Porte",
         options=[
-            ft.dropdown.Option("Porte"),
             ft.dropdown.Option("Pequeno"),
             ft.dropdown.Option("Médio"),
             ft.dropdown.Option("Grande")
         ],
-        value="Porte",
         border_radius=8
     )
 
     status_atual = ft.Dropdown(
         col=4,
         width=172,
+        hint_text="Status Atual",
         options=[
-            ft.dropdown.Option("Status Atual"),
             ft.dropdown.Option("Abrigado"),
             ft.dropdown.Option("Adotado"),
             ft.dropdown.Option("Óbito")  # Quando o status é mudado para óbito um campo data de óbito e observações de óbito devem aparecer para serem preenchidos
         ],
-        value="Status Atual",
         border_radius=8
     )
 
     mocrochip = ft.Dropdown(
         col=4,
         width=172,
+        hint_text="Microchip",
         options=[
-            ft.dropdown.Option("Microchip"),
             ft.dropdown.Option("Sim"),
             ft.dropdown.Option("Não"),
         ],
-        value="Microchip",
         border_radius=8
     )
 
     possui_seq = ft.Dropdown(
         col=4,
         width=172,
+        hint_text="Possui sequela",
         options=[
-            ft.dropdown.Option("Possui sequela"),
             ft.dropdown.Option("Sim"),
             ft.dropdown.Option("Não"),
         ],
-        value="Possui sequela",
         border_radius=8,
     )
 
     idade = ft.TextField(
         col=3,
-        label="Idade ", 
+        label="Idade",
         value="",
-        width=109,
+        width=60,
         height=56,
         border_radius=8,
     )
 
     idade_tipo = ft.Dropdown(
-        col=1,
+        col=3,
         width=172,
+        hint_text="Tipo",
         options=[
-            ft.dropdown.Option("Tipo"),
             ft.dropdown.Option("Anos"),
             ft.dropdown.Option("Meses"),
         ],
-        value="Tipo",
         border_radius=8
     )
     
-    def validate_fields(e):
-        def run_popup():
-            ft.app(target=popup)
-        p2 = multiprocessing.Process(target=run_popup)
-        p2.start()
-        p2.join()
-
+    def save_func(e):
         errors = []
         if not nome_protegido.value:
             errors.append("Nome do protegido é obrigatório.")
@@ -359,7 +350,7 @@ def main(page: ft.Page, estado = None):
     
     submit_button = ft.ElevatedButton(
         text="Salvar",
-        on_click=validate_fields,
+        on_click=save_func,
         color=ft.colors.BLACK
     )
 
@@ -403,12 +394,14 @@ def main(page: ft.Page, estado = None):
     info_obs = ft.Container(
         col=12,
         content=ft.TextField(
-            label="Observações", 
+            hint_text="Observações",
             value="",
+            multiline=True,
+            min_lines=5,
+            max_lines=5,
         ),
         width=300,
-        height=155
-    ) 
+    )
     
     infos_add = ft.ResponsiveRow(
         col=8,
@@ -427,7 +420,6 @@ def main(page: ft.Page, estado = None):
             infos_add,
             error_message
         ],
-        # expand=True,
         alignment=ft.MainAxisAlignment.CENTER,
         vertical_alignment=ft.MainAxisAlignment.CENTER
     )
@@ -453,11 +445,6 @@ def run_popup():
 
 
 if __name__ == "__main__":
-    # t2 = threading.Thread(target=ft.app(target=main), daemon=True)
-    # t2.start()
-    # t = threading.Thread(target=ft.app(target=LoginView.main), daemon=True)
-    # t.start()
-    # Adicione este suporte para evitar problemas no Windows com PyInstaller
     multiprocessing.freeze_support()
 
     # Crie e inicie os processos
