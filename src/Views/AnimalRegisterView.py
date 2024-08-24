@@ -109,7 +109,7 @@ def main(page: ft.Page, estado = None):
     def change_date(e):
         data_field.value = date_picker.value.date()
         page.update()
-    # Criar date_picker_nasc
+
     date_picker = ft.DatePicker(
         on_change=change_date
     )
@@ -138,37 +138,43 @@ def main(page: ft.Page, estado = None):
         # on_click=go_home,
     )
 
+    img_animal_path = os.path.join(os.path.dirname(__file__), '..', '..', 'assets', 'animal.png')
+
+    avatar = ft.CircleAvatar(
+        foreground_image_src=img_animal_path,
+        content=ft.Text("LOAD"),
+        )
+
     img_perfil = ft.Container(
-        ft.CircleAvatar(
-            foreground_image_src="https://picsum.photos/800/800",
-            content=ft.Text("LOAD"),
-        ),
+        avatar,
         width=120,
         height=120,
     )
-    # foto=open("caminho/para/sua/foto.jpg", "rb").read()
-    # isso está pegando o caminho, não o binario
+
+
     def perfil_picked(e: ft.FilePickerResultEvent):
         if e.files:
-            img_perfil.content.src = e.files[0].path
-            img_perfil.update()
+            avatar.foreground_image_src = e.files[0].path
+            page.update()
 
 
     file_picker = ft.FilePicker(
         on_result=perfil_picked
     )
 
+    page.overlay.append(file_picker)
+
     upload_img = ft.Container(
         col=8,
         content=ft.Row(
             controls=[
-                ft.ElevatedButton("Escolher Foto", 
+                ft.ElevatedButton("Escolher Foto",
                                   on_click=lambda _: file_picker.pick_files(allow_multiple=False),
                                   bgcolor="#D9D9D9",
-                                  icon=ft.icons.FOLDER_OPEN_OUTLINED, 
-                                  color=ft.colors.BLACK)  
+                                  icon=ft.icons.FOLDER_OPEN_OUTLINED,
+                                  color=ft.colors.BLACK)
             ],
-            alignment=ft.MainAxisAlignment.CENTER  
+            alignment=ft.MainAxisAlignment.CENTER
         ),
         width=126
     )
