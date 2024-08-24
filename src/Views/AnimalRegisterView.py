@@ -399,7 +399,7 @@ def main(page: ft.Page, estado = None):
 
 
         db.add_animal(animal_registado)
-        db.add_castracao()
+        db.add_castracao(castracao_animal_registrado)
 
 
     error_message = ft.Text(value="", color=ft.colors.RED)
