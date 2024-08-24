@@ -1,5 +1,6 @@
 import flet as ft
 
+
 def main(page: ft.Page):
     def pick_files_result(e: ft.FilePickerResultEvent):
         selected_files.value = (

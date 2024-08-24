@@ -1,9 +1,16 @@
 import flet as ft
 import datetime
 import multiprocessing
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
+import Models.Repository.db as database
+import util
 
 
 q = multiprocessing.Queue()
+db = database.DataBaseAPAM()
+
 
 class Page2(ft.Page):
     def __init__(self):
@@ -177,13 +184,15 @@ def main(page: ft.Page, estado = None):
         border_radius=8
     )
 
+    obs_cast = ft.TextField(
+                value="",
+                hint_text="Observações castração",
+                width=172, multiline=True,
+                min_lines=7, max_lines=7,
+            )
+
     campo_obs_cad = ft.Container(
-        ft.TextField(
-            value="",
-            hint_text="Observações castração",
-            width=172, multiline=True,
-            min_lines=7, max_lines=7,
-        ),
+        content=obs_cast,
     )
 
     nome_protegido = ft.TextField(
@@ -332,8 +341,26 @@ def main(page: ft.Page, estado = None):
         ],
         border_radius=8
     )
-    
+
     def save_func(e):
+        nome_animal = nome_protegido.value
+        genero_animal = genero.value
+        temperamento_animal = temperamento.value
+        especie_animal = especie.value
+        pelagem_aniamal = q.get()
+        raca_animal = raca.value
+        porte_animal = porte.value
+        status_animal = status_atual.value
+        tem_microchip = mocrochip.value
+        possui_sequela = possui_seq.value
+        idade_animal = idade.value
+        idade_tipo_animal = idade_tipo.value
+        e_castrado = animal_castrado.value
+        data_castracao_animal = data_field.value
+        obs_animal = obs.value
+        obs_cast_animal = obs_cast.value
+
+
         errors = []
         if not nome_protegido.value:
             errors.append("Nome do protegido é obrigatório.")
@@ -345,6 +372,9 @@ def main(page: ft.Page, estado = None):
         else:
             error_message.value = "Formulário válido!"
             error_message.update()
+
+        db.add_animal()
+        
 
     error_message = ft.Text(value="", color=ft.colors.RED)
     
@@ -391,15 +421,17 @@ def main(page: ft.Page, estado = None):
         )
     )
     
-    info_obs = ft.Container(
-        col=12,
-        content=ft.TextField(
+    obs = ft.TextField(
             hint_text="Observações",
             value="",
             multiline=True,
             min_lines=5,
             max_lines=5,
-        ),
+        )
+
+    info_obs = ft.Container(
+        col=12,
+        content=obs,
         width=300,
     )
     
