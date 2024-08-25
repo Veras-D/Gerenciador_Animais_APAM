@@ -592,6 +592,7 @@ class DataBaseAPAM:
 		sql = '''INSERT INTO resgate (id_animal, local_resgate, atendimento, necessario_intervencao_cirurgica, destinacao_do_protegido, historico_anamnese, diagnostico_estado_saude, tratamento_intervencao_e_medicacao, data_resgate, observacoes) 
   				 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'''
 		self.db_execute(sql, (resgate.id_animal, resgate.local_resgate, resgate.atendimento, resgate.necessario_intervencao_cirurgica, resgate.destinacao_do_protegido, resgate.historico_anamnese, resgate.diagnostico_estado_saude, resgate.tratamento_intervencao_e_medicacao, resgate.data_resgate, resgate.observacoes))
+		
   
 	def get_resgate(self, id_animal: int) -> list:
 		sql = '''SELECT * FROM resgate WHERE id_animal = ?'''
@@ -609,18 +610,28 @@ class DataBaseAPAM:
   
 	# Animal
 	def add_animal(self, animal: InfoAnimal) -> None:
-		sql = '''INSERT INTO animal (foto, nome_id_animal_animal, especie, genero, temperamento, idade, medida_idade, porte, pelagem, raca, microchip, status_atual, possui_sequela, observacoes) 
+		sql = '''INSERT INTO animal (foto, nome_animal, especie, genero, temperamento, idade, medida_idade, porte, pelagem, raca, microchip, status_atual, possui_sequela, observacoes) 
   				 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'''
 		self.db_execute(sql, (animal.foto, animal.nome_animal, animal.especie, animal.genero, animal.temperamento, animal.idade, animal.medida_idade, animal.porte, animal.pelagem, animal.raca, animal.microchip, animal.status_atual, animal.possui_sequela, animal.observacoes))
+		with sqlite3.connect('GA_APAM.db') as con:
+			cur = con.cursor()
+			cur.execute(sql, (animal.foto, animal.nome_animal, animal.especie, animal.genero, animal.temperamento, animal.idade, animal.medida_idade, animal.porte, animal.pelagem, animal.raca, animal.microchip, animal.status_atual, animal.possui_sequela, animal.observacoes))
+        
+			# Obter o ID do animal recém-inserido
+			animal_id = cur.lastrowid
+
+			con.commit()
+		
+		return animal_id
 		
   
-	def get_animais(self, nome_id_animal: str) -> list:
-		sql = '''SELECT * FROM animal WHERE nome_id_animal_animal = ?'''
-		return self.db_execute(sql, [nome])
+	def get_animais(self, nome_animal: str, ) -> list:
+		sql = '''SELECT * FROM animal WHERE nome_animal = ?'''
+		return self.db_execute(sql, [nome_animal])
 
 	def update_animal(self, id_animal: int, animal: InfoAnimal) -> None:
 		sql = '''UPDATE animal
-                SET foto = ?, nome_id_animal_animal = ?, especie = ?, genero = ?, temperamento = ?, idade = ?, medida_idade = ?, porte = ?, pelagem = ?, raca = ?, microchip = ?, status_atual = ?, possui_sequela = ?, observacoes = ?
+                SET foto = ?, nome_animal = ?, especie = ?, genero = ?, temperamento = ?, idade = ?, medida_idade = ?, porte = ?, pelagem = ?, raca = ?, microchip = ?, status_atual = ?, possui_sequela = ?, observacoes = ?
                 WHERE id_animal = ?'''
 		self.db_execute(sql, (animal.foto, animal.nome_animal, animal.especie, animal.genero, animal.temperamento, animal.idade, animal.medida_idade, animal.porte, ','.join(animal.pelagem), animal.raca, animal.microchip, animal.status_atual, animal.possui_sequela, animal.observacoes, id_animal))
   
