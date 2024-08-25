@@ -119,7 +119,7 @@ def main(page: ft.Page, estado = None):
         icon_color=ft.colors.WHITE,
         height=50,
         width=50,
-        on_click=lambda _: date_picker.pick_date()  # Criar uma função
+        on_click=lambda _: date_picker.pick_date()  
         )
     page.overlay.append(date_picker)
 
