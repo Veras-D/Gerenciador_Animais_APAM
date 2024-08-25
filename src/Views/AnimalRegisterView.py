@@ -114,6 +114,7 @@ def main(page: ft.Page, estado = None):
     date_picker = ft.DatePicker(
         on_change=change_date
     )
+
     data_castracao = ft.IconButton(
         icon=ft.icons.CALENDAR_MONTH,
         icon_color=ft.colors.WHITE,
@@ -121,12 +122,15 @@ def main(page: ft.Page, estado = None):
         width=50,
         on_click=lambda _: date_picker.pick_date()  
         )
+    
     page.overlay.append(date_picker)
+
 
     def go_home(e):
         page.clean()
         estado.estado = "Tela Seleção"
         estado.main_page()
+
 
     icon_return = ft.Container(
         content=ft.IconButton(
@@ -140,6 +144,7 @@ def main(page: ft.Page, estado = None):
     )
 
     img_animal_path = os.path.join(os.path.dirname(__file__), '..', '..', 'assets', 'animal.png')
+
 
     avatar = ft.CircleAvatar(
         foreground_image_src=img_animal_path,
@@ -163,7 +168,9 @@ def main(page: ft.Page, estado = None):
         on_result=perfil_picked
     )
 
+
     page.overlay.append(file_picker)
+
 
     upload_img = ft.Container(
         col=8,
@@ -179,7 +186,7 @@ def main(page: ft.Page, estado = None):
         ),
         width=126
     )
-    ######
+
 
     animal_castrado = ft.Dropdown(
         width=172,
@@ -192,6 +199,7 @@ def main(page: ft.Page, estado = None):
         border_radius=8
     )
 
+
     obs_cast = ft.TextField(
                 value="",
                 hint_text="Observações castração",
@@ -203,6 +211,7 @@ def main(page: ft.Page, estado = None):
         content=obs_cast,
     )
 
+
     nome_protegido = ft.TextField(
         col=4,
         label="Nome do protegido", 
@@ -211,6 +220,7 @@ def main(page: ft.Page, estado = None):
         height=56,
         border_radius=8,
     )
+
 
     genero = ft.Dropdown(
         col=4,
@@ -223,6 +233,7 @@ def main(page: ft.Page, estado = None):
         ],
         border_radius=8
     )
+
 
     temperamento = ft.Dropdown(
         col=4,
@@ -250,6 +261,7 @@ def main(page: ft.Page, estado = None):
         border_radius=8,
     )
 
+
     button_style = ft.ButtonStyle(
         bgcolor=ft.colors.WHITE,
         color=ft.colors.BLACK,
@@ -258,12 +270,14 @@ def main(page: ft.Page, estado = None):
         padding=10 
     )
 
+
     def popup_pelagem(e):
         def run_popup():
             ft.app(target=popup)
         p2 = multiprocessing.Process(target=run_popup)
         p2.start()
         p2.join()
+
 
     pelagem = ft.OutlinedButton(
         text="Selecionar Pelagem",
@@ -274,6 +288,7 @@ def main(page: ft.Page, estado = None):
         style=button_style
     )
 
+
     raca =  ft.TextField(
         col=4,
         label="Raça",
@@ -282,6 +297,7 @@ def main(page: ft.Page, estado = None):
         height=56,
         border_radius=8,
     )
+
 
     porte = ft.Dropdown(
         col=4,
@@ -295,6 +311,7 @@ def main(page: ft.Page, estado = None):
         border_radius=8
     )
 
+
     status_atual = ft.Dropdown(
         col=4,
         width=172,
@@ -307,6 +324,7 @@ def main(page: ft.Page, estado = None):
         border_radius=8
     )
 
+
     mocrochip = ft.Dropdown(
         col=4,
         width=172,
@@ -317,6 +335,7 @@ def main(page: ft.Page, estado = None):
         ],
         border_radius=8
     )
+
 
     possui_seq = ft.Dropdown(
         col=4,
@@ -329,6 +348,7 @@ def main(page: ft.Page, estado = None):
         border_radius=8,
     )
 
+
     idade = ft.TextField(
         col=3,
         label="Idade",
@@ -337,6 +357,7 @@ def main(page: ft.Page, estado = None):
         height=56,
         border_radius=8,
     )
+
 
     idade_tipo = ft.Dropdown(
         col=3,
@@ -348,6 +369,7 @@ def main(page: ft.Page, estado = None):
         ],
         border_radius=8
     )
+
 
     def save_func(e):
         foto_animal = open(avatar.foreground_image_src, "rb").read()

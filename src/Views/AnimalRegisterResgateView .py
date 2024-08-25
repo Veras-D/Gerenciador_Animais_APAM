@@ -1,4 +1,9 @@
 import flet as ft
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
+import Models.Repository.db as database
+import Models.Entities.animal as animal
 
 
 def main(page):
@@ -91,7 +96,18 @@ def main(page):
         alignment=ft.alignment.center,
         border_radius=8
     )
-    bnt_salvar = ft.ElevatedButton()
+
+
+    def save_func(e):
+        pass
+
+
+    bnt_salvar = ft.ElevatedButton(
+        text="Salvar",
+        on_click=save_func,
+        color=ft.colors.BLACK
+    )
+
 
     page.add(
         ft.Row([
@@ -138,7 +154,6 @@ def main(page):
         width=650
         ),
     )
-
 
 
 if __name__ == "__main__":
