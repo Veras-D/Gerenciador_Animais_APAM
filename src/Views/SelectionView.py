@@ -11,7 +11,7 @@ def main(page, estado):
         color=ft.colors.BLACK,
         shape=ft.RoundedRectangleBorder(radius=10),
         side=ft.BorderSide(width=2, color=ft.colors.BLACK),
-        padding=10 
+        padding=10
     )
 
 

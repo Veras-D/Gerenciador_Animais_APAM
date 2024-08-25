@@ -96,6 +96,7 @@ def popup(page_: Page2):
 
 
 def main(page: ft.Page, estado = None):
+    page.title = "Cadastrar Animal"
     data_field = ft.TextField(
         hint_text='Data',
         read_only=True,
@@ -135,7 +136,7 @@ def main(page: ft.Page, estado = None):
             icon_color=ft.colors.BLACK
         ),
         alignment=ft.alignment.center_left,
-        # on_click=go_home,
+        on_click=go_home,
     )
 
     img_animal_path = os.path.join(os.path.dirname(__file__), '..', '..', 'assets', 'animal.png')
@@ -349,7 +350,7 @@ def main(page: ft.Page, estado = None):
     )
 
     def save_func(e):
-        foto_animal = open(img_perfil.content.src, "rb").read()
+        foto_animal = open(avatar.foreground_image_src, "rb").read()
         nome_animal = nome_protegido.value
         genero_animal = genero.value
         temperamento_animal = temperamento.value
@@ -385,30 +386,81 @@ def main(page: ft.Page, estado = None):
         )
 
         castracao_animal_registrado = animal.Castracao(
+            id_animal=pass,
             data_castracao=data_castracao_animal,
             castrado=e_castrado,
             observacoes=obs_cast_animal
         )
 
 
-        # errors = []
-        # if not nome_protegido.value:
-        #     errors.append("Nome do protegido é obrigatório.")
-        # if not idade.value.isdigit():
-        #     errors.append("Idade deve ser um número válido.")
-        # if errors:
-        #     error_message.value = "\n".join(errors)
-        #     error_message.update()
-        # else:
-        #     error_message.value = "Formulário válido!"
-        #     error_message.update()
+        def verificar_variaveis_vazias(**kwargs):
+            variaveis_vazias = [nome for nome, valor in kwargs.items() if not valor]
+            return variaveis_vazias if variaveis_vazias else None
 
 
-        db.add_animal(animal_registado)
-        db.add_castracao(castracao_animal_registrado)
+        # Verificação
+        variaveis_vazias = verificar_variaveis_vazias(
+            foto_animal=foto_animal,
+            nome_animal=nome_animal,
+            genero_animal=genero_animal,
+            temperamento_animal=temperamento_animal,
+            especie_animal=especie_animal,
+            pelagem_aniamal=pelagem_aniamal,
+            raca_animal=raca_animal,
+            porte_animal=porte_animal,
+            status_animal=status_animal,
+            tem_microchip=tem_microchip,
+            animal_possui_sequela=animal_possui_sequela,
+            idade_animal=idade_animal,
+            idade_tipo_animal=idade_tipo_animal,
+            e_castrado=e_castrado,
+            data_castracao_animal=data_castracao_animal,
+            obs_animal=obs_animal,
+            obs_cast_animal=obs_cast_animal
+        )
 
 
-    error_message = ft.Text(value="", color=ft.colors.RED)
+        if not variaveis_vazias:
+            print("to db")
+            db.add_animal(animal_registado)
+            db.add_castracao(castracao_animal_registrado)
+
+            page.clean()
+            estado.estado = "Tela de Cadastro de Resgate"
+            estado.main_page()
+        else:
+            if not nome_animal:
+                nome_protegido.error_text = "Preencha Nome do Animal"
+            if not genero_animal:
+                genero.error_text = "Escolha o Gênero do Animal"
+            if not temperamento_animal:
+                temperamento.error_text = "Escolha o Temperamento do Animal"
+            if not especie_animal:
+                especie.error_text = "Escolha a Especie do Animal"
+            if not raca_animal:
+                raca.error_text = "Preencha a Raça do Animal"
+            if not porte_animal:
+                porte.error_text = "Preencha o Porte do Animal"
+            if not status_animal:
+                status_atual.error_text = "Escolha Status do Animal"
+            if not tem_microchip:
+                mocrochip.error_text = "Campos Obrigatório"
+            if not animal_possui_sequela:
+                possui_seq.error_text = "Campos Obrigatório"
+            if not idade_animal:
+                idade.error_text = "Preencha a Idade do Animal"
+            if not idade_tipo_animal:
+                idade_tipo.error_text = "Campos Obrigatório"
+            if not e_castrado:
+                animal_castrado.error_text = "Campos Obrigatório"
+            if not data_castracao_animal:
+                data_field.error_text = "Preencha Data de Castração"
+            if not obs_animal:
+                obs.error_text = "Campos Obrigatório"
+            if not obs_cast_animal:
+                obs_cast.error_text = "Campos Obrigatório"
+            page.update()
+
 
     submit_button = ft.ElevatedButton(
         text="Salvar",
@@ -483,7 +535,6 @@ def main(page: ft.Page, estado = None):
         controls=[
             basic_info,
             infos_add,
-            error_message
         ],
         alignment=ft.MainAxisAlignment.CENTER,
         vertical_alignment=ft.MainAxisAlignment.CENTER
