@@ -102,9 +102,9 @@ def main(page: ft.Page, estado = None):
         read_only=True,
         focused_border_color=ft.colors.BLACK,
         value='',
-        width=210,
+        width=180,
         text_align=ft.TextAlign.CENTER,
-        color=ft.colors.WHITE,
+        color=ft.colors.BLACK,
         border_radius=10
         )
     def change_date(e):
@@ -117,7 +117,7 @@ def main(page: ft.Page, estado = None):
 
     data_castracao = ft.IconButton(
         icon=ft.icons.CALENDAR_MONTH,
-        icon_color=ft.colors.WHITE,
+        icon_color=ft.colors.BLACK,
         height=50,
         width=50,
         on_click=lambda _: date_picker.pick_date()  
@@ -217,7 +217,7 @@ def main(page: ft.Page, estado = None):
         label="Nome do protegido", 
         value="",
         width=172,
-        height=56,
+        # height=56,
         border_radius=8,
     )
 
@@ -257,7 +257,7 @@ def main(page: ft.Page, estado = None):
         label="Especie",
         value="",
         width=172,
-        height=56,
+        # height=56,
         border_radius=8,
     )
 
@@ -294,7 +294,7 @@ def main(page: ft.Page, estado = None):
         label="Raça",
         value="",
         width=172,
-        height=56,
+        # height=56,
         border_radius=8,
     )
 
@@ -354,7 +354,7 @@ def main(page: ft.Page, estado = None):
         label="Idade",
         value="",
         width=60,
-        height=56,
+        # height=56,
         border_radius=8,
     )
 
@@ -407,13 +407,6 @@ def main(page: ft.Page, estado = None):
             observacoes=obs_animal
         )
 
-        castracao_animal_registrado = animal.Castracao(
-            # id_animal=pass,
-            data_castracao=data_castracao_animal,
-            castrado=e_castrado,
-            observacoes=obs_cast_animal
-        )
-
 
         def verificar_variaveis_vazias(**kwargs):
             variaveis_vazias = [nome for nome, valor in kwargs.items() if not valor]
@@ -444,7 +437,15 @@ def main(page: ft.Page, estado = None):
 
         if not variaveis_vazias:
             print("to db")
-            db.add_animal(animal_registado)
+            id_animal = db.add_animal(animal_registado)
+
+            castracao_animal_registrado = animal.Castracao(
+                id_animal=idade_animal,
+                data_castracao=data_castracao_animal,
+                castrado=e_castrado,
+                observacoes=obs_cast_animal
+            )
+
             db.add_castracao(castracao_animal_registrado)
 
             page.clean()
