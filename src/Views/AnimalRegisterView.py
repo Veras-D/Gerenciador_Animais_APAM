@@ -408,7 +408,7 @@ def main(page: ft.Page, estado = None):
         )
 
         castracao_animal_registrado = animal.Castracao(
-            id_animal=pass,
+            # id_animal=pass,
             data_castracao=data_castracao_animal,
             castrado=e_castrado,
             observacoes=obs_cast_animal
