@@ -112,21 +112,21 @@ def main(page):
 
         if not valor_data_resgate:
             data_resga.error_text = "Campo Obrigatório"
+        else:
+            info_resgate = animal.InfoResgate(
+                id_animal=pass,
+                local_resgate=valor_local_resgate,
+                atendimento=valor_atendimento,
+                necessario_intervencao_cirurgica=valor_intervencao_cirurgica,
+                destinacao_do_protegido=valor_dest_prot,
+                historico_anamnese=valor_hist_anam,
+                diagnostico_estado_saude=valor_diagnostico,
+                tratamento_intervencao_e_medicacao=valor_interven_e_medicacao,
+                data_resgate=valor_data_resgate,
+                observacoes=valor_obeservacao_resgate
+            )
 
-        info_resgate = animal.InfoResgate(
-            id_animal=pass,
-            local_resgate=valor_local_resgate,
-            atendimento=valor_atendimento,
-            necessario_intervencao_cirurgica=valor_intervencao_cirurgica,
-            destinacao_do_protegido=valor_dest_prot,
-            historico_anamnese=valor_hist_anam,
-            diagnostico_estado_saude=valor_diagnostico,
-            tratamento_intervencao_e_medicacao=valor_interven_e_medicacao,
-            data_resgate=valor_data_resgate,
-            observacoes=valor_obeservacao_resgate
-        )
-
-        database.add_resgate(info_resgate)
+            database.add_resgate(info_resgate)
 
 
     bnt_salvar = ft.ElevatedButton(
