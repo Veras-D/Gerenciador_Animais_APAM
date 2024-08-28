@@ -128,6 +128,7 @@ class DataBaseAPAM:
 			(id_animal INTEGER NOT NULL,
 			castrado BOOLEAN NOT NULL,
 			data_castracao DATE NOT NULL,
+			obs_castracao TEXT,
       		FOREIGN KEY (id_animal) REFERENCES animal(id_animal) ON DELETE CASCADE)''')
    
 		self.db_execute('''CREATE TABLE IF NOT EXISTS obito
@@ -642,7 +643,7 @@ class DataBaseAPAM:
 	# CRUD referente aos atributos do animal
 	# Castraçao
 	def add_castracao(self, castracao: Castracao) -> None:
-		sql = '''INSERT INTO castracao (id_animal, data_castracao, castrado) VALUES (?, ?, ?)'''
+		sql = '''INSERT INTO castracao (id_animal, data_castracao, castrado, obs_castracao) VALUES (?, ?, ?, ?)'''
 		self.db_execute(sql, (castracao.id_animal, castracao.data_castracao, castracao.castrado, castracao.observacoes))
   
 	def get_castracao(self, id_animal: int) -> list:

@@ -9,7 +9,7 @@ import Models.Entities.animal as animal
 import util
 
 
-q = multiprocessing.Queue()
+q = multiprocessing.Queue(maxsize=1)
 db = database.DataBaseAPAM()
 
 
@@ -377,13 +377,13 @@ def main(page: ft.Page, estado = None):
         genero_animal = genero.value
         temperamento_animal = temperamento.value
         especie_animal = especie.value
-        pelagem_aniamal = q.get()
+        pelagem_aniamal = ', '.join(q.get())
         raca_animal = raca.value
         porte_animal = porte.value
         status_animal = status_atual.value
         tem_microchip = mocrochip.value
         animal_possui_sequela = possui_seq.value
-        idade_animal = idade.value
+        idade_animal = int(idade.value)
         idade_tipo_animal = idade_tipo.value
         e_castrado = animal_castrado.value
         data_castracao_animal = data_field.value
@@ -438,9 +438,10 @@ def main(page: ft.Page, estado = None):
         if not variaveis_vazias:
             print("to db")
             id_animal = db.add_animal(animal_registado)
+            print(id_animal)
 
             castracao_animal_registrado = animal.Castracao(
-                id_animal=idade_animal,
+                id_animal=id_animal,
                 data_castracao=data_castracao_animal,
                 castrado=e_castrado,
                 observacoes=obs_cast_animal
