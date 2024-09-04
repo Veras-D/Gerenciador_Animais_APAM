@@ -77,17 +77,20 @@ def main(page, estado=''):
 
     container_loc = ft.Container(
                 content=area_localizacao,
-                padding=10,
+                padding=20,
                 border_radius=10,
                 bgcolor='#DEE4F8',
                 height=360,
                 width=400,
     )
+    fields = ft.Column([
+        nome_adotante,
+    ])
 
     page.add(
         icon_return,
         ft.Column([
-            ft.Row([nome_adotante, container_loc])
+            ft.Row([ft.Container(content=fields, padding=50), container_loc])
         ]),
     )
 
