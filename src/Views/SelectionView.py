@@ -1,7 +1,7 @@
 import flet as ft
 
 
-def main(page, estado):
+def main(page, estado=''):
     page.title = "Tela de Seleção"
     page.bgcolor = "white"
 
@@ -55,7 +55,7 @@ def main(page, estado):
         style=button_style, width=250, height=50
         )
     btn_consultar_adotante = ft.OutlinedButton(
-        "Consultar Adotante", 
+        "Consultar Animal e Adotante", 
         on_click=consultar_adotante,
         style=button_style, width=250, height=50
         )
@@ -63,7 +63,7 @@ def main(page, estado):
     content = ft.Column(
         [
             btn_cadastrar_animal,
-            btn_consultar_animal,
+            # btn_consultar_animal,
             btn_cadastrar_adotante,
             btn_consultar_adotante
         ],

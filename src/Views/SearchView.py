@@ -1,7 +1,7 @@
 import flet as ft
 
 
-def main(page):
+def main(page, estado=''):
     pass
 
 

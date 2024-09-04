@@ -5,10 +5,10 @@ from Views import (
     SelectionView,
     AnimalRegisterView,
     AnimalRegisterResgateView,
-    AnimalSearchView,
     AdotanteRegisterView,
     AdotanteSearchView
 )
+from src.Views import SearchView
 
 
 config = Config()
@@ -48,7 +48,7 @@ class GerenciadorDeAnimaisAPAM:
             AnimalRegisterResgateView.main(self.page)
 
         elif self.estado == "Tela de Consulta de Animal":
-            AnimalSearchView.main(self.page)
+            SearchView.main(self.page)
 
         elif self.estado == "Tela de Cadastro de Adotante":
             AdotanteRegisterView.main(self.page)
