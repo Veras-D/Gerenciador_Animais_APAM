@@ -53,8 +53,8 @@ class GerenciadorDeAnimaisAPAM:
         elif self.estado == "Tela de Cadastro de Adotante":
             AdotanteRegisterView.main(self.page)
 
-        elif self.estado == "Tela de Consulta de Adotante":
-            AdotanteSearchView.main(self.page)
+        # elif self.estado == "Tela de Consulta de Adotante":
+        #     AdotanteSearchView.main(self.page)
 
         else:
             self.page.window_height = config.HEIGHT_LOGIN

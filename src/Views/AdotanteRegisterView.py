@@ -12,10 +12,58 @@ def main(page, estado=''):
         border_radius=8,
     )
 
+    profissao_adotante = ft.TextField(
+        label="Nome Adotante",
+        value="",
+        width=210,
+        height=56,
+        border_radius=8,
+    )
+
+    rg_adotante = ft.TextField(
+        label="RG",
+        value="",
+        width=210,
+        height=56,
+        border_radius=8,
+    )
+
+    cpf_adotante = ft.TextField(
+        label="CPF",
+        value="",
+        width=210,
+        height=56,
+        border_radius=8,
+    )
+
+    email_adotante = ft.TextField(
+        label="Email",
+        value="",
+        width=430,
+        height=56,
+        border_radius=8,
+    )
+
+    complemento_adotante = ft.Dropdown(
+        width=210,
+        hint_text="Complemento",
+        options=[
+            ft.dropdown.Option("Apartamento"),
+            ft.dropdown.Option("Bloco"),
+            ft.dropdown.Option("Sala"),
+            ft.dropdown.Option("Andar"),
+            ft.dropdown.Option("Lote"),
+            ft.dropdown.Option("Condomínio"),
+            ft.dropdown.Option("Casa"),
+            ft.dropdown.Option("Quadra"),
+        ],
+        border_radius=8
+    )
+
     referencia_rua = ft.TextField(
         hint_text="Referencia Rua",
         value="",
-        width=320,
+        width=650,
         border_radius=8,
         multiline=True,
         min_lines=7,
@@ -44,7 +92,7 @@ def main(page, estado=''):
         read_only=True,
         focused_border_color=ft.colors.BLACK,
         value='',
-        width=210,
+        width=330,
         text_align=ft.TextAlign.CENTER,
         color=ft.colors.WHITE,
         border_radius=10
@@ -70,7 +118,7 @@ def main(page, estado=''):
     area_localizacao = ft.Column([
         ft.Row([
             cep_field,
-            cep_icon,
+            ft.Container(content=cep_icon, border=ft.border.all(1, ft.colors.BLACK), border_radius=10),
         ]),
         rua_field,
     ])
@@ -78,13 +126,23 @@ def main(page, estado=''):
     container_loc = ft.Container(
                 content=area_localizacao,
                 padding=20,
-                border_radius=10,
+                border_radius=20,
                 bgcolor='#DEE4F8',
                 height=360,
-                width=400,
+                width=370,
     )
     fields = ft.Column([
         nome_adotante,
+        ft.Row([
+            profissao_adotante,
+            rg_adotante,
+            cpf_adotante,
+        ]),
+        ft.Row([
+            email_adotante,
+            complemento_adotante,
+
+        ])
     ])
 
     page.add(

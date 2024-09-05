@@ -118,7 +118,6 @@ def main(page, estado=''):
                 ),
                 ft.Container(content, alignment=ft.alignment.center)
             ],
-            # expand=True  # Não descomente isso, se não o app.py não funciona
         )
     )
 
