@@ -60,6 +60,22 @@ def main(page, estado=''):
         border_radius=8
     )
 
+    telefone_fixo_adotante = ft.TextField(
+        label="Telefone Fixo",
+        value="",
+        width=210,
+        height=56,
+        border_radius=8,
+    )
+
+    telefone_celular_adotante = ft.TextField(
+        label="Telefone Celular",
+        value="",
+        width=210,
+        height=56,
+        border_radius=8,
+    )
+
     referencia_rua = ft.TextField(
         hint_text="Referencia Rua",
         value="",
@@ -74,7 +90,7 @@ def main(page, estado=''):
         label='CEP',
         focused_border_color=ft.colors.BLACK,
         value='',
-        width=270,
+        width=230,
         color=ft.colors.WHITE,
         border_radius=10
     )
@@ -92,8 +108,51 @@ def main(page, estado=''):
         read_only=True,
         focused_border_color=ft.colors.BLACK,
         value='',
-        width=330,
-        text_align=ft.TextAlign.CENTER,
+        width=300,
+        # text_align=ft.TextAlign.CENTER,
+        color=ft.colors.WHITE,
+        border_radius=10
+    )
+
+    num_field = ft.TextField(
+        label='Numero',
+        focused_border_color=ft.colors.BLACK,
+        value='',
+        width=300,
+        # text_align=ft.TextAlign.CENTER,
+        color=ft.colors.WHITE,
+        border_radius=10
+    )
+
+    bairo_field = ft.TextField(
+        hint_text='Bairo',
+        read_only=True,
+        focused_border_color=ft.colors.BLACK,
+        value='',
+        width=300,
+        # text_align=ft.TextAlign.CENTER,
+        color=ft.colors.WHITE,
+        border_radius=10
+    )
+
+    cidade_field = ft.TextField(
+        hint_text='Cidade',
+        read_only=True,
+        focused_border_color=ft.colors.BLACK,
+        value='',
+        width=300,
+        # text_align=ft.TextAlign.CENTER,
+        color=ft.colors.WHITE,
+        border_radius=10
+    )
+
+    uf_field = ft.TextField(
+        hint_text='UF',
+        read_only=True,
+        focused_border_color=ft.colors.BLACK,
+        value='',
+        width=300,
+        # text_align=ft.TextAlign.CENTER,
         color=ft.colors.WHITE,
         border_radius=10
     )
@@ -121,6 +180,10 @@ def main(page, estado=''):
             ft.Container(content=cep_icon, border=ft.border.all(1, ft.colors.BLACK), border_radius=10),
         ]),
         rua_field,
+        num_field,
+        bairo_field,
+        cidade_field,
+        uf_field,
     ])
 
     container_loc = ft.Container(
@@ -128,8 +191,8 @@ def main(page, estado=''):
                 padding=20,
                 border_radius=20,
                 bgcolor='#DEE4F8',
-                height=360,
-                width=370,
+                height=430,
+                width=340,
     )
     fields = ft.Column([
         nome_adotante,
@@ -142,14 +205,30 @@ def main(page, estado=''):
             email_adotante,
             complemento_adotante,
 
-        ])
+        ]),
+        ft.Row([
+            telefone_fixo_adotante,
+            telefone_celular_adotante,
+        ]),
+        referencia_rua,
     ])
+
+    submit_button = ft.ElevatedButton(
+        text="Salvar",
+        # on_click=save_func,
+        color=ft.colors.BLACK
+    )
 
     page.add(
         icon_return,
         ft.Column([
             ft.Row([ft.Container(content=fields, padding=50), container_loc])
         ]),
+        ft.Container(
+            content=submit_button,
+            alignment=ft.alignment.bottom_right,
+            padding=ft.padding.only(right=20, bottom=20)
+        ),
     )
 
 
