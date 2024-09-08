@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 
+
 @dataclass
 class Adotante:
     nome: str
@@ -18,11 +19,13 @@ class Adotante:
     telefone_fixo: str = 'Não Informado'
     complemento: str = 'Não Informado'
 
+
 @dataclass
 class ObservacaoAdotante:
     id_adotante: int
     observacao: str
     data_observacao: str
+
 
 @dataclass
 class AdocaoAdotante:

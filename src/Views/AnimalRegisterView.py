@@ -267,7 +267,7 @@ def main(page: ft.Page, estado = None):
         color=ft.colors.BLACK,
         shape=ft.RoundedRectangleBorder(radius=8),
         side=ft.BorderSide(width=2, color=ft.colors.BLACK),
-        padding=10 
+        padding=10
     )
 
 

@@ -14,15 +14,15 @@ def main(page, estado=''):
         label="Nome Adotante",
         value="",
         width=650,
-        height=56,
+        # height=56,
         border_radius=8,
     )
 
     profissao_adotante = ft.TextField(
-        label="Nome Adotante",
+        label="Profissão",
         value="",
         width=210,
-        height=56,
+        # height=56,
         border_radius=8,
     )
 
@@ -30,7 +30,7 @@ def main(page, estado=''):
         label="RG",
         value="",
         width=210,
-        height=56,
+        # height=56,
         border_radius=8,
     )
 
@@ -38,7 +38,7 @@ def main(page, estado=''):
         label="CPF",
         value="",
         width=210,
-        height=56,
+        # height=56,
         border_radius=8,
     )
 
@@ -46,7 +46,7 @@ def main(page, estado=''):
         label="Email",
         value="",
         width=430,
-        height=56,
+        # height=56,
         border_radius=8,
     )
 
@@ -70,7 +70,7 @@ def main(page, estado=''):
         label="Telefone Fixo",
         value="",
         width=210,
-        height=56,
+        # height=56,
         border_radius=8,
     )
 
@@ -78,7 +78,7 @@ def main(page, estado=''):
         label="Telefone Celular",
         value="",
         width=210,
-        height=56,
+        # height=56,
         border_radius=8,
     )
 
@@ -102,7 +102,7 @@ def main(page, estado=''):
     )
 
     rua_field = ft.TextField(
-        hint_text='Rua',
+        label='Rua',
         # read_only=True,
         focused_border_color=ft.colors.BLACK,
         value='',
@@ -123,7 +123,7 @@ def main(page, estado=''):
     )
 
     bairro_field = ft.TextField(
-        hint_text='Bairo',
+        label='Bairo',
         # read_only=True,
         focused_border_color=ft.colors.BLACK,
         value='',
@@ -155,6 +155,10 @@ def main(page, estado=''):
         border_radius=10
     )
 
+    page.snack_bar = ft.SnackBar(
+        content=ft.Text("Por Favor, Preencha o CEP Corretamente!", color=ft.colors.WHITE),
+        bgcolor=ft.colors.RED,
+    )
 
     def preencher_via_cep(e):
         print(cep_field.value)
@@ -163,7 +167,7 @@ def main(page, estado=''):
         cep_query = consulta_cep(cep_field.value)
 
         if not cep_query:
-            cep_field.error_text = "CEP Invalido"  # Mudar para o erro para o que aparece em cima
+            page.snack_bar.open = True
         else:
             cep_field.value = cep_query['cep']
             bairro_field.value = cep_query['bairro']
@@ -217,6 +221,7 @@ def main(page, estado=''):
                 height=430,
                 width=340,
     )
+
     fields = ft.Column([
         nome_adotante,
         ft.Row([
@@ -236,9 +241,97 @@ def main(page, estado=''):
         referencia_rua,
     ])
 
+
+    def save_func(e):
+        nome = nome_adotante.value
+        profissao = profissao_adotante.value
+        rg = rg_adotante.value
+        cpf = cpf_adotante.value
+        email = email_adotante.value
+        complemento = complemento_adotante.value
+        telefone_fixo = telefone_fixo_adotante.value
+        telefone_celular = telefone_celular_adotante.value
+        referencia = referencia_rua.value
+        cep = cep_field.value
+        rua = rua_field.value
+        num = num_field.value
+        bairro = bairro_field.value
+        cidade = cidade_field.value
+        uf = uf_field.value
+
+        registro_adotante = adotante.Adotante(
+            nome=nome,
+            profissao=profissao,
+            rg=rg,
+            cpf=cpf,
+            email=email,
+            complemento=complemento,
+            telefone_fixo=telefone_fixo,
+            telefone_celular=telefone_celular,
+            referencia_rua=referencia,
+            cep=cep,
+            rua=rua,
+            numero=num,
+            bairro=bairro,
+            cidade=cidade,
+            estado=uf
+        )
+
+        def verificar_variaveis_vazias(**kwargs):
+            variaveis_vazias = [nome for nome, valor in kwargs.items() if not valor]
+            return variaveis_vazias if variaveis_vazias else None
+
+
+        # Verificar variáveis
+        variaveis_vazias = verificar_variaveis_vazias(
+            nome=nome,
+            profissao=profissao,
+            rg=rg,
+            cpf=cpf,
+            email=email,
+            complemento=complemento,
+            telefone_fixo=telefone_fixo,
+            telefone_celular=telefone_celular,
+            referencia=referencia,
+            cep=cep,
+            rua=rua,
+            numero=num,
+            bairro=bairro,
+            cidade=cidade,
+            estado=uf
+        )
+
+        if not variaveis_vazias:
+            database.Adotante(registro_adotante)
+            page.clean()
+            estado.estado = "Tela de Cadastro de Adotante"
+            estado.main_page()
+
+        else:
+            if not nome_adotante.value:
+                nome_adotante.error_text = "Campo Obrigatório"
+            if not profissao_adotante.value:
+                profissao_adotante.error_text = "Campo Obrigatório"
+            if not rg_adotante.value:
+                rg_adotante.error_text = "Campo Obrigatório"
+            if not cpf_adotante.value:
+                cpf_adotante.error_text = "Campo Obrigatório"
+            if not email_adotante.value:
+                email_adotante.error_text = "Campo Obrigatório"
+            if not complemento_adotante.value:
+                complemento_adotante.error_text = "Campo Obrigatório"
+            if not telefone_fixo_adotante.value:
+                telefone_fixo_adotante.error_text = "Campo Obrigatório"
+            if not telefone_celular_adotante.value:
+                telefone_celular_adotante.error_text = "Campo Obrigatório"
+            if not referencia_rua.value:
+                referencia_rua.error_text = "Campo Obrigatório"
+            page.update()
+
+
     submit_button = ft.ElevatedButton(
         text="Salvar",
-        # on_click=save_func,
+        on_click=save_func,
         color=ft.colors.BLACK
     )
 
