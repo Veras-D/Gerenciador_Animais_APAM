@@ -6,7 +6,7 @@ import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
 import Models.Repository.db as database
 import Models.Entities.animal as animal
-import util
+from view_util import PopupWindow
 
 
 q = multiprocessing.Queue(maxsize=1)
@@ -29,7 +29,7 @@ def popup(page_: Page2):
     page_.scroll = True
     
     
-    def button_clicked(e):
+    def button_clicked(e):        
         list_values = {
             f"{c1.label}": c1.value,
             f"{c2.label}": c2.value,
@@ -71,6 +71,13 @@ def popup(page_: Page2):
     c13 = ft.Checkbox(label="Escama", value=False)
     c14 = ft.Checkbox(label="Outros", value=False)
     b = ft.ElevatedButton(text="Salvar", on_click=button_clicked)
+    if q.full():
+        lista = q.get()
+        elementos = [c1, c2, c3, c4, c5, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14]
+        for item in elementos:
+            if item.label in lista:
+                item.value = True
+        page_.update()
 
     page_.add(
         ft.Row([t],
@@ -94,7 +101,6 @@ def popup(page_: Page2):
         )
     )
 
-
 def main(page: ft.Page, estado = None):
     page.title = "Cadastrar Animal"
     data_field = ft.TextField(
@@ -106,10 +112,12 @@ def main(page: ft.Page, estado = None):
         text_align=ft.TextAlign.CENTER,
         color=ft.colors.BLACK,
         border_radius=10
-        )
+    )
+
     def change_date(e):
         data_field.value = date_picker.value.date()
         page.update()
+
 
     date_picker = ft.DatePicker(
         on_change=change_date
@@ -121,7 +129,7 @@ def main(page: ft.Page, estado = None):
         height=50,
         width=50,
         on_click=lambda _: date_picker.pick_date()  
-        )
+    )
     
     page.overlay.append(date_picker)
 
@@ -145,7 +153,6 @@ def main(page: ft.Page, estado = None):
 
     img_animal_path = os.path.join(os.path.dirname(__file__), '..', '..', 'assets', 'animal.png')
 
-
     avatar = ft.CircleAvatar(
         foreground_image_src=img_animal_path,
         content=ft.Text("LOAD"),
@@ -157,20 +164,16 @@ def main(page: ft.Page, estado = None):
         height=120,
     )
 
-
     def perfil_picked(e: ft.FilePickerResultEvent):
         if e.files:
             avatar.foreground_image_src = e.files[0].path
             page.update()
 
-
     file_picker = ft.FilePicker(
         on_result=perfil_picked
     )
 
-
     page.overlay.append(file_picker)
-
 
     upload_img = ft.Container(
         col=8,
@@ -187,7 +190,6 @@ def main(page: ft.Page, estado = None):
         width=126
     )
 
-
     animal_castrado = ft.Dropdown(
         width=172,
         options=[
@@ -198,7 +200,6 @@ def main(page: ft.Page, estado = None):
         alignment=ft.alignment.center,
         border_radius=8
     )
-
 
     obs_cast = ft.TextField(
                 value="",
@@ -211,7 +212,6 @@ def main(page: ft.Page, estado = None):
         content=obs_cast,
     )
 
-
     nome_protegido = ft.TextField(
         col=4,
         label="Nome do protegido", 
@@ -220,7 +220,6 @@ def main(page: ft.Page, estado = None):
         # height=56,
         border_radius=8,
     )
-
 
     genero = ft.Dropdown(
         col=4,
@@ -233,7 +232,6 @@ def main(page: ft.Page, estado = None):
         ],
         border_radius=8
     )
-
 
     temperamento = ft.Dropdown(
         col=4,
@@ -261,7 +259,6 @@ def main(page: ft.Page, estado = None):
         border_radius=8,
     )
 
-
     button_style = ft.ButtonStyle(
         bgcolor=ft.colors.WHITE,
         color=ft.colors.BLACK,
@@ -270,14 +267,12 @@ def main(page: ft.Page, estado = None):
         padding=10
     )
 
-
     def popup_pelagem(e):
         def run_popup():
             ft.app(target=popup)
         p2 = multiprocessing.Process(target=run_popup)
         p2.start()
         p2.join()
-
 
     pelagem = ft.OutlinedButton(
         text="Selecionar Pelagem",
@@ -288,7 +283,6 @@ def main(page: ft.Page, estado = None):
         style=button_style
     )
 
-
     raca =  ft.TextField(
         col=4,
         label="Raça",
@@ -297,7 +291,6 @@ def main(page: ft.Page, estado = None):
         # height=56,
         border_radius=8,
     )
-
 
     porte = ft.Dropdown(
         col=4,
@@ -311,7 +304,6 @@ def main(page: ft.Page, estado = None):
         border_radius=8
     )
 
-
     status_atual = ft.Dropdown(
         col=4,
         width=172,
@@ -324,7 +316,6 @@ def main(page: ft.Page, estado = None):
         border_radius=8
     )
 
-
     mocrochip = ft.Dropdown(
         col=4,
         width=172,
@@ -335,7 +326,6 @@ def main(page: ft.Page, estado = None):
         ],
         border_radius=8
     )
-
 
     possui_seq = ft.Dropdown(
         col=4,
@@ -348,7 +338,6 @@ def main(page: ft.Page, estado = None):
         border_radius=8,
     )
 
-
     idade = ft.TextField(
         col=3,
         label="Idade",
@@ -357,7 +346,6 @@ def main(page: ft.Page, estado = None):
         # height=56,
         border_radius=8,
     )
-
 
     idade_tipo = ft.Dropdown(
         col=3,
@@ -370,25 +358,63 @@ def main(page: ft.Page, estado = None):
         border_radius=8
     )
 
+    page.snack_bar = ft.SnackBar(
+        content=ft.Text("Por Favor, Preencha as Pelagens!", color=ft.colors.WHITE),
+        bgcolor=ft.colors.RED,
+    )
 
     def save_func(e):
+        if not q.full():
+            page.snack_bar.open = True
+            page.update()
+
         foto_animal = open(avatar.foreground_image_src, "rb").read()
         nome_animal = nome_protegido.value
         genero_animal = genero.value
         temperamento_animal = temperamento.value
         especie_animal = especie.value
-        pelagem_aniamal = ', '.join(q.get())
         raca_animal = raca.value
         porte_animal = porte.value
         status_animal = status_atual.value
         tem_microchip = mocrochip.value
         animal_possui_sequela = possui_seq.value
-        idade_animal = int(idade.value)
+        if idade.value:
+            idade_animal = int(idade.value)
+        else:
+            idade_animal = idade.value
         idade_tipo_animal = idade_tipo.value
         e_castrado = animal_castrado.value
         data_castracao_animal = data_field.value
         obs_animal = obs.value
         obs_cast_animal = obs_cast.value
+
+
+        def verificar_variaveis_vazias(**kwargs):
+            variaveis_vazias = [nome for nome, valor in kwargs.items() if not valor]
+            return variaveis_vazias if variaveis_vazias else None
+
+
+        # Verificação
+        variaveis_vazias = verificar_variaveis_vazias(
+            foto_animal=foto_animal,
+            nome_animal=nome_animal,
+            genero_animal=genero_animal,
+            temperamento_animal=temperamento_animal,
+            especie_animal=especie_animal,
+            raca_animal=raca_animal,
+            porte_animal=porte_animal,
+            status_animal=status_animal,
+            tem_microchip=tem_microchip,
+            animal_possui_sequela=animal_possui_sequela,
+            idade_animal=idade_animal,
+            idade_tipo_animal=idade_tipo_animal,
+            e_castrado=e_castrado,
+            data_castracao_animal=data_castracao_animal,
+            obs_animal=obs_animal,
+            obs_cast_animal=obs_cast_animal
+        )
+
+        pelagem_aniamal = ', '.join(q.get())
 
         animal_registado = animal.InfoAnimal(
             nome_animal=nome_animal,
@@ -406,34 +432,6 @@ def main(page: ft.Page, estado = None):
             possui_sequela=animal_possui_sequela,
             observacoes=obs_animal
         )
-
-
-        def verificar_variaveis_vazias(**kwargs):
-            variaveis_vazias = [nome for nome, valor in kwargs.items() if not valor]
-            return variaveis_vazias if variaveis_vazias else None
-
-
-        # Verificação
-        variaveis_vazias = verificar_variaveis_vazias(
-            foto_animal=foto_animal,
-            nome_animal=nome_animal,
-            genero_animal=genero_animal,
-            temperamento_animal=temperamento_animal,
-            especie_animal=especie_animal,
-            pelagem_aniamal=pelagem_aniamal,
-            raca_animal=raca_animal,
-            porte_animal=porte_animal,
-            status_animal=status_animal,
-            tem_microchip=tem_microchip,
-            animal_possui_sequela=animal_possui_sequela,
-            idade_animal=idade_animal,
-            idade_tipo_animal=idade_tipo_animal,
-            e_castrado=e_castrado,
-            data_castracao_animal=data_castracao_animal,
-            obs_animal=obs_animal,
-            obs_cast_animal=obs_cast_animal
-        )
-
 
         if not variaveis_vazias:
             print("to db")

@@ -3,18 +3,19 @@ import flet as ft
 
 
 class PopupWindow:
-    def __init__(self, page: ft.Page)
+    def __init__(self, page: ft.Page):
         self.page = page
         self.queue = multiprocessing.Queue()
+        def run_popup(self):
+            ft.app(target=self.page)
+        self.p2 = multiprocessing.Process(target=run_popup)
 
 
     def create(self):
-        def run_popup(self):
-            ft.app(target=self.page)
-        p2 = multiprocessing.Process(target=run_popup)
-        p2.start()
-        p2.join()
+        self.p2.start()
+        self.p2.join()
 
-    
+
     def destroy(self):
-        self.page_.window_destroy()
+        self.page.window_destroy()
+        self.p2.terminate()
