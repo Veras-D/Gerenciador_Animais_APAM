@@ -197,6 +197,7 @@ def main(page, estado=''):
             width=50,
             icon_color=ft.colors.BLACK
         ),
+        padding=ft.padding.only(left=20),
         alignment=ft.alignment.center_left,
         on_click=go_home,
     )

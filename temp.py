@@ -1,26 +1,30 @@
 import flet as ft
 
-class Data:
-    def __init__(self) -> None:
-        self.counter = 0
+def main(page: ft.Page):
 
-d = Data()
-
-def main(page):
-
-    page.snack_bar = ft.SnackBar(
-        content=ft.Text("Hello, world!", color=ft.colors.WHITE),
-        # action="Alright!",
-        bgcolor=ft.colors.RED,
-        # action_color=ft.colors.RED,
+    t = ft.Tabs(
+        selected_index=0,
+        animation_duration=300,
+        tabs=[
+            ft.Tab(
+                text="Tab 1",
+                content=ft.Container(
+                    content=ft.Text("This is Tab 1"), alignment=ft.alignment.center
+                ),
+            ),
+            ft.Tab(
+                tab_content=ft.Icon(ft.icons.SEARCH),
+                content=ft.Text("This is Tab 2"),
+            ),
+            ft.Tab(
+                text="Tab 3",
+                icon=ft.icons.SETTINGS,
+                content=ft.Text("This is Tab 3"),
+            ),
+        ],
+        expand=1,
     )
 
-    def on_click(e):
-        # page.snack_bar = ft.SnackBar(ft.Text(f"Hello {d.counter}"))
-        page.snack_bar.open = True
-        d.counter += 1
-        page.update()
-
-    page.add(ft.ElevatedButton("Open SnackBar", on_click=on_click))
+    page.add(t)
 
 ft.app(main)

@@ -21,7 +21,7 @@ def main(page, estado=''):
         estado.main_page()
 
 
-    def consultar_animal(e):
+    def consultar_animal_adotante(e):
         page.clean()
         estado.estado = "Tela de Consulta de Animal"
         estado.main_page()
@@ -33,39 +33,27 @@ def main(page, estado=''):
         estado.main_page()
 
 
-    def consultar_adotante(e):
-        page.clean()
-        estado.estado = "Tela de Consulta de Adotante"
-        estado.main_page()
-
-
     btn_cadastrar_animal = ft.OutlinedButton(
         "Cadastrar Animal", 
         on_click=cadastrar_animal,
         style=button_style, width=250, height=50
-        )
-    btn_consultar_animal = ft.OutlinedButton(
-        "Consultar Animal", 
-        on_click=consultar_animal,
-        style=button_style,width=250, height=50
         )
     btn_cadastrar_adotante = ft.OutlinedButton(
         "Cadastrar Adotante", 
         on_click=cadastrar_adotante, 
         style=button_style, width=250, height=50
         )
-    btn_consultar_adotante = ft.OutlinedButton(
+    btn_consultar_animal_adotante = ft.OutlinedButton(
         "Consultar Animal e Adotante", 
-        on_click=consultar_adotante,
+        on_click=consultar_animal_adotante,
         style=button_style, width=250, height=50
         )
 
     content = ft.Column(
         [
             btn_cadastrar_animal,
-            # btn_consultar_animal,
             btn_cadastrar_adotante,
-            btn_consultar_adotante
+            btn_consultar_animal_adotante
         ],
         alignment=ft.MainAxisAlignment.CENTER,
         horizontal_alignment=ft.CrossAxisAlignment.CENTER,
@@ -112,10 +100,10 @@ def main(page, estado=''):
     page.add(
         ft.Column(
             [
-                ft.Row(
-                    [menu],
-                    alignment=ft.MainAxisAlignment.START
-                ),
+                # ft.Row(
+                #     [menu],
+                #     alignment=ft.MainAxisAlignment.START
+                # ),
                 ft.Container(content, alignment=ft.alignment.center)
             ],
         )

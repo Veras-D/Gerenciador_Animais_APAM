@@ -39,13 +39,17 @@ class GerenciadorDeAnimaisAPAM:
         elif self.estado == "Tela de Cadastro de Animal":
             self.page.window_height = config.HEIGHT_BASE * 1.5
             self.page.window_width = config.WIDTH_BASE * 1.2
-            AnimalRegisterView.main(self.page)
+            AnimalRegisterView.main(self.page, self)
 
         elif self.estado == "Tela de Consulta de Animal e Adotante":
+            self.page.window_height = config.HEIGHT_BASE * 1.5
+            self.page.window_width = config.WIDTH_BASE * 1.2
             SearchView.main(self.page)
 
         elif self.estado == "Tela de Cadastro de Adotante":
-            AdotanteRegisterView.main(self.page)
+            self.page.window_height = config.HEIGHT_BASE * 1.5
+            self.page.window_width = config.WIDTH_BASE * 1.2
+            AdotanteRegisterView.main(self.page, self)
 
         # elif self.estado == "Tela de Consulta de Adotante":
         #     AdotanteSearchView.main(self.page)

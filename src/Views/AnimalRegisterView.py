@@ -6,7 +6,6 @@ import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
 import Models.Repository.db as database
 import Models.Entities.animal as animal
-from view_util import PopupWindow
 
 
 q = multiprocessing.Queue(maxsize=1)
@@ -101,7 +100,7 @@ def popup(page_: Page2):
         )
     )
 
-def main(page: ft.Page, estado = None):
+def main(page: ft.Page, estado = ''):
     page.title = "Cadastrar Animal"
     data_field = ft.TextField(
         hint_text='Data',
