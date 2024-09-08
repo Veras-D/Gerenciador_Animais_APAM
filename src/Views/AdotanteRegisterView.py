@@ -1,4 +1,10 @@
 import flet as ft
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
+import Models.Repository.db as database
+import Models.Entities.adotante as adotante
+from Controllers.AdotanteRegisterController import consulta_cep
 
 
 def main(page, estado=''):
@@ -91,26 +97,18 @@ def main(page, estado=''):
         focused_border_color=ft.colors.BLACK,
         value='',
         width=230,
-        color=ft.colors.WHITE,
+        # color=ft.colors.WHITE,
         border_radius=10
-    )
-
-    cep_icon = ft.IconButton(
-        icon=ft.icons.LOCATION_ON_OUTLINED,
-        icon_color=ft.colors.BLACK,
-        height=50,
-        width=50,
-        # on_click=pass
     )
 
     rua_field = ft.TextField(
         hint_text='Rua',
-        read_only=True,
+        # read_only=True,
         focused_border_color=ft.colors.BLACK,
         value='',
         width=300,
         # text_align=ft.TextAlign.CENTER,
-        color=ft.colors.WHITE,
+        # color=ft.colors.WHITE,
         border_radius=10
     )
 
@@ -120,18 +118,18 @@ def main(page, estado=''):
         value='',
         width=300,
         # text_align=ft.TextAlign.CENTER,
-        color=ft.colors.WHITE,
+        # color=ft.colors.WHITE,
         border_radius=10
     )
 
-    bairo_field = ft.TextField(
+    bairro_field = ft.TextField(
         hint_text='Bairo',
-        read_only=True,
+        # read_only=True,
         focused_border_color=ft.colors.BLACK,
         value='',
         width=300,
         # text_align=ft.TextAlign.CENTER,
-        color=ft.colors.WHITE,
+        # color=ft.colors.WHITE,
         border_radius=10
     )
 
@@ -142,7 +140,7 @@ def main(page, estado=''):
         value='',
         width=300,
         # text_align=ft.TextAlign.CENTER,
-        color=ft.colors.WHITE,
+        # color=ft.colors.WHITE,
         border_radius=10
     )
 
@@ -153,8 +151,33 @@ def main(page, estado=''):
         value='',
         width=300,
         # text_align=ft.TextAlign.CENTER,
-        color=ft.colors.WHITE,
+        # color=ft.colors.WHITE,
         border_radius=10
+    )
+
+
+    def preencher_via_cep(e):
+        print(cep_field.value)
+        print(consulta_cep(cep_field.value))
+        
+        cep_query = consulta_cep(cep_field.value)
+
+        if not cep_query:
+            cep_field.error_text = "CEP Invalido"  # Mudar para o erro para o que aparece em cima
+        else:
+            cep_field.value = cep_query['cep']
+            bairro_field.value = cep_query['bairro']
+            cidade_field.value = cep_query['localidade']
+            uf_field.value = cep_query['uf']
+        page.update()
+
+
+    cep_icon = ft.IconButton(
+        icon=ft.icons.LOCATION_ON_OUTLINED,
+        icon_color=ft.colors.BLACK,
+        height=50,
+        width=50,
+        on_click=preencher_via_cep
     )
 
     def go_home(e):
@@ -181,7 +204,7 @@ def main(page, estado=''):
         ]),
         rua_field,
         num_field,
-        bairo_field,
+        bairro_field,
         cidade_field,
         uf_field,
     ])
@@ -230,7 +253,6 @@ def main(page, estado=''):
             padding=ft.padding.only(right=20, bottom=20)
         ),
     )
-
 
 
 if __name__ == "__main__":
