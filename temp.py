@@ -1,28 +1,29 @@
 import flet as ft
 
-def main(page: ft.Page):
+
+def main(page: ft.Page, estado=''):
+    page.title = "Cadastrar Adotante"
+    page.theme_mode = ft.ThemeMode.LIGHT
+
+    pesquisa_animal=ft.Container(ft.Text("Pesq. Animal"))
+    pesquisa_adotante=ft.Container(ft.Text("Pesq. Adotante"))
 
     t = ft.Tabs(
-        selected_index=0,
         animation_duration=300,
+        tab_alignment=ft.TabAlignment.CENTER,
         tabs=[
             ft.Tab(
-                text="Tab 1",
+                text="Consultar Animal",
                 content=ft.Container(
-                    content=ft.Text("This is Tab 1"), alignment=ft.alignment.center
+                    content=pesquisa_animal
                 ),
             ),
             ft.Tab(
-                tab_content=ft.Icon(ft.icons.SEARCH),
-                content=ft.Text("This is Tab 2"),
-            ),
-            ft.Tab(
-                text="Tab 3",
-                icon=ft.icons.SETTINGS,
-                content=ft.Text("This is Tab 3"),
+                text="Consultar Adotante",
+                content=pesquisa_adotante
             ),
         ],
-        expand=1,
+        # expand=1,
     )
 
     page.add(t)
