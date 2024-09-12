@@ -1,4 +1,12 @@
 import flet as ft
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
+import Models.Repository.db as database
+
+
+banco = database.DataBaseAPAM()
+print(banco.search_animal_or_adotante(target='adotante', search='ana'))
 
 
 def main(page: ft.Page, estado=''):

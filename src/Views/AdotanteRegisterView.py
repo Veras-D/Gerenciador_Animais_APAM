@@ -7,6 +7,9 @@ import Models.Entities.adotante as adotante
 from Controllers.AdotanteRegisterController import consulta_cep
 
 
+db = database.DataBaseAPAM()
+
+
 def main(page, estado=''):
     page.title = "Cadastrar Adotante"
     page.theme_mode = ft.ThemeMode.LIGHT
@@ -303,7 +306,7 @@ def main(page, estado=''):
         )
 
         if not variaveis_vazias:
-            database.Adotante(registro_adotante)
+            db.Adotante(registro_adotante)
             page.clean()
             estado.estado = "Tela de Cadastro de Adotante"
             estado.main_page()

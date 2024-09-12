@@ -1,31 +1,57 @@
 import flet as ft
+import src.Models.Repository.db as database
 
 
-def main(page: ft.Page, estado=''):
-    page.title = "Cadastrar Adotante"
-    page.theme_mode = ft.ThemeMode.LIGHT
+banco = database()
 
-    pesquisa_animal=ft.Container(ft.Text("Pesq. Animal"))
-    pesquisa_adotante=ft.Container(ft.Text("Pesq. Adotante"))
+print(banco.search_animal_or_adotante())
 
-    t = ft.Tabs(
-        animation_duration=300,
-        tab_alignment=ft.TabAlignment.CENTER,
-        tabs=[
-            ft.Tab(
-                text="Consultar Animal",
-                content=ft.Container(
-                    content=pesquisa_animal
-                ),
-            ),
-            ft.Tab(
-                text="Consultar Adotante",
-                content=pesquisa_adotante
-            ),
+def main(page):
+
+    def close_anchor(e):
+        text = f"Color {e.control.data}"
+        print(f"closing view from {text}")
+        anchor.close_view(text)
+
+    def handle_change(e):
+        print(f"handle_change e.data: {e.data}")
+
+    def handle_submit(e):
+        print(f"handle_submit e.data: {e.data}")
+
+    def handle_tap(e):
+        print(f"handle_tap")
+        anchor.open_view()
+
+    anchor = ft.SearchBar(
+        view_elevation=4,
+        divider_color=ft.colors.AMBER,
+        bar_hint_text="Search colors...",
+        view_hint_text="Choose a color from the suggestions...",
+        on_change=handle_change,
+        on_submit=handle_submit,
+        on_tap=handle_tap,
+        controls=[
+            ft.ListTile(title=ft.Text(f"Color {i}"), on_click=close_anchor, data=i)
+            for i in range(100)
         ],
-        # expand=1,
     )
 
-    page.add(t)
+    page.add(
+        ft.Row(
+            alignment=ft.MainAxisAlignment.CENTER,
+            controls=[
+                ft.OutlinedButton(
+                    "Open Search View",
+                    on_click=lambda _: anchor.open_view(),
+                ),
+            ],
+        ),
+        ft.Row(
+            alignment=ft.MainAxisAlignment.CENTER,
+            controls=[anchor],
+        )
+    )
+
 
 ft.app(main)

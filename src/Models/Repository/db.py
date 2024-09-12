@@ -624,11 +624,27 @@ class DataBaseAPAM:
 			con.commit()
 		
 		return animal_id
-		
-  
+
+
 	def get_animais(self, nome_animal: str, ) -> list:
 		sql = '''SELECT * FROM animal WHERE nome_animal = ?'''
 		return self.db_execute(sql, [nome_animal])
+
+
+	def search_animal_or_adotante(self, target: str='animal', search: str='') -> list:
+		if target in ['animal', 'adotante']:
+			target = target.lower()
+			consulta = 'nome_animal, id_animal' if target == 'animal' else 'nome_adotante, id_adotante'
+
+			if search:
+				sql = f'''SELECT {consulta} FROM {target} WHERE nome_{target} LIKE ?'''
+				return self.db_execute(sql, [f'%{search}%'])
+			else:
+				sql = f'''SELECT {consulta} from {target}'''
+				return self.db_execute(sql)
+		else:
+			raise ValueError('Target deve animal ou adotante')
+
 
 	def update_animal(self, id_animal: int, animal: InfoAnimal) -> None:
 		sql = '''UPDATE animal

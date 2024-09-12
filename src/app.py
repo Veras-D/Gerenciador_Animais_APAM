@@ -4,7 +4,6 @@ from Views import (
     LoginView, 
     SelectionView,
     AnimalRegisterView,
-    # AnimalRegisterResgateView,
     AdotanteRegisterView,
     SearchView
 )
