@@ -9,7 +9,6 @@ from Controllers.AdotanteRegisterController import consulta_cep
 
 db = database.DataBaseAPAM()
 
-
 def main(page, estado=''):
     page.title = "Cadastrar Adotante"
     page.theme_mode = ft.ThemeMode.LIGHT

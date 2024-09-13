@@ -639,11 +639,9 @@ class DataBaseAPAM:
 			if search:
 				sql = f'''SELECT {consulta} FROM {target} WHERE nome_{target} LIKE ?'''
 				return self.db_execute(sql, [f'%{search}%'])
-			else:
-				sql = f'''SELECT {consulta} from {target}'''
-				return self.db_execute(sql)
-		else:
-			raise ValueError('Target deve animal ou adotante')
+			sql = f'''SELECT {consulta} from {target}'''
+			return self.db_execute(sql)
+		raise ValueError('Target deve animal ou adotante')
 
 
 	def update_animal(self, id_animal: int, animal: InfoAnimal) -> None:
