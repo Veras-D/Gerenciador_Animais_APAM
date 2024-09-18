@@ -11,7 +11,7 @@ db = database.DataBaseAPAM()
 def main(page: ft.Page, estado=''):
     page.title = "Pesquisar Animal e Adotante"
     page.theme_mode = ft.ThemeMode.LIGHT
-    # page.scroll = "always"
+    page.scroll = "always"
     pesq_animal = db.search_animal_or_adotante()
     pesq_adotante = db.search_animal_or_adotante(target='adotante')
 
@@ -52,7 +52,14 @@ def main(page: ft.Page, estado=''):
                 else:
                     print(len(container_animal.controls))
                     dados_animal = db.get_animais(id_animal=valor_pesquisa[1])[0]
-                    print(dados_animal)
+                    try:
+                        dados_castracao = db.get_castracao(id_animal=valor_pesquisa[1])[0]
+                        castrado = "Sim"
+                        data_castracao = dados_castracao[2]
+                    except IndexError:
+                        castrado = "Não"
+                        data_castracao = "Não Castrado"
+                    # print(dados_castracao)
                     if len(container_animal.controls) >= 3:
                         container_animal.controls.pop()
 
@@ -102,7 +109,25 @@ def main(page: ft.Page, estado=''):
                             read_only=True,
                             min_lines=7, max_lines=7,
                         ),
-                        ft.Text("Animal"),
+                        ft.Text(f"Dados de Castração Animal {valor_pesquisa[0]}", size=20, weight=ft.FontWeight.BOLD),
+                        ft.Row([
+                            ft.DataTable(
+                                columns=[
+                                    ft.DataColumn(ft.Text("É Castrado")),
+                                    ft.DataColumn(ft.Text("Data Castração")),
+                                ],
+                                rows=[
+                                    ft.DataRow(
+                                        cells=[
+                                            ft.DataCell(ft.Text(f"{castrado}")),
+                                            ft.DataCell(ft.Text(f"{data_castracao}")),
+                                        ]
+                                    )
+                                ]
+                            )
+                        ],
+                        alignment=ft.MainAxisAlignment.CENTER
+                        ),
                         ft.Text("Animal"),
                     ])
 
