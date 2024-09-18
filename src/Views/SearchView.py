@@ -51,18 +51,57 @@ def main(page: ft.Page, estado=''):
                     page.snack_bar_animal.open = True
                 else:
                     print(len(container_animal.controls))
-                    dados_animal = db.get_animais(id_animal=valor_pesquisa[1])
+                    dados_animal = db.get_animais(id_animal=valor_pesquisa[1])[0]
                     print(dados_animal)
                     if len(container_animal.controls) >= 3:
                         container_animal.controls.pop()
-                    
+
 
                     # Erro grave, não é possível prosseguir
                     conteudo_animal = ft.Column([
                         ft.Text(f"Perfil Animal {valor_pesquisa[0]}", size=20, weight=ft.FontWeight.BOLD),
-                        ft.Text("Animal"),
-                        ft.Text("Animal"),
-                        ft.Text("Animal"),
+                        ft.Row([
+                            ft.DataTable(
+                                columns=[
+                                    ft.DataColumn(ft.Text("Nome")),
+                                    ft.DataColumn(ft.Text("Especie")),
+                                    ft.DataColumn(ft.Text("Gênero")),
+                                    ft.DataColumn(ft.Text("Temperamento")),
+                                    ft.DataColumn(ft.Text("Idade")),
+                                    ft.DataColumn(ft.Text("Porte")),
+                                    ft.DataColumn(ft.Text("Raça")),
+                                    ft.DataColumn(ft.Text("Microchip")),
+                                    ft.DataColumn(ft.Text("Status")),
+                                    ft.DataColumn(ft.Text("Possui Sequela")),
+                                ],
+                                rows=[
+                                    ft.DataRow(
+                                        cells=[
+                                            ft.DataCell(ft.Text(f"{dados_animal[2]}")),
+                                            ft.DataCell(ft.Text(f"{dados_animal[3]}")),
+                                            ft.DataCell(ft.Text(f"{dados_animal[4]}")),
+                                            ft.DataCell(ft.Text(f"{dados_animal[5]}")),
+                                            ft.DataCell(ft.Text(f"{dados_animal[6]} {dados_animal[7]}")),
+                                            ft.DataCell(ft.Text(f"{dados_animal[8]}")),
+                                            ft.DataCell(ft.Text(f"{dados_animal[10]}")),
+                                            ft.DataCell(ft.Text(f"{dados_animal[11]}")),
+                                            ft.DataCell(ft.Text(f"{dados_animal[12]}")),
+                                            ft.DataCell(ft.Text(f"{dados_animal[13]}")),
+                                        ],
+                                    ),
+                                ],
+                            ),
+                        ],
+                        alignment=ft.MainAxisAlignment.CENTER,
+                        ),
+                        ft.Text(f"Pelagem: {dados_animal[9]}"),
+                        ft.Text("Observações"),
+                        ft.TextField(
+                            value=dados_animal[14],
+                            multiline=True,
+                            read_only=True,
+                            min_lines=7, max_lines=7,
+                        ),
                         ft.Text("Animal"),
                         ft.Text("Animal"),
                     ])
