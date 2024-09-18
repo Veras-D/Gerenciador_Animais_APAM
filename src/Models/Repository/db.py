@@ -626,9 +626,9 @@ class DataBaseAPAM:
 		return animal_id
 
 
-	def get_animais(self, nome_animal: str, ) -> list:
-		sql = '''SELECT * FROM animal WHERE nome_animal = ?'''
-		return self.db_execute(sql, [nome_animal])
+	def get_animais(self, id_animal: int, ) -> list:
+		sql = '''SELECT * FROM animal WHERE id_animal = ?'''
+		return self.db_execute(sql, [id_animal])
 
 
 	def search_animal_or_adotante(self, target: str='animal', search: str='') -> list:

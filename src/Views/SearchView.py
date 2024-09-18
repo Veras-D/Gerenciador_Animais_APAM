@@ -11,7 +11,7 @@ db = database.DataBaseAPAM()
 def main(page: ft.Page, estado=''):
     page.title = "Pesquisar Animal e Adotante"
     page.theme_mode = ft.ThemeMode.LIGHT
-    page.scroll = "always"
+    # page.scroll = "always"
     pesq_animal = db.search_animal_or_adotante()
     pesq_adotante = db.search_animal_or_adotante(target='adotante')
 
@@ -50,12 +50,28 @@ def main(page: ft.Page, estado=''):
                 if not valor_pesquisa[1]:
                     page.snack_bar_animal.open = True
                 else:
-                    # Verrifcar depois de o numero de elementos não mudou
-                    print(len(page.controls))
-                    if len(page.controls) >= 2:
-                        page.controls.pop()
-                    perfil = ft.Container()
-                    page.controls.append(perfil)
+                    print(len(container_animal.controls))
+                    dados_animal = db.get_animais(id_animal=valor_pesquisa[1])
+                    print(dados_animal)
+                    if len(container_animal.controls) >= 3:
+                        container_animal.controls.pop()
+                    
+
+                    # Erro grave, não é possível prosseguir
+                    conteudo_animal = ft.Column([
+                        ft.Text(f"Perfil Animal {valor_pesquisa[0]}", size=20, weight=ft.FontWeight.BOLD),
+                        ft.Text("Animal"),
+                        ft.Text("Animal"),
+                        ft.Text("Animal"),
+                        ft.Text("Animal"),
+                        ft.Text("Animal"),
+                    ])
+
+                    perfil = ft.Container(
+                        conteudo_animal,
+                    )
+
+                    container_animal.controls.append(perfil)
                     page.update()
 
     def handle_tap_animal(e):
@@ -87,7 +103,7 @@ def main(page: ft.Page, estado=''):
     def handle_change_adotante(e):
         pesq = db.search_animal_or_adotante(search=e.data)
         print(f"handle_change e.data: {e.data}")
-        anchor_adotate.controls = [
+        anchor_adotante.controls = [
             ft.ListTile(title=ft.Text(i[0]), on_click=close_anchor_adotante, data=i)
             for i in pesq
         ]
@@ -112,9 +128,8 @@ def main(page: ft.Page, estado=''):
                 if not valor_pesquisa[1]:
                     page.snack_bar_adotante.open = True
                 else:
-                    # Verrifcar depois de o numero de elementos não mudou
                     print(len(page.controls))
-                    if len(page.controls) >= 2:
+                    if len(page.controls) >= 3:
                         page.controls.pop()
                     perfil = ft.Container()
                     page.controls.append(perfil)
@@ -145,7 +160,7 @@ def main(page: ft.Page, estado=''):
         alignment=ft.MainAxisAlignment.CENTER
         ),
     ])
-    
+
     container_adotante = ft.Column([
         ft.Container(height=10),
         ft.Row([anchor_adotante],
@@ -194,7 +209,8 @@ def main(page: ft.Page, estado=''):
     )
 
     page.add(icon_return,
-             t)
+             t,
+    )
 
 
 if __name__ == "__main__":
