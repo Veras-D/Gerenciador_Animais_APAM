@@ -6,23 +6,154 @@ import Models.Repository.db as database
 
 
 db = database.DataBaseAPAM()
-print(db.search_animal_or_adotante(target='adotante', search='ana'))
-
-
-def search_animal(search: str = '') -> list:
-    return db.search_animal_or_adotante(target='animal', search=search)
-
-
-def search_adotante(search: str = '') -> list:
-    return db.search_animal_or_adotante(target='adotante', search=search)
 
 
 def main(page: ft.Page, estado=''):
     page.title = "Pesquisar Animal e Adotante"
     page.theme_mode = ft.ThemeMode.LIGHT
+    page.scroll = "always"
+    pesq_animal = db.search_animal_or_adotante()
+    pesq_adotante = db.search_animal_or_adotante(target='adotante')
 
-    pesquisa_animal=ft.Container(ft.Text("Pesq. Animal"))
-    pesquisa_adotante=ft.Container(ft.Text("Pesq. Adotante"))
+
+    def close_anchor_animal(e):
+        text = e.control.data
+        print(f"closing view from {text}")
+        anchor_animal.close_view(text)
+
+
+    def handle_change_animal(e):
+        pesq = db.search_animal_or_adotante(search=e.data)
+        print(f"handle_change e.data: {e.data}")
+        anchor_animal.controls = [
+            ft.ListTile(title=ft.Text(i[0]), on_click=close_anchor_animal, data=i)
+            for i in pesq
+        ]
+        anchor_animal.update()
+
+
+    page.snack_bar_animal = ft.SnackBar(
+        content=ft.Text("Pesquisa Invalida!", color=ft.colors.WHITE),
+        bgcolor=ft.colors.RED,
+    )
+
+
+    def handle_submit_animal(e):
+        print(f"handle_submit e.data: {e.data}")
+        valor_pesquisa = e.data[1:-1].replace(' ', '').split(',')
+        if len(valor_pesquisa) == 2 and valor_pesquisa[1]:
+            try:
+                valor_pesquisa[1] = int(valor_pesquisa[1])
+            except ValueError:
+                valor_pesquisa[1] = ''
+            finally:
+                if not valor_pesquisa[1]:
+                    page.snack_bar_animal.open = True
+                else:
+                    # Verrifcar depois de o numero de elementos não mudou
+                    print(len(page.controls))
+                    if len(page.controls) >= 2:
+                        page.controls.pop()
+                    perfil = ft.Container()
+                    page.controls.append(perfil)
+                    page.update()
+
+    def handle_tap_animal(e):
+        print(f"handle_tap")
+        anchor_animal.open_view()
+
+
+    anchor_animal = ft.SearchBar(
+        view_elevation=4,
+        divider_color=ft.colors.AMBER,
+        bar_hint_text="Procurar animal...",
+        view_hint_text="Procure pelo nome do animal...",
+        on_change=handle_change_animal,
+        on_submit=handle_submit_animal,
+        on_tap=handle_tap_animal,
+        controls=[
+            ft.ListTile(title=ft.Text(i[0]), on_click=close_anchor_animal, data=i)
+            for i in pesq_animal
+        ],
+    )
+
+
+    def close_anchor_adotante(e):
+        text = e.control.data
+        print(f"closing view from {text}")
+        anchor_adotante.close_view(text)
+
+
+    def handle_change_adotante(e):
+        pesq = db.search_animal_or_adotante(search=e.data)
+        print(f"handle_change e.data: {e.data}")
+        anchor_adotate.controls = [
+            ft.ListTile(title=ft.Text(i[0]), on_click=close_anchor_adotante, data=i)
+            for i in pesq
+        ]
+        anchor_adotante.update()
+
+
+    page.snack_bar_adotante = ft.SnackBar(
+        content=ft.Text("Pesquisa Invalida!", color=ft.colors.WHITE),
+        bgcolor=ft.colors.RED,
+    )
+
+
+    def handle_submit_adotante(e):
+        print(f"handle_submit e.data: {e.data}")
+        valor_pesquisa = e.data[1:-1].replace(' ', '').split(',')
+        if len(valor_pesquisa) == 2 and valor_pesquisa[1]:
+            try:
+                valor_pesquisa[1] = int(valor_pesquisa[1])
+            except ValueError:
+                valor_pesquisa[1] = ''
+            finally:
+                if not valor_pesquisa[1]:
+                    page.snack_bar_adotante.open = True
+                else:
+                    # Verrifcar depois de o numero de elementos não mudou
+                    print(len(page.controls))
+                    if len(page.controls) >= 2:
+                        page.controls.pop()
+                    perfil = ft.Container()
+                    page.controls.append(perfil)
+                    page.update()
+
+    def handle_tap_adotante(e):
+        print(f"handle_tap")
+        anchor_adotante.open_view()
+
+
+    anchor_adotante = ft.SearchBar(
+        view_elevation=4,
+        divider_color=ft.colors.AMBER,
+        bar_hint_text="Procurar adotante...",
+        view_hint_text="Procure pelo nome do adotante...",
+        on_change=handle_change_adotante,
+        on_submit=handle_submit_adotante,
+        on_tap=handle_tap_adotante,
+        controls=[
+            ft.ListTile(title=ft.Text(i[0]), on_click=close_anchor_adotante, data=i)
+            for i in pesq_adotante
+        ],
+    )
+
+    container_animal = ft.Column([
+        ft.Container(height=10),
+        ft.Row([anchor_animal],
+        alignment=ft.MainAxisAlignment.CENTER
+        ),
+    ])
+    
+    container_adotante = ft.Column([
+        ft.Container(height=10),
+        ft.Row([anchor_adotante],
+        alignment=ft.MainAxisAlignment.CENTER
+        ),
+    ])
+    pesquisa_animal=ft.Container(container_animal)
+    pesquisa_adotante=ft.Container(container_adotante)
 
 
     def go_home(e):
