@@ -42,6 +42,16 @@ def main(page: ft.Page, estado=''):
         print(f"handle_submit e.data: {e.data}")
         valor_pesquisa = e.data[1:-1].replace(' ', '').split(',')
         if len(valor_pesquisa) == 2 and valor_pesquisa[1]:
+            def editar_dados_animal():
+                pass
+            
+            def editar_dados_castracao():
+                pass
+
+            def editar_data_obito():
+                pass
+
+
             try:
                 valor_pesquisa[1] = int(valor_pesquisa[1])
             except ValueError:
@@ -59,7 +69,15 @@ def main(page: ft.Page, estado=''):
                     except IndexError:
                         castrado = "Não"
                         data_castracao = "Não Castrado"
-                    # print(dados_castracao)
+
+                    try:
+                        dados_obito = db.get_obito(id_animal=valor_pesquisa[1])[0]
+                        data_obito = dados_obito[1]
+                        print(dados_obito)
+                    except IndexError:
+                        data_obito= "Vivo"
+
+
                     if len(container_animal.controls) >= 3:
                         container_animal.controls.pop()
 
@@ -109,7 +127,10 @@ def main(page: ft.Page, estado=''):
                             read_only=True,
                             min_lines=7, max_lines=7,
                         ),
-                        ft.Text(f"Dados de Castração Animal {valor_pesquisa[0]}", size=20, weight=ft.FontWeight.BOLD),
+                        ft.ElevatedButton(text="Editar Dados Animal", on_click=editar_dados_animal),
+                        ft.Container(height=10),
+                        ft.Text(f"Dados de Castração Animal {valor_pesquisa[0]}", 
+                                size=20, weight=ft.FontWeight.BOLD),
                         ft.Row([
                             ft.DataTable(
                                 columns=[
@@ -128,6 +149,11 @@ def main(page: ft.Page, estado=''):
                         ],
                         alignment=ft.MainAxisAlignment.CENTER
                         ),
+                        ft.ElevatedButton(text="Editar dados de Castração", on_click=editar_dados_castracao),
+                        ft.Container(height=10),
+                        ft.Text(f"Data Obito: {data_obito}"),
+                        ft.ElevatedButton(text="Adicionar Óbito", on_click=editar_data_obito),
+                        ft.Container(height=10),
                         ft.Text("Animal"),
                     ])
 
