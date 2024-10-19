@@ -23,7 +23,7 @@ def main(page, estado=''):
 
     def consultar_animal_adotante(e):
         page.clean()
-        estado.estado = "Tela de Consulta de Animal"
+        estado.estado = "Tela de Consulta de Animal e Adotante"
         estado.main_page()
 
 
